@@ -1,6 +1,6 @@
 %%------------- Funcion de Entrenamiento para Perceptron Simple--------
    
-function [tasa_e, W]=Ps_training(archivo,criterio,epoca_max,gamma,tasa_max, graph_title)
+function [tasa_e,epoca_ac, W]=Ps_training(archivo,criterio,epoca_max,gamma,tasa_max, graph_title)
 
     %Inicializacion:
         v_trn=load(archivo); %%Cargo el vector de entramientos
@@ -9,7 +9,7 @@ function [tasa_e, W]=Ps_training(archivo,criterio,epoca_max,gamma,tasa_max, grap
         M= zeros(n,m+1); %% Creo la matriz expandida
         M(:,1)=-1; %% Primera fila todos -1 (Ref. X0)
         M(:,2:end)=v_trn; %%Reemplazo mi matriz de entrenamiento 
-        epoca_ac=1;
+        epoca_ac=0;
         bandera=1; %% Corte de b
 
     % Entrenamiento
@@ -18,8 +18,9 @@ function [tasa_e, W]=Ps_training(archivo,criterio,epoca_max,gamma,tasa_max, grap
             x=M(i,1:end-1); 
             v=dot(W,x); %Producto punto
             y=f_signo(v); %% Puede ser cualquier funcion 
-            e=M(i,end)-y;     
-            DeltaW=gamma*e*x;
+            mm=M(i,end);
+            e=mm-y;
+            DeltaW=gamma*e*x;%ppio de minima perturbacion, si error e cero, no modifica los pesos
             W=W+DeltaW;
             if (DeltaW~=0)
                 %graph(graph_title,W,M,2, 0.2, 5)
@@ -33,10 +34,11 @@ function [tasa_e, W]=Ps_training(archivo,criterio,epoca_max,gamma,tasa_max, grap
             y=f_signo(v);
             e=M(:,end)-y;
             ne=sum(e~=0);
-            tasa_e=ne/n;
-        %Control para terminar bucle:
+            tasa_e=ne/n
+        %Control para terminar bucle: 
             epoca_ac=epoca_ac+1;
-            bandera=corte(criterio,epoca_ac,epoca_max,tasa_e,tasa_max,bandera);         
+            bandera=corte(criterio,epoca_ac,epoca_max,tasa_e,tasa_max,bandera);
+            
     end
 
 
