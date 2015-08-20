@@ -35,4 +35,4 @@ slprj/
 *.*~
 
 #ignorar archivos de particiones generados
-Guia 1/Datos/particiones/
+Guia\ 1/Datos/particiones/*
