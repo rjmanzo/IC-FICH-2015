@@ -1,7 +1,7 @@
 %Funcion Particionar
 %Recibe un archivo csv, la cantidad de parciones y el porcentaje de particion
 % Devuelve las particiones de entrenamiento y prueba
-function []= particionar(archivo,particiones,p)
+function []= particionar(archivo,salida,particiones,p)
  v_trn=load(archivo); %%Cargo el archivo completo
  [n,m]=size(v_trn);
  for i=1:particiones
@@ -21,7 +21,7 @@ function []= particionar(archivo,particiones,p)
      
      %Defino path de salidas
      
-     salida='../Datos/particiones/spheres2d10';
+     %salida='../Datos/particiones/spheres2d10';
      path_entrenamiento = strcat(salida,'_e_',num2str(i),'.csv');
      path_test = strcat(salida,'_t_',num2str(i),'.csv');
      %Escribo la particion i en el disco

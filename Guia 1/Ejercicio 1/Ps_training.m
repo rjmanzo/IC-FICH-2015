@@ -34,10 +34,10 @@ function [tasa_e,epoca_ac, W]=Ps_training(archivo,criterio,epoca_max,gamma,tasa_
             y=f_signo(v);
             e=M(:,end)-y;
             ne=sum(e~=0);
-            tasa_e=ne/n
-        %Control para terminar bucle: 
             epoca_ac=epoca_ac+1;
-            bandera=corte(criterio,epoca_ac,epoca_max,tasa_e,tasa_max,bandera);
+            tasa_e(epoca_ac)=ne/n;
+        %Control para terminar bucle:
+            bandera=corte(criterio,epoca_ac,epoca_max,tasa_e(epoca_ac),tasa_max,bandera);
             
     end
 
