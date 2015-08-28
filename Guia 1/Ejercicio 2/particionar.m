@@ -15,8 +15,8 @@ function []= particionar(archivo,salida,particiones,p)
      
      %Creo la matriz con la particion de prueba parcial i
      p_test= zeros(ceil(n*(1-p)),m); 
-     for j=1:ceil(n*(1-p)) %%Desde el ultimo valor del entrenamiento hasta n
-     p_test(j,:)=v_trn(index(j+ceil(n*p)),:);
+     for j=1:ceil(n*(1-p)) 
+     p_test(j,:)=v_trn(index(floor(n*p)+j),:);%%Desde el ultimo valor del index hasta n del index
      end  
      
      %Defino path de salidas
