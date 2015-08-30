@@ -1,4 +1,4 @@
-function graph_mlp(Y,M,tituloFig)   
+function graph_mlp_ejer4(Y,M,tituloFig)   
     tam=10; %Tamaño de puntos
     [NaN, Dim]=size(M);
     [NaN, Cant_salidas]=size(Y);

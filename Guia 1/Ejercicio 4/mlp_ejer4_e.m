@@ -1,4 +1,4 @@
-function [tasa_e,tasa_a,epoca_actual,W]= mlp_ejer3_e(archivo,criterio,gamma,alpha,tasa_e_max,epoca_max,neuronas)
+function [tasa_e,tasa_a,epoca_actual,W]= mlp_ejer4_e(archivo,criterio,gamma,alpha,tasa_e_max,epoca_max,neuronas)
    
     epoca_actual=1; %Contador de épocas 
     cant_salidas=neuronas(end); %cantidad de neuronas de la última capa son las salidas que tengo en mi red
@@ -21,7 +21,7 @@ function [tasa_e,tasa_a,epoca_actual,W]= mlp_ejer3_e(archivo,criterio,gamma,alph
         end % fin de epoca 
         
       %Calculo  de tasa error de entrenamiento
-      [tasa_e,tasa_a,Yp,V]=calc_error(W,patrones_entr,capas,cant_salidas);    
+      [tasa_e,tasa_a,Yp,V]=calc_error_ejer4(W,patrones_entr,capas,cant_salidas);    
       bandera=corte(criterio,epoca_actual,epoca_max,tasa_e,tasa_e_max,bandera);        
       epoca_actual=epoca_actual+1
         
@@ -36,7 +36,7 @@ function [tasa_e,tasa_a,epoca_actual,W]= mlp_ejer3_e(archivo,criterio,gamma,alph
     ylabel('error');
     title('Error en Entrenamiento');
     %Graficamos clasificacion con los patrones de Entrenamiento
-    graph_mlp(V,patrones_entr,'Graficamos clasificacion con los patrones de Entrenamiento');
+    graph_mlp_ejer4(V,patrones_entr,'Graficamos clasificacion con los patrones de Entrenamiento');
     end
 
 
@@ -50,7 +50,7 @@ function [Y]=forward(W,patrones_entr,capas,cant_salidas,index_patron)
  X=[-1 patrones_entr(index_patron,1:end-cant_salidas)]'; %obtengo un patron i 
         for k=1:capas
             V=W{k}*X;
-            Y{k}=(sigmoidea_ejer3(V,1)); 
+            Y{k}=(sigmoidea_ejer4(V,1)); 
             X=[-1; Y{k}];
         end
 end

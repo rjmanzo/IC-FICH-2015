@@ -1,4 +1,4 @@
-function cp=particionar_LKO_eje3(archivo,k)
+function cp=particionar_LKO_ejer4(archivo,k)
     %Par�metros:
         %archivo    ->  ruta con datos a particionar
         %k          ->  cantidad de patrones para la prueba
