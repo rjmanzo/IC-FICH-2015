@@ -1,6 +1,6 @@
 %%------------- Funcion de prueba (Test) para Perceptron Simple--------
 
-function ep = Ps_test(archivo,W)
+function ep = Ps_test_(archivo,W)
     %Inicializacion:
     v_test=load(archivo);
     [n,m]=size(v_test);
@@ -10,7 +10,7 @@ function ep = Ps_test(archivo,W)
     
     %Prueba:
     v=M(:,1:end-1)*W';
-    y=f_signo(v);
+    y=f_signo_(v);
     e=M(:,end)-y;
     ne=sum(e~=0);
     ep=ne/n;

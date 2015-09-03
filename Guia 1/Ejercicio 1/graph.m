@@ -7,7 +7,7 @@ function graph(graph_title,W,M,range, step, tam_puntos)
             x_graph=-range:step:range; %Rango para graficar        
             scatter(M(:,2),M(:,3),tam_puntos,color);
             hold on
-            y_graph=W(1)/W(3)-(W(2)/W(3))*x_graph;
+            y_graph=W(1)/W(3)*(-1)*M(1,1)-(W(2)/W(3))*x_graph;% Multiplico por M(1,1) dado que este valor me modifica la ordenada a origen
             plot(x_graph,y_graph);
             axis([-range range -range range])
             xlabel('X1');

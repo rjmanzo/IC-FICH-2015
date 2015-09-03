@@ -14,10 +14,41 @@ function [tasa_e,tasa_a,epoca_actual,W]= mlp_ejer3_e(archivo,criterio,gamma,alph
         for i= 1:n % recorrida de patrones
             %forward
             Y=forward(W,patrones_entr,capas,cant_salidas,i);
+            
+%              X=[-1 patrones_entr(i,1:end-cant_salidas)]'; %obtengo un patron i 
+%         for k=1:capas
+%             V=W{k}*X;
+%             Y{k}=(sigmoidea_ejer3(V,1)); 
+%             X=[-1; Y{k}];
+%         end
+            
+            
             %back
-            Delta=back(Y,W,patrones_entr,capas,cant_salidas,i);        
+            Delta=back(Y,W,patrones_entr,capas,cant_salidas,i);  
+            
+%                   % 1ro -> Delta para la capa de salida
+%         derivada=(1/2)*(1+Y{capas}).*(1-Y{capas});
+%         error=patrones_entr(i,end-cant_salidas+1:end)'-Y{capas}; %forma general para mas de una salida
+%         Delta{capas}=error.*derivada;
+%         %2do -> Delta para las capas ocultas
+%         for k=capas-1:-1:1
+%             derivada=(1/2)*(1+Y{k}).*(1-Y{k});
+%             Delta{k}=(W{k+1}(:,2:end)'*Delta{k+1}).*derivada;
+%         end
+            
+            
             %Ajuste de Pesos
-            [W,deltaW_n]=ajusteW(Y,W,Delta,deltaW_n,patrones_entr,capas,cant_salidas,gamma,alpha,i);            
+            [W,deltaW_n]=ajusteW(Y,W,Delta,deltaW_n,patrones_entr,capas,cant_salidas,gamma,alpha,i); 
+%                       X=[-1 patrones_entr(i,1:end-cant_salidas)]; %Entradas al patron i     
+%         for k=1:capas
+%             dW=gamma*Delta{k}*X;
+%             W{k}=W{k}+dW+alpha*deltaW_n{k};% momento de inercia,  acelera la convergencia cuando el gradiente sigue un sentic;
+%             deltaW_n{k}=dW; %Guardo lo que tenia antes de sumar dW 
+%             X=[-1; Y{k}]';
+%         end
+            
+            
+            
         end % fin de epoca 
         
       %Calculo  de tasa error de entrenamiento

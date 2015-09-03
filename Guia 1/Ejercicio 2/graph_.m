@@ -1,5 +1,5 @@
 %graph(graph_title,W,M,2, 0.2, 5)
-function graph(graph_title,W,M,range, step, tam_puntos)
+function graph_(graph_title,W,M,range, step, tam_puntos)
         color=zeros(length(M),3); %todos ceros (negro)
         color(M(:,end)==1,2)=1; %La clase 1 es verde
         color(M(:,end)==-1,3)=1; %La clase 2 es celeste

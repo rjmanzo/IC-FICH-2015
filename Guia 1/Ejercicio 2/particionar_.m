@@ -1,7 +1,7 @@
 %Funcion Particionar
 %Recibe un archivo csv, la cantidad de parciones y el porcentaje de particion
 % Devuelve las particiones de entrenamiento y prueba
-function []= particionar(archivo,salida,particiones,p)
+function []= particionar_(archivo,salida,particiones,p)
  v_trn=load(archivo); %%Cargo el archivo completo
  [n,m]=size(v_trn);
  for i=1:particiones

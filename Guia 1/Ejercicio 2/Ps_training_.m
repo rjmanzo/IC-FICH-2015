@@ -1,6 +1,6 @@
 %%------------- Funcion de Entrenamiento para Perceptron Simple--------
    
-function [tasa_e,epoca_ac, W]=Ps_training(archivo,criterio,epoca_max,gamma,tasa_max, graph_title)
+function [tasa_e,epoca_ac, W]=Ps_training_(archivo,criterio,epoca_max,gamma,tasa_max, graph_title)
 
     %Inicializacion:
         v_trn=load(archivo); %%Cargo el vector de entramientos
@@ -17,7 +17,7 @@ function [tasa_e,epoca_ac, W]=Ps_training(archivo,criterio,epoca_max,gamma,tasa_
         for i=1:n % Se recorre los patrones
             x=M(i,1:end-1); 
             v=dot(W,x); %Producto punto
-            y=f_signo(v); %% Puede ser cualquier funcion 
+            y=f_signo_(v); %% Puede ser cualquier funcion 
             mm=M(i,end);
             e=mm-y;
             DeltaW=gamma*e*x;%ppio de minima perturbacion, si error es cero, no modifica los pesos
@@ -28,10 +28,10 @@ function [tasa_e,epoca_ac, W]=Ps_training(archivo,criterio,epoca_max,gamma,tasa_
             
         end
         
-        graph(graph_title,W,M,2,0.2, 5)
+        graph_(graph_title,W,M,2,0.2, 5)
         %Calcular error(error entrenamiento):
             v=M(:,1:end-1)*W';
-            y=f_signo(v);
+            y=f_signo_(v);
             e=M(:,end)-y;
             ne=sum(e~=0);
             epoca_ac=epoca_ac+1;

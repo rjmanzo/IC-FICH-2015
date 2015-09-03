@@ -21,13 +21,10 @@ function [tasa_e,epoca_ac, W]=Ps_training(archivo,criterio,epoca_max,gamma,tasa_
             mm=M(i,end);
             e=mm-y;
             DeltaW=gamma*e*x;%ppio de minima perturbacion, si error e cero, no modifica los pesos
-            W=W+DeltaW;
-            if (DeltaW~=0)
-                %graph(graph_title,W,M,2, 0.2, 5)
-            end
-            
+            W=W+DeltaW;            
         end
         
+        %%Grafico la solucion al finalizar la epoca
         graph(graph_title,W,M,2,0.2, 5)
         %Calcular error:
             v=M(:,1:end-1)*W';
@@ -35,7 +32,7 @@ function [tasa_e,epoca_ac, W]=Ps_training(archivo,criterio,epoca_max,gamma,tasa_
             e=M(:,end)-y;
             ne=sum(e~=0);
             epoca_ac=epoca_ac+1;
-            tasa_e(epoca_ac)=ne/n;
+            tasa_e(epoca_ac)=ne/n
         %Control para terminar bucle:
             bandera=corte(criterio,epoca_ac,epoca_max,tasa_e(epoca_ac),tasa_max,bandera);
             
