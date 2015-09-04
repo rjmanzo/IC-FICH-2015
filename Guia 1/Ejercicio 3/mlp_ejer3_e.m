@@ -1,6 +1,6 @@
 function [tasa_e,tasa_a,epoca_actual,W]= mlp_ejer3_e(archivo,criterio,gamma,alpha,tasa_e_max,epoca_max,neuronas)
    
-    epoca_actual=1; %Contador de épocas 
+    epoca_actual=0; %Contador de épocas 
     cant_salidas=neuronas(end); %cantidad de neuronas de la última capa son las salidas que tengo en mi red
     patrones_entr=load(archivo);
     [n,m]=size(patrones_entr);
@@ -10,6 +10,7 @@ function [tasa_e,tasa_a,epoca_actual,W]= mlp_ejer3_e(archivo,criterio,gamma,alph
     capas=length(neuronas); %cantidad de capas
     deltaW_n=W; %iniciaclización del delta W del momento deinercia
     bandera=1;
+    
     while(bandera)
         for i= 1:n % recorrida de patrones
             %forward
@@ -20,13 +21,12 @@ function [tasa_e,tasa_a,epoca_actual,W]= mlp_ejer3_e(archivo,criterio,gamma,alph
 %             V=W{k}*X;
 %             Y{k}=(sigmoidea_ejer3(V,1)); 
 %             X=[-1; Y{k}];
-%         end
-            
+%         end            
             
             %back
             Delta=back(Y,W,patrones_entr,capas,cant_salidas,i);  
             
-%                   % 1ro -> Delta para la capa de salida
+%         % 1ro -> Delta para la capa de salida
 %         derivada=(1/2)*(1+Y{capas}).*(1-Y{capas});
 %         error=patrones_entr(i,end-cant_salidas+1:end)'-Y{capas}; %forma general para mas de una salida
 %         Delta{capas}=error.*derivada;
@@ -52,9 +52,10 @@ function [tasa_e,tasa_a,epoca_actual,W]= mlp_ejer3_e(archivo,criterio,gamma,alph
         end % fin de epoca 
         
       %Calculo  de tasa error de entrenamiento
-      [tasa_e,tasa_a,Yp,V]=calc_error(W,patrones_entr,capas,cant_salidas);    
-      bandera=corte(criterio,epoca_actual,epoca_max,tasa_e,tasa_e_max,bandera);        
+      [tasa_e,tasa_a,Yp,V]=calc_error(W,patrones_entr,capas,cant_salidas);  
       epoca_actual=epoca_actual+1
+      bandera=corte(criterio,epoca_actual,epoca_max,tasa_e,tasa_e_max,bandera);        
+      
         
         %Cálculo de error por época para graficar:
             error_cuad=(Yp{capas}-patrones_entr(:,end-cant_salidas+1:end)).^2;

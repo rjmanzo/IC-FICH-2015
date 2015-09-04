@@ -30,13 +30,13 @@ function [tasa_e,tasa_a,epoca_actual,W]= mlp_ejer4_e(archivo,criterio,gamma,alph
             error_epoca(epoca_actual,:)=mean(error_cuad);
         
     end
-    figure('Name','Error vs Epocas en Entrenamiento','NumberTitle','off')
+    figure('Name','Salidas','NumberTitle','off')
     plot(error_epoca);
     xlabel('epoca');
     ylabel('error');
-    title('Error en Entrenamiento');
+    title('Entrenamiento');
     %Graficamos clasificacion con los patrones de Entrenamiento
-    graph_mlp_ejer4(V,patrones_entr,'Graficamos clasificacion con los patrones de Entrenamiento');
+    %graph_mlp_ejer4(V,patrones_entr,'Graficamos clasificacion con los patrones de Entrenamiento');
     end
 
 
@@ -67,7 +67,6 @@ function [Delta]=back(Y,W,patrones_entr,capas,cant_salidas,index_patron)
         end
 end
 
-
 function [W,deltaW_n]=ajusteW(Y,W,Delta,deltaW_n,patrones_entr,capas,cant_salidas,gamma,alpha,index_patron)
            X=[-1 patrones_entr(index_patron,1:end-cant_salidas)]; %Entradas al patron i     
         for k=1:capas
@@ -77,15 +76,6 @@ function [W,deltaW_n]=ajusteW(Y,W,Delta,deltaW_n,patrones_entr,capas,cant_salida
             X=[-1; Y{k}]';
         end
 end
-
-
-%%------------- Funcion de Corte--------
-%epoca_max      ->  Cantidad max de epocas de entrenamiento
-%tasa_max	->  Error maximo aceptable
-%Criterio:
-%1. - termina con la cant. maxima de iteraciones 
-%2. - termina cuando la tasa_e de la epoca n es menor/igual a la tasa maxima de error 
-%3. - Conjuncion de los criterios 1. y 2. (Sale por el mejor)
 
 function [bandera]= corte(criterio,epoca_ac,epoca_max,tasa_e,tasa_max,bandera)
         switch criterio
