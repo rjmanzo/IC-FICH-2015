@@ -19,10 +19,9 @@ path_salida=strcat('../Datos/particiones/',archivo);
 % [tasa_e,tasa_a,epoca,W]=mlp_ejer4_e(path_entrada_e,criterio,gamma,alpha,tasa_max_err,epoca_max,neuronas);
 % [tasa_e_t,tasa_a_t]=mlp_ejer4_t(path_entrada_t,W,neuronas);
 
-
 %Segunda Parte (usando leave-k-out):
  %Leave-k-out:
-    K=1; % Hacer K=1 para hacer leave-one-out;
+    K=50; % Hacer K=1 para hacer leave-one-out;
     cp=particionar_LKO_ejer4(path_archivo,path_salida,K); 
     errorPrueba=zeros(1,cp);
     for i=1:cp

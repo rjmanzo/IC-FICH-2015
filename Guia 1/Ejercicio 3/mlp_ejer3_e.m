@@ -14,52 +14,24 @@ function [tasa_e,tasa_a,epoca_actual,W]= mlp_ejer3_e(archivo,criterio,gamma,alph
     while(bandera)
         for i= 1:n % recorrida de patrones
             %forward
-            Y=forward(W,patrones_entr,capas,cant_salidas,i);
-            
-%              X=[-1 patrones_entr(i,1:end-cant_salidas)]'; %obtengo un patron i 
-%         for k=1:capas
-%             V=W{k}*X;
-%             Y{k}=(sigmoidea_ejer3(V,1)); 
-%             X=[-1; Y{k}];
-%         end            
+            Y=forward(W,patrones_entr,capas,cant_salidas,i);                   
             
             %back
-            Delta=back(Y,W,patrones_entr,capas,cant_salidas,i);  
-            
-%         % 1ro -> Delta para la capa de salida
-%         derivada=(1/2)*(1+Y{capas}).*(1-Y{capas});
-%         error=patrones_entr(i,end-cant_salidas+1:end)'-Y{capas}; %forma general para mas de una salida
-%         Delta{capas}=error.*derivada;
-%         %2do -> Delta para las capas ocultas
-%         for k=capas-1:-1:1
-%             derivada=(1/2)*(1+Y{k}).*(1-Y{k});
-%             Delta{k}=(W{k+1}(:,2:end)'*Delta{k+1}).*derivada;
-%         end
-            
+            Delta=back(Y,W,patrones_entr,capas,cant_salidas,i);              
             
             %Ajuste de Pesos
-            [W,deltaW_n]=ajusteW(Y,W,Delta,deltaW_n,patrones_entr,capas,cant_salidas,gamma,alpha,i); 
-%                       X=[-1 patrones_entr(i,1:end-cant_salidas)]; %Entradas al patron i     
-%         for k=1:capas
-%             dW=gamma*Delta{k}*X;
-%             W{k}=W{k}+dW+alpha*deltaW_n{k};% momento de inercia,  acelera la convergencia cuando el gradiente sigue un sentic;
-%             deltaW_n{k}=dW; %Guardo lo que tenia antes de sumar dW 
-%             X=[-1; Y{k}]';
-%         end
-            
-            
-            
+            [W,deltaW_n]=ajusteW(Y,W,Delta,deltaW_n,patrones_entr,capas,cant_salidas,gamma,alpha,i);    
+                  
         end % fin de epoca 
         
       %Calculo  de tasa error de entrenamiento
       [tasa_e,tasa_a,Yp,V]=calc_error(W,patrones_entr,capas,cant_salidas);  
       epoca_actual=epoca_actual+1
       bandera=corte(criterio,epoca_actual,epoca_max,tasa_e,tasa_e_max,bandera);        
-      
-        
-        %Cálculo de error por época para graficar:
-            error_cuad=(Yp{capas}-patrones_entr(:,end-cant_salidas+1:end)).^2;
-            error_epoca(epoca_actual,:)=mean(error_cuad);
+              
+      %Cálculo de error por época para graficar:
+      %error_cuad=(Yp{capas}-patrones_entr(:,end-cant_salidas+1:end)).^2;
+      error_epoca(epoca_actual)=tasa_e;
         
     end
     figure('Name','Error vs Epocas en Entrenamiento','NumberTitle','off')
@@ -70,7 +42,6 @@ function [tasa_e,tasa_a,epoca_actual,W]= mlp_ejer3_e(archivo,criterio,gamma,alph
     %Graficamos clasificacion con los patrones de Entrenamiento
     graph_mlp(V,patrones_entr,'Graficamos clasificacion con los patrones de Entrenamiento');
     end
-
 
 function [W]=pesosW(nodos,neuronas)
 	for i=1:length(nodos)
