@@ -7,7 +7,7 @@ function [tasa_e,tasa_a,Yp,V]=calc_error_ejer4(W,patrones_entr,capas,cant_salida
             Yp{k}=(sigmoidea_ejer4(V,1))';
             X=[-1*ones(n,1) Yp{k}];
         end
-        V=signo_ejer4(Yp{capas});
+        V=sign(Yp{capas});
         if (length(V(1,:))==1) %si tengo una sola salida
             aciertos=sum((V==patrones_entr(:,end-cant_salidas+1:end))); 
         else %si tengo muchas salidas

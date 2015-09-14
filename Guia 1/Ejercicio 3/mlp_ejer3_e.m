@@ -54,7 +54,7 @@ function [Y]=forward(W,patrones_entr,capas,cant_salidas,index_patron)
         for k=1:capas
             V=W{k}*X;
             Y{k}=(sigmoidea_ejer3(V,1)); 
-            X=[-1; Y{k}];
+            X=[-1; Y{k}]; %Construyo la proxima matriz (Columna)
         end
 end
 

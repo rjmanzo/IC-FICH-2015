@@ -1,12 +1,12 @@
-clear all;
-close all;
+% clear all;
+% close all;
 cp=1; % cantidad de particiones
 
 archivo='concentlite';
 %    path_archivo=strcat('../Datos/',archivo,'.csv');
 %    path_salida=strcat('../Datos/particiones/',archivo);
 %    particionar_ejer3(path_archivo,path_salida,cp,0.8);
-neuronas=[5 1];
+neuronas=[10 1];
 path_entrada_e = strcat('../Datos/particiones/',archivo,'_e_1','.csv');
 path_entrada_t = strcat('../Datos/particiones/',archivo,'_t_1','.csv');
 
