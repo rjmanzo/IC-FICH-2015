@@ -1,71 +1,96 @@
-% ============ ENTRADAS
-% archivo -> nombre del archivo que contiene los datos
-% est -> vector con la estructura del SOM
-% va -> velocidad de aprendizaje
-% vec -> valor de la vecindad
-% epocas -> vector de 3 elementos (epocas de cada etapa)
-% salidas -> cantidad de salidas
-% ============ SALIDA
-% W -> celda con los pesos finales
-function [W] = SOM(archivo,est,va,vec,epocas,salidas)
-    % Leo los datos del archivo
-    datos = csvread( strcat( 'Datos/' , archivo , '.csv' ) );
-    datos = datos(:,1:end-salidas);
-    % Me fijo el tamaño de la matriz de datos
-    [f,~] = size( datos );
-    % Genero los vectores de pesos de cada neurona del SOM
-    W = pesosSOM( est , datos , 1 );
-    % Grafico el SOM
-    graficarSOM( W ) ;
+function [W]=SOM(archivo,matris_som,gamma,vecindad,epocas_etapas,cant_salidas,ini)
+    patrones=csvread(archivo);
+    patrones=patrones(:,1:end-cant_salidas);
+    [n,~]=size(patrones);
+    W = inicializarSOM( matris_som , patrones , ini );% pesos para cada neurona
+    graphSOM(W) ;
     pause(2);
-    % Creo un contador para las epocas
-    cont_ep = 1;
-    while( cont_ep < sum(epocas) )
-        % Parametros Ordenamiento Global
-        if cont_ep < epocas(1)
-            mu = va
-            A = vec
+    epoca_actual=1;
+    while(epoca_actual<sum(epocas_etapas))        
+     [gamma,A,vecindad]=etapas(epoca_actual,epocas_etapas,vecindad,gamma);
+      W= recorrerPatrones(patrones,vecindad,W,matris_som,gamma,A); 
+        if mod(epoca_actual,2) == 0 %grafico cada 2 epocas
+            graphSOM( W ) ;
+             pause(2);
+        end
+        epoca_actual=epoca_actual+1
+    end
+    graficar(patrones);
+end
+
+
+
+function [W] = inicializarSOM( matris_som , patrones , ini )
+    switch ini
+        case 1
+            [~,m] = size( patrones );
+            W = cell( matris_som(1) , matris_som(2) );
+            for i=1:matris_som(1)
+                for j=1:matris_som(2)
+                    W{i,j} = -0.5 + rand(1,m); %inicializo al azar los pesos
+                end
+            end
+        case 2
+            [n m] = size( patrones );
+            W = cell( matris_som(1) , matris_som(2) );
+            for i=1:matris_som(1)
+                for j=1:matris_som(2)
+                    W{i,j} = patrones(round((n-1)*rand(1)+1),:); % patron cualquiera
+                end
+            end
+        otherwise
+            disp('Error');
+    end
+end
+
+function [gamma,A,vecindad]=etapas(epoca_actual,epocas_etapas,vecindad,gamma)
+
+   % Parametros Ordenamiento Global
+        if epoca_actual < epocas_etapas(1)
+            %mu = gamma
+            A = vecindad
         % Parametros Transicion
-        elseif cont_ep < sum(epocas(1:2))
-            mu = va + (0.1-va)*(cont_ep-epocas(1))/epocas(2)
-            A = vec + (1-vec)*(cont_ep-epocas(1))/epocas(2)
+        elseif epoca_actual < sum(epocas_etapas(1:2))
+            gamma = gamma + (0.1-gamma)*(epoca_actual-epocas_etapas(1))/epocas_etapas(2)
+            A = vecindad + (1-vecindad)*(epoca_actual-epocas_etapas(1))/epocas_etapas(2)
         % Parametros Ajuste fino
         else
-            mu = 0.01
-            vec = 0
+            gamma = 0.01
+            A= 0
+            vecindad=0
         end
-        % Hago un bucle para recorrer todos los patrones
-        for i=1:f
-            % Selecciono el patron de analisis
-            patron = datos(i,:);
-            % Busco la neurona mas cercana
-            [fn,cn] = buscarCercano( W , patron );
-            % Selecciono la neurona ganadora
-            ng = W{fn,cn};
-            % Valido los limites
-            [ar,ab,iz,de] = validarLimite( fn , cn , vec , est );
-            % Analizo la vecindad
-            for fv=ar:ab
+end
+
+function [fila_neurona,col_neurona] = coord_de_ganadora( W , patron )
+    D = cellfun( @(x) patron-x , W , 'UniformOutput' , false ); % diferencia a cada elemento de celda
+    D = cellfun( @(x) norm(x) , D , 'UniformOutput' , false ); %distancia a cada vector de la celda
+    D = cell2mat(D);
+    [v,fila_neurona] = min(D); %minimo de la matriz
+    [v,col_neurona] = min(v); %minimo del vector
+    fila_neurona = fila_neurona(col_neurona);
+end
+
+function W= recorrerPatrones(patrones,vecindad,W,matris_som,gamma,A)
+        [n,~] = size(patrones);
+        for i=1:n %recorro patrones
+            patron = patrones(i,:);
+            % Cooordenada de ganadora-> mas cercana al patron de entrada
+            % actual
+            [filaGanadora,colGanadora] = coord_de_ganadora( W , patron );
+            %limites
+            [ar,ab,iz,de]=Limites( filaGanadora , colGanadora , vecindad , matris_som );
+            for fv=ar:ab %vecindad -> radio
                 for cv=iz:de
-                    % Pregunto si la neurona vecina esta dentro de la vecindad
-                    if abs((fn-fv))+abs((cn-cv)) <= A 
+                    if abs((filaGanadora-fv))+abs((colGanadora-cv)) <= A  %si esta dentro del radio
                         % Selecciono la neurona vecina
                         nv = W{fv,cv};
                         % Calculo el error con el patron entrante
                         e = patron - nv;
-                        % Actualizo la neurona
-                        W{fv,cv} = W{fv,cv}+mu*e;
+                        W{fv,cv} = W{fv,cv}+gamma*e;%actulizacion pesos
                     end
                 end
             end
         end
-        % Grafico el SOM ( cada 20 epocas )
-        if mod( cont_ep , 20 ) == 0
-            graficarSOM( W ) ;
-        end
-        % Aumento el contador de epocas
-        cont_ep = cont_ep + 1 
-    end
-    % Grafico los datos del archivo
-    graficar( datos );
 end
+
+

@@ -1,5 +1,6 @@
 %clear all; close all;
-archivo = 'irisbin';
+%archivo = 'irisbin';
+archivo = 'XOR';
 cp=1; % cantidad de particiones
 path_archivo=strcat('../Datos/',archivo,'.csv');  
 path_salida=strcat('../Datos/particiones/',archivo);
@@ -9,15 +10,17 @@ gamma=0.02;
 tasa_max_err=0.05;
 epoca_max=300;
 % RBF
-K=75;
-cant_salidas=3;
+K=2;
+cant_salidas=1;
 t = cputime;
-[medias,M]= kmeans('../Datos/particiones/irisbin_e_1.csv',K,cant_salidas);
-gaussianas=gaussiana('../Datos/particiones/irisbin_e_1.csv',medias,M,cant_salidas);
+path_e = strcat('../Datos/particiones/',archivo,'_e_1','.csv');
+path_t = strcat('../Datos/particiones/',archivo,'_e_1','.csv');
+[medias,M]= kmeans(path_e,K,cant_salidas);
+gaussianas=gaussiana(path_e,medias,M,cant_salidas);
 [W,tasa_a,epoca_actual]=rbf(gaussianas,gamma,tasa_max_err,epoca_max,cant_salidas);
-gaussianas=gaussiana('../Datos/particiones/irisbin_t_1.csv',medias,M,cant_salidas);
+gaussianas=gaussiana(path_t,medias,M,cant_salidas);
 tasa_a_test_RBF=rbf_test(gaussianas,W,cant_salidas);
-e = cputime-t
+tiempo_ejecucion = cputime-t
 
 % % MLP
 % cd ../../Guia' 1'/Ejercicio' 4'/

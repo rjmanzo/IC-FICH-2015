@@ -1,16 +1,20 @@
 clear all; close all;
 % Defino el archivo a utilizar
 archivo = 'clouds';
-% Particiono los datos
-Particionar(archivo,1,0.8);
-% ========================= SOM ========================================
+cp=1; % cantidad de particiones
+path_archivo=strcat('../Datos/',archivo,'.csv');  
+path_salida=strcat('../Datos/particiones/',archivo);
+particionar(path_archivo,path_salida,cp,0.8);
+
+%  SOM 
 % % Obtengo la celda con los pesos de todas las neuronas
 % [W_SOM] = SOM('clouds_e1',[10 10],0.5,3,[50 350 100] , 1 );
 % % Obtengo la etiqueta de cada neurona
 % [E] = etiquetar('clouds_e1',W_SOM);
 % % Evaluo el clasificador
 % [ta_SOM] = clasificar('clouds_p1',W_SOM,E);
-% % ========================= MLP ========================================
+
+% %  MLP
 % Me posiciono en la carpeta
 % cd '../../IC_guia1/Ejercicio 3 y 4';
 % % Defino la estructura del MLP
@@ -19,7 +23,8 @@ Particionar(archivo,1,0.8);
 % [W_MLP,tae_MLP,cep_MLP] = EntrenarPM('../../IC_guia2/Ejercicio 2 y 3/Datos/clouds_e1.csv',neuronas,0.1,0.1,300,0.05);
 % % Pruebo el MLP
 % [tap_MLP] = ProbarPM('../../IC_guia2/Ejercicio 2 y 3/Datos/clouds_p1.csv',W_MLP,neuronas);
-% % ========================= RBF ========================================
+
+% %  RBF
 % Me posiciono en la carpeta
 cd '../../IC_guia2/Ejercicio 1';
 % Cantidad de gaussianas
