@@ -18,8 +18,6 @@ function [W]=SOM(archivo,matris_som,gamma,vecindad,epocas_etapas,cant_salidas,in
     graficar(patrones);
 end
 
-
-
 function [W] = inicializarSOM( matris_som , patrones , ini )
     switch ini
         case 1

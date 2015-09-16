@@ -9,6 +9,7 @@ particionar(path_archivo,path_salida,cp,0.8);
 gamma=0.02;  
 tasa_max_err=0.05;
 epoca_max=300;
+
 % RBF
 K=2;
 cant_salidas=1;
