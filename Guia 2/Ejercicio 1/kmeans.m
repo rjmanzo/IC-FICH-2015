@@ -1,52 +1,50 @@
-%Para probar:
-%     archivo='Xor_trn';
-%     k=4;
-%     cant_salidas=1;
-%     medias=zeros(k,2);
 function [medias,M_sigma] = kmeans(archivo,k,cant_salidas)
-    datos = csvread( archivo );
-    [f,c] = size( datos );
-    index = round(1+(k-1).*rand(f,1));
-    datos = [ index  datos ];
-    % Instancio una bandera en verdadero
+    patrones = csvread( archivo );
+    [n,m] = size( patrones );
+    % Genero un vector columna con valores entre 1 y k con n elementos
+    index = round(1+(k-1).*rand(n,1));
+    patrones = [ index  patrones ];
     cambio = true;
-    medias=zeros(k,c-cant_salidas);
+    medias=zeros(k,m-cant_salidas);
     while( cambio )
+        % Cambio la bandera a falso
         cambio = false;
-        % medias
         for i=1:k
-            conjuntoi=datos(datos(:,1)==i,2:end-cant_salidas);
+            conjuntoi=patrones(patrones(:,1)==i,2:end-cant_salidas);
             if (isempty(conjuntoi))
-                 medias(i,:)=rand(1,c-cant_salidas)-0.5;
+                 medias(i,:)=rand(1,m-cant_salidas)-0.5;
             else
                 medias(i,:) = median(conjuntoi); 
             end
         end
-        %  Reasignacion
-        for i=1:f
-            patron = datos(i,2:end-cant_salidas);
+        for i=1:n
+            patron = patrones(i,2:end-cant_salidas);
             % Calculo la distancia del patron a cada vector de medias
             for j=1:k
                 distancia(j) = sum((patron - medias(j,:)).^2);
             end
             [~,g] = min(distancia);
-            if( g ~= datos(i,1) )
-                datos(i,1) = g;
+            % Pregunto si cambia de grupo
+            if( g ~= patrones(i,1) )
+                % Si cambió de grupo, hago el cambio
+                patrones(i,1) = g;
                 % Como hubo cambio, debo seguir entrenando
                 cambio = true;
             end
         end
         % ================================================================
     end
-    M_sigma=varianzas_RBF(datos(:,1:end-cant_salidas), medias); 
+    M_sigma=varianzas_RBF(patrones(:,1:end-cant_salidas), medias); 
+    %agregar bandera de uso de varianza
     
-    % ============ Grafico los datos del XOR =======================
+    
+    % ============ Grafico los patrones del XOR =======================
 %     figure(2);
 %     hold on
-%     scatter(datos(datos(:,1)==1,2),datos(datos(:,1)==1,3),'blue');
-%     scatter(datos(datos(:,1)==2,2),datos(datos(:,1)==2,3),'red');
-%     scatter(datos(datos(:,1)==3,2),datos(datos(:,1)==3,3),'green');
-%     scatter(datos(datos(:,1)==4,2),datos(datos(:,1)==4,3),'black');
+%     scatter(patrones(patrones(:,1)==1,2),patrones(patrones(:,1)==1,3),'blue');
+%     scatter(patrones(patrones(:,1)==2,2),patrones(patrones(:,1)==2,3),'red');
+%     scatter(patrones(patrones(:,1)==3,2),patrones(patrones(:,1)==3,3),'green');
+%     scatter(patrones(patrones(:,1)==4,2),patrones(patrones(:,1)==4,3),'black');
 %     scatter(medias(:,1),medias(:,2),10,'yellow','fill');
 %     figure(3);
     % ============================================================

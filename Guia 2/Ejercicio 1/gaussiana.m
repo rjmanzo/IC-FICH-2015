@@ -10,6 +10,7 @@ function gaussianas=gaussiana(archivo,medias,varianza,cant_salidas)
             gaussianas(i,j)=exp(-1/2*dot((X-medias(j,:)),(X-medias(j,:))));
 %            dist=X-medias(j,:);
 %             gaussianas(i,j)=exp(-1/2*dist*inv(varianza)*dist');
+%Agregar bandera de uso en varianza
         end
     end
 
