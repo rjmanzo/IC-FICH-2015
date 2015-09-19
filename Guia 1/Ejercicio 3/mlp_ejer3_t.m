@@ -6,5 +6,5 @@ function [tasa_e,tasa_a]=mlp_ejer3_t(archivo,W,neuronas)
     patrones_entr=load(archivo); 
     [tasa_e,tasa_a,Yp,V]=calc_error(W,patrones_entr,capas,cant_salidas);
     %Graficamos clasificacion con los patrones de Test
-    graph_mlp(V,patrones_entr,'Graficamos clasificacion con los patrones de Test');
+    graph_mlp(V,patrones_entr,'Graficamos clasificacion con los patrones de Test - Final');
 end

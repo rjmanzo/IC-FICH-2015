@@ -27,7 +27,12 @@ function [tasa_e,tasa_a,epoca_actual,W]= mlp_ejer3_e(archivo,criterio,gamma,alph
       %Calculo  de tasa error de entrenamiento
       [tasa_e,tasa_a,Yp,V]=calc_error(W,patrones_entr,capas,cant_salidas);  
       epoca_actual=epoca_actual+1
-      bandera=corte(criterio,epoca_actual,epoca_max,tasa_e,tasa_e_max,bandera);        
+      bandera=corte(criterio,epoca_actual,epoca_max,tasa_e,tasa_e_max,bandera);
+      %Graficamos clasificacion con los patrones de Entrenamiento
+      if mod(epoca_actual,5) == 0 %grafico cada 5 epocas
+      graph_mlp(V,patrones_entr,'Graficamos clasificacion con los patrones de Entrenamiento');
+      pause(1);
+      end
               
       %Cálculo de error por época para graficar:
       %error_cuad=(Yp{capas}-patrones_entr(:,end-cant_salidas+1:end)).^2;
@@ -40,7 +45,7 @@ function [tasa_e,tasa_a,epoca_actual,W]= mlp_ejer3_e(archivo,criterio,gamma,alph
     ylabel('error');
     title('Error en Entrenamiento');
     %Graficamos clasificacion con los patrones de Entrenamiento
-    graph_mlp(V,patrones_entr,'Graficamos clasificacion con los patrones de Entrenamiento');
+    graph_mlp(V,patrones_entr,'Graficamos clasificacion con los patrones de Entrenamiento - Final');
     end
 
 function [W]=pesosW(nodos,neuronas)
