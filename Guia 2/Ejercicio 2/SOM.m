@@ -9,7 +9,7 @@ function [W]=SOM(archivo,matris_som,gamma,vecindad,epocas_etapas,cant_salidas,in
     while(epoca_actual<sum(epocas_etapas))        
      [gamma,A,vecindad]=etapas(epoca_actual,epocas_etapas,vecindad,gamma);
       W= recorrerPatrones(patrones,vecindad,W,matris_som,gamma,A); 
-        if mod(epoca_actual,2) == 0 %grafico cada 2 epocas
+        if mod(epoca_actual,5) == 0 %grafico cada 2 epocas
             graphSOM( W ) ;
              pause(2);
         end
