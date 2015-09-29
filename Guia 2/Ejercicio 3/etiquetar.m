@@ -1,11 +1,11 @@
 function [E] = etiquetar(archivo,W)
     % Leo los datos del archivo
-    datos = csvread( strcat( 'Datos/' , archivo , '.csv' ) );
-    % Averiguo el tamaño de la celda
+    datos = csvread( archivo );
+    % Averiguo el tamaï¿½o de la celda
     [fw,cw] = size(W);
     % Inicializo una celda contadora
     C = cellfun( @(x) zeros(1,2) , W , 'UniformOutput' , false );
-    % Averiguo el tamaño de la matriz de datos
+    % Averiguo el tamaï¿½o de la matriz de datos
     [fd,~] = size(datos);
     % Recorro todos los patrones
     for i=1:fd
@@ -14,7 +14,7 @@ function [E] = etiquetar(archivo,W)
         % Tomo la salida del patron entrante
         salida = datos(i,end);
         % Busco la neurona ganadora
-        [fg,cg] = buscarCercano(W,patron);
+        [fg,cg] = coord_de_ganadora(W,patron);
         % Agarro el vector contador de esa neurona
         contador = C{fg,cg};
         if salida == -1
@@ -42,4 +42,14 @@ function [E] = etiquetar(archivo,W)
             end
         end
     end
+end
+
+
+function [fila_neurona,col_neurona] = coord_de_ganadora( W , patron )
+    D = cellfun( @(x) patron-x , W , 'UniformOutput' , false ); % diferencia a cada elemento de celda
+    D = cellfun( @(x) norm(x) , D , 'UniformOutput' , false ); %distancia a cada vector de la celda
+    D = cell2mat(D);
+    [v,fila_neurona] = min(D); %minimo de la matriz
+    [v,col_neurona] = min(v); %minimo del vector
+    fila_neurona = fila_neurona(col_neurona);
 end

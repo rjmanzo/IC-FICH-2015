@@ -40,11 +40,11 @@ end
 %ylabel('error');
 %title('Entrenamiento/single');
 
-figure('Name','Tasa_e Vs. Epocas','NumberTitle','off')
+figure('Name','Tasa Error Entrenamiento - MLP','NumberTitle','off')
 plot(error_tasa);
 xlabel('epoca');
 ylabel('Tasa');
-title('Entrenamiento/gral.');
+title('Tasa Error Entrenamiento - MLP');
 
 %Graficamos clasificacion con los patrones de Entrenamiento
 %graph_mlp_ejer4(V,patrones_entr,'Graficamos clasificacion con los patrones de Entrenamiento');

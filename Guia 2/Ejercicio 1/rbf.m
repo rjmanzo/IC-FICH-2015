@@ -1,4 +1,4 @@
-function [W,tasa_a,epoca_actual]= rbf(gaussianas,gamma,tasa_max_err,epoca_max,cant_salidas)
+function [W,tasa_a,epoca_actual]= rbf(gaussianas,gamma,tasa_max_err,epoca_max,cant_salidas,criterio)
 
     epoca_actual=1;
     [n,m]=size(gaussianas);
@@ -24,17 +24,18 @@ function [W,tasa_a,epoca_actual]= rbf(gaussianas,gamma,tasa_max_err,epoca_max,ca
         tasa_a(epoca_actual)=aciertos/n;
         tasa_e(epoca_actual)=1-tasa_a(epoca_actual);     
         %Control para terminar bucle:
-        bandera=corte(3,epoca_actual,epoca_max,tasa_e(epoca_actual),tasa_max_err,bandera);
+        bandera=corte(criterio,epoca_actual,epoca_max,tasa_e(epoca_actual),tasa_max_err,bandera);
             
-        epoca_actual=epoca_actual+1;
-        
+        epoca_actual=epoca_actual+1;    
         
     end
-    figure('Name','Tasa Error Enrenamiento','NumberTitle','off')
-    plot(1.-tasa_a);
+    figure('Name','Tasa Error Entrenamiento - RBF','NumberTitle','off')
+    plot(tasa_e);
     xlabel('epoca');
     ylabel('Tasa');
-    title('tasa de errores');
+    title('tasa de errores - RBF');
+    
+    
 end
 
 

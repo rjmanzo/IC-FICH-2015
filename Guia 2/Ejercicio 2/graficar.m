@@ -1,13 +1,13 @@
 % ============ ENTRADAS
-% datos -> datos a graficar
-function graficar( datos )
-    % Me fijo el tamaño de la matriz
-    [f,c] = size(datos);
+% patrones -> patrones a graficar
+function graficar( patrones )
+    % Me fijo el tamaï¿½o de la matriz
+    [n,m] = size(patrones);
     figure(2);
     axis([-2 2 -2 2]);
-    for i=1:f
+    for i=1:n
         % Dibujo el patron
-        scatter(datos(i,1),datos(i,2),36,'red');
+        scatter(patrones(i,1),patrones(i,2),36,'red');
         hold on;
     end
 end

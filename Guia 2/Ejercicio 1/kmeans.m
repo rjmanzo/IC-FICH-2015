@@ -6,13 +6,13 @@ function [medias,M_sigma] = kmeans(archivo,k,cant_salidas)
     patrones = [ index  patrones ];
     cambio = true;
     medias=zeros(k,m-cant_salidas);
-    while( cambio )
+    while(cambio)
         % Cambio la bandera a falso
         cambio = false;
         for i=1:k
             conjuntoi=patrones(patrones(:,1)==i,2:end-cant_salidas);
             if (isempty(conjuntoi))
-                 medias(i,:)=rand(1,m-cant_salidas)-0.5;
+                 medias(i,:)=rand(1,m-cant_salidas)-0.5;%Conjunto al azar. Puede caer cerca de un conj. ya asignado
             else
                 medias(i,:) = median(conjuntoi); 
             end
@@ -38,14 +38,24 @@ function [medias,M_sigma] = kmeans(archivo,k,cant_salidas)
     %agregar bandera de uso de varianza
     
     
-    % ============ Grafico los patrones del XOR =======================
-%     figure(2);
+%     % ============ Grafico los patrones del XOR =======================
+%     %Original
+%     figure('Name','Original');
+%     title('Original');
 %     hold on
-%     scatter(patrones(patrones(:,1)==1,2),patrones(patrones(:,1)==1,3),'blue');
-%     scatter(patrones(patrones(:,1)==2,2),patrones(patrones(:,1)==2,3),'red');
-%     scatter(patrones(patrones(:,1)==3,2),patrones(patrones(:,1)==3,3),'green');
+%     scatter(patrones(patrones(:,4)==-1,2),patrones(patrones(:,4)==-1,3),'red');
+%     scatter(patrones(patrones(:,4)==1,2),patrones(patrones(:,4)==1,3),'blue');
+%     scatter(medias(:,1),medias(:,2),10,'yellow','fill');
+%     
+%     %Respuesta RBF
+%     figure('Name','Respuesta RBF');
+%     title('Respuesta RBF');
+%     hold on
+%     scatter(patrones(patrones(:,1)==1,2),patrones(patrones(:,1)==1,3),'magenta');
+%     scatter(patrones(patrones(:,1)==2,2),patrones(patrones(:,1)==2,3),'green');
+%     scatter(patrones(patrones(:,1)==3,2),patrones(patrones(:,1)==3,3),'blue');
 %     scatter(patrones(patrones(:,1)==4,2),patrones(patrones(:,1)==4,3),'black');
 %     scatter(medias(:,1),medias(:,2),10,'yellow','fill');
-%     figure(3);
-    % ============================================================
+%     % ============================================================
+        
 end
