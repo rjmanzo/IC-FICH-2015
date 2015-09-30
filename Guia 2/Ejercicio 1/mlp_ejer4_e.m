@@ -24,12 +24,10 @@ while(bandera)
     [tasa_e,tasa_a,Yp,V]=calc_error_ejer4(W,patrones_entr,capas,cant_salidas);
     bandera=corte(criterio,epoca_actual,epoca_max,tasa_e,tasa_e_max,bandera);
     
-    %Cálculo de error por época para graficar:
-    % error_cuad=(Yp{capas}-patrones_entr(:,end-cant_salidas+1:end)).^2;
-    %  error_epoca(epoca_actual,:)=mean(error_cuad);
-    
     %Calculo la tasa de error por epoca
     error_tasa(epoca_actual)=tasa_e;
+        
+    %%Actualizo el contador de epocas
     epoca_actual=epoca_actual+1
     
 end

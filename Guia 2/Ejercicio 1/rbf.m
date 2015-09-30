@@ -26,7 +26,7 @@ function [W,tasa_a,epoca_actual]= rbf(gaussianas,gamma,tasa_max_err,epoca_max,ca
         %Control para terminar bucle:
         bandera=corte(criterio,epoca_actual,epoca_max,tasa_e(epoca_actual),tasa_max_err,bandera);
             
-        epoca_actual=epoca_actual+1;    
+        epoca_actual=epoca_actual+1    
         
     end
     figure('Name','Tasa Error Entrenamiento - RBF','NumberTitle','off')

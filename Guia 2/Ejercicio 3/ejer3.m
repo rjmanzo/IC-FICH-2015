@@ -4,7 +4,10 @@ close all;
 archivo = 'clouds_m';
 path_archivo=strcat('../Datos/',archivo,'.csv');
 path_salida=strcat('../Datos/particiones/',archivo);
-%particionar(path_archivo,path_salida,1,0.8);
+particionar(path_archivo,path_salida,1,0.8);
+
+%Visualizo el conjunto de patrones a clasificar
+graficar_patrones(path_archivo);
 
 %Path de entrenamiento y test
 path_e = strcat('../Datos/particiones/',archivo,'_e_1','.csv');
@@ -17,6 +20,9 @@ epoca_max=320;
 criterio=3;
 cant_salidas=1;
 
+%-----------------------------------------------------
+%SOM
+%-----------------------------------------------------
 t = cputime;
 % Obtengo la celda con los pesos de todas las neuronas
 %SOM(archivo,matris_som,gamma,vecindad,epocas_etapas,cant_salidas,ini)
@@ -24,17 +30,14 @@ t = cputime;
 % Obtengo la etiqueta de cada neurona
 [E] = etiquetar(path_e,W_SOM);
 % Evaluo el clasificador
-[ta_SOM] = clasificar(path_t,W_SOM,E);
+[tasa_a_t_SOM] = clasificar(path_t,W_SOM,E);
 %Fin del temporizador
 tiempo_ejecucion_SOM = cputime-t;
 
-
-
-
-% -----------------------------------------------------
-% RBF
-% -----------------------------------------------------
-Me posiciono en la carpeta
+%-----------------------------------------------------
+%RBF
+%-----------------------------------------------------
+%Me posiciono en la carpeta
 cd ../../Guia' 2'/Ejercicio' 1'/
 % Conf. de variables del problema 
 K=25; % Cantidad de gaussianas
@@ -46,8 +49,6 @@ gaussianas=gaussiana(path_e,medias,M,cant_salidas,bandera_M_sigma);
 gaussianas=gaussiana(path_t,medias,M,cant_salidas,bandera_M_sigma);
 tasa_a_t_rbf=rbf_test(gaussianas,W,cant_salidas);
 tiempo_ejecucion_RBF = cputime-t;
-
-
 
 % % % -----------------------------------------------------
 % % % MLP

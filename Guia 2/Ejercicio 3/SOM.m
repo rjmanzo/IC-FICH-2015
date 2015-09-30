@@ -3,8 +3,8 @@ function [W]=SOM(archivo,matris_som,gamma,vecindad,epocas_etapas,cant_salidas,in
     patrones=patrones(:,1:end-cant_salidas);
     [n,~]=size(patrones);
     W = inicializarSOM( matris_som , patrones , ini );% pesos para cada neurona
-    graphSOM(W) ;
-    pause(2);
+    graphSOM(W);
+    pause(1);
     epoca_actual=1;
     while(epoca_actual<sum(epocas_etapas))        
      [gamma,A,vecindad]=etapas(epoca_actual,epocas_etapas,vecindad,gamma);

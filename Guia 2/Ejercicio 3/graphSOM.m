@@ -1,10 +1,11 @@
 function graphSOM( W )
     [n,m] = size(W);
+    %figure('Name','Entrenamiento SOM');
     figure(1);
     for i=1:n
         for j=1:m
             p = W{i,j};%neurona
-            % Dibujo el patron
+            % Dibujo el patron           
             scatter(p(1),p(2),36,'blue','o','fill');
             hold on;
             if i ~= n %ultima fila?

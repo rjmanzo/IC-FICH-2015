@@ -23,15 +23,12 @@ function [tasa_e,tasa_a,epoca_actual,W]= mlp_ejer4_e(archivo,criterio,gamma,alph
       %Calculo  de tasa error de entrenamiento
       [tasa_e,tasa_a,Yp,V]=calc_error_ejer4(W,patrones_entr,capas,cant_salidas);    
       bandera=corte(criterio,epoca_actual,epoca_max,tasa_e,tasa_e_max,bandera);        
-      epoca_actual=epoca_actual+1
-        
-        %Cálculo de error por época para graficar:
-       % error_cuad=(Yp{capas}-patrones_entr(:,end-cant_salidas+1:end)).^2;
-      %  error_epoca(epoca_actual,:)=mean(error_cuad);
-        
-         %Calculo la tasa de error por epoca
-         error_tasa(epoca_actual)=tasa_e;
-         
+      %Calculo la tasa de error por epoca
+      error_tasa(epoca_actual)=tasa_e;
+      
+      %Actualizo el contador de epocas
+      epoca_actual=epoca_actual+1 
+      
     end
     
     %figure('Name','Salidas','NumberTitle','off')
@@ -40,11 +37,11 @@ function [tasa_e,tasa_a,epoca_actual,W]= mlp_ejer4_e(archivo,criterio,gamma,alph
     %ylabel('error');
     %title('Entrenamiento/single');
     
-    figure('Name','Tasa_e Vs. Epocas','NumberTitle','off')
+    figure('Name','Tasa de error - MLP','NumberTitle','off')
     plot(error_tasa);
     xlabel('epoca');
     ylabel('Tasa');
-    title('Entrenamiento/gral.');
+    title('Tasa de error - MLP');
     
     %Graficamos clasificacion con los patrones de Entrenamiento
     %graph_mlp_ejer4(V,patrones_entr,'Graficamos clasificacion con los patrones de Entrenamiento');
