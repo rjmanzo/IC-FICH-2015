@@ -1,33 +1,25 @@
 function [W]=SOM(archivo,matris_som,gamma,vecindad,epocas_etapas,cant_salidas,ini)
-    patrones=csvread(archivo);
-    patrones=patrones(:,1:end-cant_salidas);
-    [n,~]=size(patrones);
-    W = inicializarSOM( matris_som , patrones , ini );% pesos para cada neurona
-    graphSOM(W) ;
-    pause(2);
-    epoca_actual=1;
-    while(epoca_actual<sum(epocas_etapas))        
-     [gamma,A,vecindad]=etapas(epoca_actual,epocas_etapas,vecindad,gamma);
-      W= recorrerPatrones(patrones,vecindad,W,matris_som,gamma,A); 
-<<<<<<< HEAD
-        if mod(epoca_actual,5) == 0 %grafico cada 2 epocas para ver su evolucion
-=======
-        if mod(epoca_actual,5) == 0 %grafico cada 5 epocas
->>>>>>> 0a04a04ae548939bd04906b80956ea6cfd1f2b71
-            graphSOM( W ) ;
-             pause(2);
-        end
-        epoca_actual=epoca_actual+1
+patrones=csvread(archivo);
+patrones=patrones(:,1:end-cant_salidas);
+[n,~]=size(patrones);
+W = inicializarSOM( matris_som , patrones , ini );% pesos para cada neurona
+graphSOM(W) ;
+pause(2);
+epoca_actual=1;
+while(epoca_actual<sum(epocas_etapas))
+    [gamma,A,vecindad]=etapas(epoca_actual,epocas_etapas,vecindad,gamma);
+    W= recorrerPatrones(patrones,vecindad,W,matris_som,gamma,A);
+    if mod(epoca_actual,5) == 0 %grafico cada 5 epocas
+        graphSOM( W ) ;
+        pause(2);
     end
-<<<<<<< HEAD
-    graphSOM( W ) ; % grafico el mapa som final
-=======
-    %Grafico el conjunto de patrones de entrenamiento
->>>>>>> 0a04a04ae548939bd04906b80956ea6cfd1f2b71
-    graficar(patrones);
+    epoca_actual=epoca_actual+1
 end
-
-
+% Grafico el mapa som final
+graphSOM( W ) ;
+%Grafico el conjunto de patrones de entrenamiento
+graficar(patrones);
+end
 
 function [W] = inicializarSOM( matris_som , patrones , ini )
     switch ini
