@@ -4,7 +4,7 @@ close all;
 archivo = 'clouds_m';
 path_archivo=strcat('../Datos/',archivo,'.csv');
 path_salida=strcat('../Datos/particiones/',archivo);
-particionar(path_archivo,path_salida,1,0.8);
+%particionar(path_archivo,path_salida,1,0.8);
 
 %Visualizo el conjunto de patrones a clasificar
 graficar_patrones(path_archivo);

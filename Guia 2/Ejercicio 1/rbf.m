@@ -29,6 +29,7 @@ function [W,tasa_a,epoca_actual]= rbf(gaussianas,gamma,tasa_max_err,epoca_max,ca
         epoca_actual=epoca_actual+1    
         
     end
+    epoca_actual=epoca_actual-1; % para que la epoca de salida no sea la epoca real+1-> arriba sumo uno y despues corto por eso
     figure('Name','Tasa Error Entrenamiento - RBF','NumberTitle','off')
     plot(tasa_e);
     xlabel('epoca');

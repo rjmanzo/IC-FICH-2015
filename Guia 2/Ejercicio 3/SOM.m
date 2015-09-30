@@ -11,7 +11,8 @@ function [W]=SOM(archivo,matris_som,gamma,vecindad,epocas_etapas,cant_salidas,in
       W= recorrerPatrones(patrones,vecindad,W,matris_som,gamma,A); 
       epoca_actual=epoca_actual+1
     end
-    graficar(patrones);
+    graphSOM(W);
+    %graficar(patrones);
 end
 
 function [W] = inicializarSOM( matris_som , patrones , ini )
