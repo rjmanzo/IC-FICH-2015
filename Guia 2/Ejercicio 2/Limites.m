@@ -8,7 +8,7 @@ function [arriba,abajo,izquierda,derecha] = Limites( filaGanadora , colGanadora 
     end
     % Valido el limite inferior
     abajo = round(filaGanadora+vecindad);
-    if abajo > matris_som(1)
+    if abajo > matris_som(1)%max cantidad de filas
         abajo = matris_som(1);
     end
     % Valido el limite izquierdo
@@ -18,7 +18,7 @@ function [arriba,abajo,izquierda,derecha] = Limites( filaGanadora , colGanadora 
     end
     % Valido el limite derecho
     derecha = round(colGanadora+vecindad);
-    if derecha > matris_som(2)
+    if derecha > matris_som(2)%max cantidad de columnas
         derecha = matris_som(2);
     end
 end

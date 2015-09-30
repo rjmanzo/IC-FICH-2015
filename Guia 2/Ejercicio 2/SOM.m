@@ -9,12 +9,13 @@ function [W]=SOM(archivo,matris_som,gamma,vecindad,epocas_etapas,cant_salidas,in
     while(epoca_actual<sum(epocas_etapas))        
      [gamma,A,vecindad]=etapas(epoca_actual,epocas_etapas,vecindad,gamma);
       W= recorrerPatrones(patrones,vecindad,W,matris_som,gamma,A); 
-        if mod(epoca_actual,5) == 0 %grafico cada 2 epocas
+        if mod(epoca_actual,5) == 0 %grafico cada 5 epocas
             graphSOM( W ) ;
              pause(2);
         end
         epoca_actual=epoca_actual+1
     end
+    %Grafico el conjunto de patrones de entrenamiento
     graficar(patrones);
 end
 
@@ -62,9 +63,9 @@ function [gamma,A,vecindad]=etapas(epoca_actual,epocas_etapas,vecindad,gamma)
 end
 
 function [fila_neurona,col_neurona] = coord_de_ganadora( W , patron )
-    D = cellfun( @(x) patron-x , W , 'UniformOutput' , false ); % diferencia a cada elemento de celda
-    D = cellfun( @(x) norm(x) , D , 'UniformOutput' , false ); %distancia a cada vector de la celda
-    D = cell2mat(D);
+    D = cellfun( @(x) patron-x , W , 'UniformOutput' , false ); % diferencia (entre vectores) a cada elemento de celda
+    D = cellfun( @(x) norm(x) , D , 'UniformOutput' , false ); %distancia a cada vector de la celda (Norma euclidea)
+    D = cell2mat(D); %Convierto las celdas en una unica matriz
     [v,fila_neurona] = min(D); %minimo de la matriz
     [v,col_neurona] = min(v); %minimo del vector
     fila_neurona = fila_neurona(col_neurona);
