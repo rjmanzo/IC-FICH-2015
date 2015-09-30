@@ -26,7 +26,7 @@ cant_salidas=1;
 t = cputime;
 % Obtengo la celda con los pesos de todas las neuronas
 %SOM(archivo,matris_som,gamma,vecindad,epocas_etapas,cant_salidas,ini)
-[W_SOM] = SOM(path_e,[10 10],0.5,3,[20 200 100],cant_salidas,1);
+[W_SOM] = SOM(path_e,[11 11],0.5,3,[20 200 100],cant_salidas,1);
 % Obtengo la etiqueta de cada neurona
 [E] = etiquetar(path_e,W_SOM);
 % Evaluo el clasificador
@@ -54,7 +54,7 @@ tiempo_ejecucion_RBF = cputime-t;
 % % % MLP
 % % % -----------------------------------------------------
 cd ../../Guia' 2'/Ejercicio' 3'/
-neuronas=[10 50 1];   
+neuronas=[10 8 1];   
 %Inicio del temporizador
 t = cputime;
 [tasa_e_mlp,tasa_a_mlp,epoca_mlp,W_mlp]=mlp_ejer4_e(path_e,criterio,gamma,alpha,tasa_max_err,epoca_max,neuronas);
