@@ -1,9 +1,3 @@
-% ============ ENTRADAS
-% archivo -> nombre del archivo con los patrones
-% W -> celda con los vectores de pesos finales
-% clases -> matriz con la etiqueta de cada neurona
-% ============ SALIDA
-% tasa_a -> tasa de acierto del SOM
 function [tasa_a] = clasificar(archivo,W,clases)
     % Leo el archivo
     patrones = csvread( archivo);

@@ -6,8 +6,6 @@ patrones=load(archivo);
 axis([-5 5 -5 5]);
 
 % ============ Grafico los patrones  =======================
-figure('Name', 'Patrones');
-title('Conjunto de patrones a clasificar');
 hold on;
 scatter(patrones(patrones(:,3)==-1,1),patrones(patrones(:,3)==-1,2),'red');
 scatter(patrones(patrones(:,3)==1,1),patrones(patrones(:,3)==1,2),'blue','x');

@@ -4,7 +4,7 @@ function [E] = etiquetar(archivo,W)
     % Averiguo el tama�o de la celda
     [n,m] = size(W);
     % Inicializo una celda contadora
-    C = cellfun( @(x) zeros(1,2) , W , 'UniformOutput' , false );
+    C = cellfun( @(x) zeros(1,2) , W , 'UniformOutput' , false ); % matriz  zeros(1,2) por que salida es -1 o 1.
     % Averiguo el tama�o de la matriz de patrones
     [fd,~] = size(patrones);
     % Recorro todos los patrones
@@ -18,7 +18,7 @@ function [E] = etiquetar(archivo,W)
         % Agarro el vector contador de esa neurona
         contador = C{filaGanadora,colGanadora};
         if salida == -1
-            % Si la salida es cero, aumento el contador para esa salida
+            % Si la salida es -1, aumento el contador para esa salida
             contador(1) = contador(1) + 1;
         else
             % Si la salida es uno, aumento el contador para esa salida
@@ -27,7 +27,8 @@ function [E] = etiquetar(archivo,W)
         % Lo actualizo
         C{filaGanadora,colGanadora} = contador;
     end
-    % Recorro toma la Celda y Armo la matriz de clasificacion
+    % Recorro toda la matriz contadora por cada neurona
+    %y Armo la matriz de clasificacion
     for i=1:n
         for j=1:m
             % Agarro el vector contador
@@ -35,7 +36,7 @@ function [E] = etiquetar(archivo,W)
             % Busco el maximo de ese vector
             [~,clase] = max(contador);
             % Etiqueto la neurona con la clase
-            if clase == 1
+            if clase == 1 % clase guarda el indice del en que columan esta el maximo-> si el maximo esta en indice 1 es clase -1
                 E(i,j) = -1;
             else
                 E(i,j) = 1;
