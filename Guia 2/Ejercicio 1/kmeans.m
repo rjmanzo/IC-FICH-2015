@@ -34,12 +34,10 @@ function [medias,M_sigma] = kmeans(archivo,k,cant_salidas)
         end
         % ================================================================
     end
-    M_sigma=varianzas_RBF(patrones(:,1:end-cant_salidas), medias); 
-    %agregar bandera de uso de varianza
-    
+    M_sigma=varianzas_RBF(patrones(:,1:end-cant_salidas), medias); %calculo varianza    
     
 %     % ============ Grafico los patrones del XOR =======================
-%     %Original
+    %Original
 %     figure('Name','Original');
 %     title('Original');
 %     hold on
@@ -56,6 +54,6 @@ function [medias,M_sigma] = kmeans(archivo,k,cant_salidas)
 %     scatter(patrones(patrones(:,1)==3,2),patrones(patrones(:,1)==3,3),'blue');
 %     scatter(patrones(patrones(:,1)==4,2),patrones(patrones(:,1)==4,3),'black');
 %     scatter(medias(:,1),medias(:,2),10,'yellow','fill');
-%     % ============================================================
+% %     % ============================================================
         
 end

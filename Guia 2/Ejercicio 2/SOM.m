@@ -54,6 +54,7 @@ function [gamma,A,vecindad]=etapas(epoca_actual,epocas_etapas,vecindad,gamma)
         elseif epoca_actual < sum(epocas_etapas(1:2))
             gamma = gamma + (0.1-gamma)*(epoca_actual-epocas_etapas(1))/epocas_etapas(2)
             A = vecindad + (1-vecindad)*(epoca_actual-epocas_etapas(1))/epocas_etapas(2)
+            vecindad=A;
         % Parametros Ajuste fino
         else
             gamma = 0.01

@@ -1,22 +1,14 @@
 function [tasa_a] = clasificar(archivo,W,clases)
-    % Leo el archivo
     patrones = csvread( archivo);
-    % Me fijo la cantidad de patrones
     [fd,~] = size(patrones);
-    % Inicializo la taza de acierto en 0
-    tasa_a = 0;
-    % Para cada patron busco el cercano
-    for i=1:fd
-        % Selecciono el patron
-        patron = patrones(i,1:end-1);
-        % Selecciono la salida de ese patron
-        salida = patrones(i,end);
-        % Busco la neurona ganadora
-        [filaGanadora,colGanadora] =  coord_de_ganadora( W , patron );
+    tasa_a = 0;%tasa en cero al inicio    
+    for i=1:fd% Para cada patron buscamos el cercano        
+        patron = patrones(i,1:end-1); % Seleccionamos el patron     
+        salida = patrones(i,end);   % Seleccionamos la salida de ese patron      
+        [filaGanadora,colGanadora] =  coord_de_ganadora( W , patron ); %ganadora
         % Selecciono la etiqueta de la neurona ganadora
-        etiqueta = clases(filaGanadora,colGanadora);
-        % Me fijo si acerto
-        if etiqueta == salida
+        etiqueta = clases(filaGanadora,colGanadora);       
+        if etiqueta == salida % si acerto cuento
             tasa_a = tasa_a + 1 ;
         end
     end

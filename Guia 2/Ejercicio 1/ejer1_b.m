@@ -18,15 +18,14 @@ criterio=3;
 %para iris
 K=10;
 cant_salidas=3;
-bandera_M_sigma=0; %bandera_M_sigma=0 -> sigma = 1-> todos circulos,bandera_M_sigma=1 sigmas distintos en la diagonal
 path_e = strcat('../Datos/particiones/',archivo,'_e_1','.csv');
 path_t = strcat('../Datos/particiones/',archivo,'_t_1','.csv');
 
 t = cputime;
 [medias,M]= kmeans(path_e,K,cant_salidas);
-gaussianas=gaussiana(path_e,medias,M,cant_salidas,bandera_M_sigma);
+gaussianas=gaussiana(path_e,medias,M,cant_salidas,0);
 [W,tasa_a_rbf,epoca_rbf]=rbf(gaussianas,gamma,tasa_max_err,epoca_max,cant_salidas, criterio); %LMS
-gaussianas=gaussiana(path_t,medias,M,cant_salidas,bandera_M_sigma);
+gaussianas=gaussiana(path_t,medias,M,cant_salidas,0);
 tasa_a_t_rbf=rbf_test(gaussianas,W,cant_salidas);
 tiempo_ejecucion_RBF = cputime-t;
 

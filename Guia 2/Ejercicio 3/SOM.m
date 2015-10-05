@@ -9,10 +9,13 @@ function [W]=SOM(archivo,matris_som,gamma,vecindad,epocas_etapas,cant_salidas,in
     while(epoca_actual<sum(epocas_etapas))        
      [gamma,A,vecindad]=etapas(epoca_actual,epocas_etapas,vecindad,gamma);
       W= recorrerPatrones(patrones,vecindad,W,matris_som,gamma,A); 
+      if mod(epoca_actual,10) == 0 %grafico cada 5 epocas
+      graphSOM( W ) ;
+      pause(0.05);
+      end
       epoca_actual=epoca_actual+1
     end
     graphSOM(W);
-    %graficar(patrones);
 end
 
 function [W] = inicializarSOM( matris_som , patrones , ini )
@@ -48,6 +51,7 @@ function [gamma,A,vecindad]=etapas(epoca_actual,epocas_etapas,vecindad,gamma)
         elseif epoca_actual < sum(epocas_etapas(1:2))
             gamma = gamma + (0.1-gamma)*(epoca_actual-epocas_etapas(1))/epocas_etapas(2)
             A = vecindad + (1-vecindad)*(epoca_actual-epocas_etapas(1))/epocas_etapas(2)
+            vecindad=A;
         % Parametros Ajuste fino
         else
             gamma = 0.01
@@ -74,7 +78,7 @@ function W= recorrerPatrones(patrones,vecindad,W,matris_som,gamma,A)
             [filaGanadora,colGanadora] = coord_de_ganadora( W , patron );
             %limites
             [ar,ab,iz,de]=Limites( filaGanadora , colGanadora , vecindad , matris_som );
-            for fv=ar:ab %vecindad -> radio
+            for fv=ar:ab %vecindad -> radio  A
                 for cv=iz:de
                     if abs((filaGanadora-fv))+abs((colGanadora-cv)) <= A  %si esta dentro del radio
                         % Selecciono la neurona vecina

@@ -1,7 +1,7 @@
 function[M]=varianzas_RBF(patrones, medias)
 %patrones tiene en la primer columna el indice de la media a la que pertenece
 [K,col]=size(medias);
-%varianza=zeros(K,col);
+varianza_j=zeros(K,col);
 for j=1:K
     k_j=patrones(patrones(:,1)==j,2:end);
     [n,m]=size(k_j);

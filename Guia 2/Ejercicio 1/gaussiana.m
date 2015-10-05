@@ -13,7 +13,6 @@ function gaussianas=gaussiana(archivo,medias,M_sigma,cant_salidas, bandera)
             dist=X-medias(j,:);
             gaussianas(i,j)=exp(-1/2*dist*inv(M_sigma)*dist');
             end
-%Agregar bandera de uso en M_sigma
         end
     end
 
