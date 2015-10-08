@@ -1,12 +1,12 @@
-function [ mapeo ] = index_map(indice,act)
+function [ Mapeo ] = index_map(indice,M)
 %UNTITLED Summary of this function goes here
 %   Detailed explanation goes here
-[~,m]=size(indice);
-mapeo = zeros(1,m);
+[n,m]=size(M);
+Mapeo = zeros(n,m);
 indx = 0;
-for i=1:1:m
-    indx = indice(1,i);
-    mapeo(1,i) = act(1,indx);
+for i=1:n
+    conjuntoi = M(indice(i),:);
+    Mapeo(i,:) = conjuntoi;
 end
 end
 
