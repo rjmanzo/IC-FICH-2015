@@ -1,0 +1,11 @@
+7cities:
+
+Camino: [7 6 4 5 2 3 1 7]
+Distancia: 30.7188 km
+
+------------------------------
+
+10cities:
+
+Camino: [5 9 4 8 2 1 10 6 7 3 5]
+Distancia: 298.4305 km
