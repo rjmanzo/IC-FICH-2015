@@ -17,6 +17,11 @@ M2=[mean(M(1,:)) std(M(1,:));
     mean(M(6,:)) std(M(6,:))
     mean(M(7,:)) std(M(7,:))];
 
-[n,m]=size(M2);
 s=-20:0.5:20;
+
+%g
+figure('Name','G','NumberTitle','off')
 graficar_conjunto(s,M2);
+%trapecio
+figure('Name','Trapecio','NumberTitle','off')
+graficar_conjunto(s,M);
