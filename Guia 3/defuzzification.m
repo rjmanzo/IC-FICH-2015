@@ -31,8 +31,8 @@ if (m==4) % caso trapezoides
     end
 else %caso gausseana
     for i=1:n
-        area(i)=  M(i,2)*(2*pi)^0.5;
-        centroide(i)= M(i,1)*activacion(i);
+        area(i)=  S(i,2)*(2*pi)^0.5;
+        centroide(i)= S(i,1)*activacion(i);
         %area(i)*centroide(i)*activacion(i);
     end
 end
