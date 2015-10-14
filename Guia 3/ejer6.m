@@ -2,7 +2,7 @@
 clear all
 close all
 clc
-x=-20:0.5:20;
+x=-30:0.5:30;
 %Mapeos
  r=[1 2 3 4 5 6 7];
 %r=[7 6 5 4 3 2 1];
