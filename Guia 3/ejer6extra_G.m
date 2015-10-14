@@ -123,19 +123,19 @@ GS3=[mean(S3(1,:)) std(S3(1,:));
     mean(S3(7,:)) std(S3(7,:))];
 
 %Figuras gauseanas
-figure('Name','Trapecios: entradas M1, M2 y M3','NumberTitle','off')
+figure('Name','Gauseanas: entradas M1, M2 y M3','NumberTitle','off')
 subplot(3,1,1)
 graficar_conjunto(x,G);
-title('M1')
+title('G1')
 subplot(3,1,2)
 graficar_conjunto(x,G2);
-title('M2')
+title('G2')
 subplot(3,1,3)
 graficar_conjunto(x,G3);
-title('M3')
+title('G3')
 
 %salidas gauseanas
-figure('Name','Trapecios: salidas S1, S2 y S3','NumberTitle','off')
+figure('Name','Gauseanas: salidas S1, S2 y S3','NumberTitle','off')
 subplot(3,1,1)
 graficar_conjunto(x,GS);
 title('S1')
