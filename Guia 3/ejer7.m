@@ -1,15 +1,15 @@
 %ejercicio 7
 clc
-clear al
+clear all
 close all
-% r=[1 2 3 4 5 6 7];
-r=[1 2 5 6 4 3 7];
+ r=[1 2 3 4 5 6 7];
+%r=[1 2 5 6 4 3 7];
 g=40/41;
 a=g;
 t_ref=15;
 temp_salida(1)=15;
 ti=15; %cte
-cambio=100; % cantidad de pasos hasta cambiar la temperatura de referencia
+cambio=30; % cantidad de pasos hasta cambiar la temperatura de referencia
 valor=25; % valor de la temperatura de referencia asignado en el cambio
 
 M1=[-20 -20 -10 -5;
