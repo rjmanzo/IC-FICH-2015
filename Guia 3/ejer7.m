@@ -1,9 +1,17 @@
 %ejercicio 7
+<<<<<<< HEAD
 clear al
 close all
 x=-20:0.5:20;
 r=[1 2 3 4 5 6 7];
 r2=[1 2 3 4 5 6 7 8 9 10 11];
+=======
+clc
+clear all
+close all
+ r=[1 2 3 4 5 6 7];
+%r=[1 2 5 6 4 3 7];
+>>>>>>> 7f2e294fe3c6992677d7cf911faea5f739f87d7a
 g=40/41;
 a=g;
 t_ref=15;

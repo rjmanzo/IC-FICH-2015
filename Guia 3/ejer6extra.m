@@ -1,6 +1,6 @@
 %Ejercicio 6 extra. TRAPECIOS
-clear all
-close all
+%clear all
+%close all
 x=-20:0.5:20;
 %Mapeos
  r=[1 2 3 4 5 6 7];
@@ -53,6 +53,7 @@ S2=[-7 -5 -5 -3 ;
     -7 -5 -5 -3;
     -7 -5 -5 -3;
     -7 -5 -5 -3];
+
 
 %Matriz de salida unica S2
 S3=[-7 -5 -5 -3 ;
