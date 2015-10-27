@@ -1,7 +1,7 @@
 
-% clear all
-% close all
-% clc
+ clear all
+ close all
+ clc
 
 %Cargo la imagen original
 path_imagen = 'Datos/cameraman.tif';
@@ -41,8 +41,9 @@ graficar_conjunto(x,S);
 title('S')
 
 [n,m]=size(ruidosa);
-for i=1:n-2
-    for j=1:m-2
+    
+for i=1:m-2 
+    for j=1:n-2
         rect=[i j 2 2];
         I2 = imcrop(ruidosa,rect); % rect [xmin ymin width height]
         if (I2(2,2)==255 ||I2(2,2)==0)
@@ -103,7 +104,7 @@ for i=1:n-2
             I2(2,2)=A;
             for l=i:i+2
              for m=j:j+2
-                 ruidosa(l,m)=I2(l-i+1,m-j+1);
+                 ruidosa(m,l)=I2(l-i+1,m-j+1);
              end
             end
         end
