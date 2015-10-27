@@ -8,7 +8,6 @@ salida=zeros(1,n);
 mapeo=index_map(r,M); % mapeo
 for i=1:n
     a=grado_activacion(x(i),mapeo); %activacion para ese x
-%     salida(i)=defuzzification([1 2 3 500 500 6 7],S); %respuesta
     salida(i)=defuzzification(a,S); %respuesta
 
 end
