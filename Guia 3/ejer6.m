@@ -1,10 +1,10 @@
 %Ejercicio 6
-clear all
-close all
+%clear all
+%close all
 clc
 x=-20:0.5:20;
 %Mapeos
- %r=[1 2 3 4 5 6 7];
+r=[1 2 3 4 5 6 7];
 %r=[7 6 5 4 3 2 1];
 %r=[6 4 3 5 2 7 1];
 
