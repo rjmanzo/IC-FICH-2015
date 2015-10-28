@@ -22,7 +22,7 @@ if (m==4) %Gauss2mf y %BellGauss
         end
     end
 else
-    u=exp(-((x-vector(1))^2)/(2*(vector(2))^2)); %Gaussmf
+    u=exp(-((x-vector(1))^2)/(2*(vector(2))^2)); %Gaussmf (normal)
 end
 end
 
