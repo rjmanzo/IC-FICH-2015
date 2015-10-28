@@ -1,0 +1,48 @@
+[System]
+Name='system'
+Type='mamdani'
+Version=2.0
+NumInputs=2
+NumOutputs=1
+NumRules=9
+AndMethod='min'
+OrMethod='max'
+ImpMethod='min'
+AggMethod='max'
+DefuzzMethod='centroid'
+
+[Input1]
+Name='P1'
+Range=[0 255]
+NumMFs=3
+MF1='dark':'gauss2mf',[-1 0 9.37 49.3]
+MF2='avg':'gauss2mf',[13.9 84.7666666666667 14.8 166.316666666667]
+MF3='light':'gauss2mf',[12.3762515564891 209.383333333333 34.6 265]
+
+[Input2]
+Name='P2'
+Range=[0 255]
+NumMFs=3
+MF1='dark':'gauss2mf',[-1 0 10.1 49.58]
+MF2='avg':'gauss2mf',[13.9 91 14.78 172.6]
+MF3='ligth':'gauss2mf',[12.38 209.4 34.6 265]
+
+[Output1]
+Name='salida'
+Range=[0 255]
+NumMFs=4
+MF1='dark':'gaussmf',[20 50]
+MF2='dmA':'gaussmf',[20 100]
+MF3='avg':'gaussmf',[20 150]
+MF4='amL':'gaussmf',[20 200]
+
+[Rules]
+1 1, 1 (1) : 1
+2 1, 2 (1) : 1
+3 1, 3 (1) : 1
+1 2, 2 (1) : 1
+2 2, 3 (1) : 1
+3 2, 4 (1) : 1
+1 3, 3 (1) : 1
+2 3, 4 (1) : 1
+3 3, 4 (1) : 1
