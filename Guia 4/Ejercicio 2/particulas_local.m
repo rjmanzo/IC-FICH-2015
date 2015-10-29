@@ -1,5 +1,5 @@
 %Particulas: Enjambre del mejor local 
-function [] = particulas_global(intervalo,Nfunc,maxIter,p_inercial,cantParticulas,c1,c2,entorno)
+function [] = particulas_global(intervalo,Nfunc,maxIter,p_inercial,cantParticulas,c1,c2,Entorno)
 	%Inicializo la bandera para el ciclo
 	cantIter=1; 
 
@@ -39,7 +39,7 @@ function [] = particulas_global(intervalo,Nfunc,maxIter,p_inercial,cantParticula
 			r2=rand(size(posParticulas));
 			
 			%Calculo la velocidad de las particulas
-			velocPartic=inercia*velocPartic+c1*r1.*(mejorLocPos-posParticulas)+c2*r2.*(mejorEntornoPos-posParticulas);
+			velocPartic=p_inercial*velocPartic+c1*r1.*(mejorLocPos-posParticulas)+c2*r2.*(mejorEntornoPos-posParticulas);
 						
 			%Actualizo la posicion de las particulas
 			posParticulas=posParticulas+velocPartic;
@@ -66,7 +66,8 @@ function [] = particulas_global(intervalo,Nfunc,maxIter,p_inercial,cantParticula
 			end
 			
 			%Muestro el resultado parcial
-			resutlado_parcial(cantIter,mejorGlobalVal,mejorGlobalPos);
+% 			resultado_parcial(cantIter,mejorGlobalVal,mejorGlobalPos);
+%             resultado_parcial(cantIter,funGlobalVal,funGlobalPos);
 			cantIter=cantIter+1;
 		end
 
@@ -80,7 +81,6 @@ function[index]=entornoK(k,cantidad,n)
     index(index<1)=1;
     index(index>cantidad)=cantidad;
 end
-
 
 
 
