@@ -1,5 +1,9 @@
+<<<<<<< HEAD
 
 %clear all
+=======
+clear all
+>>>>>>> 9a1ad935208d7ec5245816edb42b57b2c2dae34e
 close all
 clc
 

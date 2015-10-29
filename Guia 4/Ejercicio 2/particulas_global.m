@@ -57,7 +57,7 @@ function [] = particulas_global(intervalo,Nfunc,maxIter,p_inercial,cantParticula
 			end
 			
 			%Muestro el resultado parcial
-			resutlado_parcial(cantIter,mejorGlobalVal,mejorGlobalPos);
+			resultado_parcial(cantIter,mejorGlobalVal,mejorGlobalPos);
 			cantIter=cantIter+1;
 		end
 

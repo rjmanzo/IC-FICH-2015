@@ -26,7 +26,7 @@ if Nfunc==3
     xlabel('x'),ylabel('y'),zlabel('f(x,y)');
     hold on
 else
-    Z=aplicarFuncion(Nfunc,delta);
+    Z=aplicar_funcion(Nfunc,delta);
     plot(delta,Z);
     hold on
     xlabel('x'),ylabel('f(x)');
