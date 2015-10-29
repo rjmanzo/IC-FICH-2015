@@ -6,35 +6,35 @@ NumInputs=2
 NumOutputs=1
 NumRules=9
 AndMethod='min'
-OrMethod='max'
-ImpMethod='min'
+OrMethod='probor'
+ImpMethod='prod'
 AggMethod='max'
 DefuzzMethod='centroid'
 
 [Input1]
 Name='P1'
-Range=[0 255]
+Range=[0 254]
 NumMFs=3
-MF1='dark':'gauss2mf',[-1 0 9.37 49.3]
-MF2='avg':'gauss2mf',[13.9 84.7666666666667 14.8 166.316666666667]
-MF3='light':'gauss2mf',[12.3762515564891 209.383333333333 34.6 265]
+MF1='dark':'gauss2mf',[46.3 -21.6854444444444 24.2 39.2555555555556]
+MF2='avg':'gauss2mf',[13.4 88.8288888888889 16.5 154.703845739606]
+MF3='light':'gauss2mf',[22.9190299890649 204.611111111111 9.4 265]
 
 [Input2]
 Name='P2'
-Range=[0 255]
+Range=[0 254]
 NumMFs=3
-MF1='dark':'gauss2mf',[-1 0 10.1 49.58]
-MF2='avg':'gauss2mf',[13.9 91 14.78 172.6]
-MF3='ligth':'gauss2mf',[12.38 209.4 34.6 265]
+MF1='dark':'gauss2mf',[46.3 -21.69 24.2 39.26]
+MF2='avg':'gauss2mf',[13.4 88.83 16.5 154.7]
+MF3='ligth':'gauss2mf',[22.92 204.6 9.4 265]
 
 [Output1]
 Name='salida'
-Range=[0 255]
+Range=[0 254]
 NumMFs=4
-MF1='dark':'gaussmf',[20 50]
-MF2='dmA':'gaussmf',[20 100]
-MF3='avg':'gaussmf',[20 150]
-MF4='amL':'gaussmf',[20 200]
+MF1='dark':'gaussmf',[11.8 50.3622222222222]
+MF2='dmA':'gaussmf',[12.6 100.868888888889]
+MF3='avg':'gaussmf',[11.8 150.982222222222]
+MF4='amL':'gaussmf',[12.7 204.368888888889]
 
 [Rules]
 1 1, 1 (1) : 1
