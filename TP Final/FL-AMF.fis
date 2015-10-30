@@ -1,5 +1,5 @@
 [System]
-Name='system'
+Name='FL-AMF'
 Type='mamdani'
 Version=2.0
 NumInputs=2
@@ -9,7 +9,7 @@ AndMethod='min'
 OrMethod='max'
 ImpMethod='min'
 AggMethod='max'
-DefuzzMethod='mom'
+DefuzzMethod='centroid'
 
 [Input1]
 Name='P1'

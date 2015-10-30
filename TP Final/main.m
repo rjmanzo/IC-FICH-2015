@@ -1,124 +1,69 @@
-<<<<<<< HEAD
-
-%clear all
-=======
 clear all
->>>>>>> 9a1ad935208d7ec5245816edb42b57b2c2dae34e
 close all
 clc
-
-%Cargo la imagen original
 path_imagen = 'Datos/cameraman.tif';
-% original = gpuArray(imread(path_imagen)); SI QUERES TRABAJAR CON LA GPU
 original = imread(path_imagen);
 % figure, imshow(original);
 
 %Imagen ruidosa (S&P)
-ruidosa = imnoise(original,'salt & pepper',0.05);
+ruidosa = imnoise(original,'salt & pepper',0.050);
+%imwrite(ruidosa,'Datos/cameramanRuido.tif' )
+%path_imagen = 'Datos/cameramanRuido.tif';
+%ruidosa = imread(path_imagen);
+
 figure('Name','con ruido','NumberTitle','off'), imshow(ruidosa);
 
 %Denoise de salt and paper
 recuperada = medfilt2(ruidosa,[3 3]);
 figure('Name','filtro matlab','NumberTitle','off'), imshow(recuperada);
 
-%borroso
-x=0:1:254; %rango grises 8 bits
-r=[1 2 3]; %map
-%Entrada
-M=[0 25 25 25;
-    75 5 175 5;
-    225 25 250 25];
-% M=[0 0 75 100;
-%     50 100 150 200;
-%     150 200 255 255];
-% salida
-S=[75 20;
-    125 20;
-    175 20;]
-    %200 20];
-
-figure('Name','Conjuntos M y S','NumberTitle','off')
-subplot(2,1,1)
-graficar_conjunto(x,M);
-title('M')
-subplot(2,1,2)
-graficar_conjunto(x,S);
-title('S')
-drawnow
-
-%a = readfis('system');
-%evalfis([103 48],a)
-[n,m]=size(ruidosa);
+a = readfis('FL-AMF');
+ evalfis([125 75],a);
+ 
+procesar=ruidosa;
+[n,m]=size(procesar);
 
 for i=1:m-2
     for j=1:n-2
-        rect=[i j 2 2];
-        I2 = imcrop(ruidosa,rect); % rect [xmin ymin width height]
-        if (I2(2,2)==255 ||I2(2,2)==0)
-            DP1 = median(I2(:)');
+        rect=[j i 2 2];
+        recorte = imcrop(procesar,rect); % rect [xmin ymin width height]
+        if (recorte(2,2)==255 ||recorte(2,2)==0)
+            DP1 = median(recorte(:)');
             %pixel - norte - sur
-            s1=[I2(1,2) I2(3,2)];
+            s1=[double(recorte(1,2)) double(recorte(3,2))];
             %pixel - oeste - este
-            s2=[I2(2,1) I2(2,3)];
+            s2=[double(recorte(2,1)) double(recorte(2,3))];
             %pixel - noroeste - sureste
-            s3=[I2(1,1) I2(3,3)];
+            s3=[double(recorte(1,1)) double(recorte(3,3))];
             %pixel - suroeste - noreste
-            s4=[I2(1,3) I2(3,1)];
+            s4=[double(recorte(1,3)) double(recorte(3,1))];
             %
-
-            mapeo=index_map(r,M); % mapeo
-            a1=grado_activacion(double(s1(1)),mapeo); %activacion para ese x
-            a2=grado_activacion(double(s1(2)),mapeo); %activacion para ese x
-            a=min(a1,a2); %union de membresias
-            ss1=defuzzification(a,S); %respuesta
-
-            a1=grado_activacion(double(s2(1)),mapeo); %activacion para ese x
-            a2=grado_activacion(double(s2(2)),mapeo); %activacion para ese x
-            a=min(a1,a2); %union de membresias
-            ss2=defuzzification(a,S); %respuesta
-
-
-            a1=grado_activacion(double(s3(1)),mapeo); %activacion para ese x
-            a2=grado_activacion(double(s3(2)),mapeo); %activacion para ese x
-            a=min(a1,a2); %union de membresias
-            ss3=defuzzification(a,S); %respuesta
-
-            a1=grado_activacion(double(s4(1)),mapeo); %activacion para ese x
-            a2=grado_activacion(double(s4(2)),mapeo); %activacion para ese x
-            a=min(a1,a2); %union de membresias
-            ss4=defuzzification(a,S); %respuesta
-
-            a1=grado_activacion(double(ss1),mapeo); %activacion para ese x
-            a2=grado_activacion(double(ss2),mapeo); %activacion para ese x
-            a=max(a1,a2); %union de membresias
-            NS1=defuzzification(a,S); %respuesta
-
-            a1=grado_activacion(double(ss3),mapeo); %activacion para ese x
-            a2=grado_activacion(double(ss4),mapeo); %activacion para ese x
-            a=max(a1,a2); %union de membresias
-            NS2=defuzzification(a,S); %respuesta
-
-
-            a1=grado_activacion(double(NS1),mapeo); %activacion para ese x
-            a2=grado_activacion(double(NS2),mapeo); %activacion para ese x
-            a=max(a1,a2); %union de membresias
-            DP2=defuzzification(a,S); %respuesta
-
-            a1=grado_activacion(double(DP1),mapeo); %activacion para ese x
-            a2=grado_activacion(double(DP2),mapeo); %activacion para ese x
-            a=max(a1,a2); %union de membresias
-            f=defuzzification(a,S); %respuesta
-            A = uint8(f);
-            I2(2,2)=A;
+              ss1=evalfis(s1,a);
+              ss2=evalfis(s2,a);
+              ss3=evalfis(s3,a);
+              ss4=evalfis(s4,a);
+              NS1=evalfis([ss1 ss2],a);
+              NS2=evalfis([ss3 ss4],a);
+              DP2=evalfis([NS1 NS2],a);
+              f=evalfis([double(DP1) double(DP2)],a);
+              recorte;
+              %sum=(double(recorte(1,1))+double(recorte(1,2))+double(recorte(1,3))+double(recorte(2,1))+double(recorte(2,3))+double(recorte(3,1))+double(recorte(3,2))+double(recorte(3,3)))/8;
+              A = uint8(f);             
+              %pause
+              recorte(2,2)=A;
+              
+              
             for l=i:i+2
              for m=j:j+2
-                 ruidosa(m,l)=I2(l-i+1,m-j+1);
-             end
+                 procesar(l,m)=recorte(l-i+1,m-j+1);
+             end    
             end
         end
 end
 end
 
-figure('Name','Salida','NumberTitle','off'), imshow(ruidosa);
+figure('Name','Salida','NumberTitle','off'), imshow(procesar);
+psrn1= psnr(original,recuperada)
+psrn2= psnr(original,procesar)
 
 
