@@ -1,5 +1,4 @@
-
-function [mejorCamino,mejorCosto]=colonia_hormigas(path_archivo,nodo_i,b,p,alpha,beta)
+function [mejorCamino,mejorCosto]=colonia_hormigas(path_archivo,nodo_i,N,b,p,alpha,beta,Q)
 	% Leo los datos
 	datos = csvread(path_archivo);
 	% Inicializo la cantidad de feromonas

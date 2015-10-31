@@ -2,8 +2,8 @@ clear all
 close all
 clc
 
-% path_imagen = 'Datos/cameraman.tif';
-path_imagen = 'Datos/lena.jpg';
+path_imagen = 'Datos/cameraman.tif';
+% path_imagen = 'Datos/lena.jpg';
 original = imread(path_imagen);
 %Imagen ruidosa (S&P)
 ruidosa = imnoise(original,'salt & pepper',0.05);
