@@ -2,26 +2,19 @@ clear all
 close all
 clc
 path_imagen = 'Datos/cameraman.tif';
+%path_imagen = 'Datos/lena.jpg';
 original = imread(path_imagen);
-% figure, imshow(original);
-
 %Imagen ruidosa (S&P)
-ruidosa = imnoise(original,'salt & pepper',0.050);
+ruidosa = imnoise(original,'salt & pepper',0.05);
 %imwrite(ruidosa,'Datos/cameramanRuido.tif' )
 %path_imagen = 'Datos/cameramanRuido.tif';
 %ruidosa = imread(path_imagen);
 
-figure('Name','con ruido','NumberTitle','off'), imshow(ruidosa);
-
-%Denoise de salt and paper
 recuperada = medfilt2(ruidosa,[3 3]);
-figure('Name','filtro matlab','NumberTitle','off'), imshow(recuperada);
-
-a = readfis('FL-AMF');
- evalfis([125 75],a);
  
 procesar=ruidosa;
 [n,m]=size(procesar);
+a=readfis('FL-AMF');
 
 for i=1:m-2
     for j=1:n-2
@@ -48,21 +41,29 @@ for i=1:m-2
               f=evalfis([double(DP1) double(DP2)],a);
               recorte;
               %sum=(double(recorte(1,1))+double(recorte(1,2))+double(recorte(1,3))+double(recorte(2,1))+double(recorte(2,3))+double(recorte(3,1))+double(recorte(3,2))+double(recorte(3,3)))/8;
-              A = uint8(f);             
+              u=membresiabis(50,150,f);
+              Salida=(1-u)*f+u*DP1;
+              A=uint8(Salida);
+        
+             % A = uint8(f);             
               %pause
-              recorte(2,2)=A;
-              
+              recorte(2,2)=A;             
               
             for l=i:i+2
-             for m=j:j+2
-                 procesar(l,m)=recorte(l-i+1,m-j+1);
+             for mm=j:j+2
+                 procesar(l,mm)=recorte(l-i+1,mm-j+1);
              end    
             end
         end
 end
 end
 
-figure('Name','Salida','NumberTitle','off'), imshow(procesar);
+figure('Name','ORIGINAL','NumberTitle','off'), imshow(original);
+figure('Name','RUIDO','NumberTitle','off'), imshow(ruidosa);
+figure('Name','MEDIANA','NumberTitle','off'), imshow(recuperada)
+figure('Name','FUZZY','NumberTitle','off'), imshow(procesar);
+
+
 psrn1= psnr(original,recuperada)
 psrn2= psnr(original,procesar)
 
