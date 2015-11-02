@@ -1,9 +1,9 @@
-clear all
+%clear all
 close all
 clc
 
 %Parametros de inicializacion
-Nfunc=1; %Numero de funcion a minimizar (Ver Guia 4 - ejer. 1)
+Nfunc=3; %Numero de funcion a minimizar (Ver Guia 4 - ejer. 1)
 cantParticulas=20;
 c1=0.5; %Aceleracion: Comp. cognitiva 
 c2=1-c1; %Aceleracion: Comp. Global
@@ -21,9 +21,4 @@ particulas_global(intervalo,Nfunc,maxIter,p_inercial,cantParticulas,c1,c2);
 %Tiempos y resultados (gEP)
 tiempoTotal=cputime - t;
 display(strcat('Tiempo Total (gEP): ',num2str(tiempoTotal),' segundos'));
-
-
-
-
-
 

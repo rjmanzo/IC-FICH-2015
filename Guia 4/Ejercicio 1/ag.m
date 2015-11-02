@@ -21,8 +21,10 @@ while(mejorAptitud(n)<aptitudRequerida && n<iteracionesMaximas)
     graficarCromosomas (fitness,f2,mejorAptitud(n),mejorPosicion,x,0.5)
 end
 
-figure()
+figure('Name','Evolucion a lo largo de las iteracion','NumberTitle','off')
 plot(1:n,mejorAptitud(1:n));
+ylabel('aptitudRequerida')
+xlabel('iteracion')
 
 toc
 end

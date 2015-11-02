@@ -2,8 +2,8 @@ clear all
 close all
 clc
 
-path_imagen = 'Datos/cameraman.tif';
-% path_imagen = 'Datos/lena.jpg';
+%path_imagen = 'Datos/cameraman.tif';
+ path_imagen = 'Datos/lena.jpg';
 original = imread(path_imagen);
 %Imagen ruidosa (S&P)
 ruidosa = imnoise(original,'salt & pepper',0.05);
@@ -45,9 +45,9 @@ for i=1:m-2
             f=evalfis([double(DP1) double(DP2)],a);
             recorte;
             %sum=(double(recorte(1,1))+double(recorte(1,2))+double(recorte(1,3))+double(recorte(2,1))+double(recorte(2,3))+double(recorte(3,1))+double(recorte(3,2))+double(recorte(3,3)))/8;
-            u=membresiabis(50,150,f);
-            Salida=(1-u)*f+u*DP1;
-            A=uint8(Salida);
+            %u=membresiabis(50,150,f);
+            %Salida=(1-u)*f+u*DP1;
+            A=uint8(f);
             
             % A = uint8(f);
             %pause
