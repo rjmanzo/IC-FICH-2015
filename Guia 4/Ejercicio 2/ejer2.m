@@ -1,4 +1,4 @@
-%clear all
+clear all
 close all
 clc
 
@@ -8,6 +8,7 @@ cantParticulas=20;
 c1=0.5; %Aceleracion: Comp. cognitiva 
 c2=1-c1; %Aceleracion: Comp. Global
 maxIter=200; %Max. de iteraciones 
+TolCorte=1.0e-03;
 p_inercial = 1;%Si quiero trabajar con peso inercial = 1, sino Default en -1 
 
 %Obtengo la expresion del intervalo de busqueda segun la funcion seleccionar en Nfunc  
@@ -16,7 +17,7 @@ p_inercial = 1;%Si quiero trabajar con peso inercial = 1, sino Default en -1
 %Inicializo el temporarizador
 t = cputime;
 
-particulas_global(intervalo,Nfunc,maxIter,p_inercial,cantParticulas,c1,c2);
+particulas_global(intervalo,Nfunc,maxIter,TolCorte,p_inercial,cantParticulas,c1,c2);
 
 %Tiempos y resultados (gEP)
 tiempoTotal=cputime - t;
