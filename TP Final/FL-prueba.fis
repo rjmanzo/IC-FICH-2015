@@ -1,0 +1,49 @@
+[System]
+Name='FL-prueba'
+Type='mamdani'
+Version=2.0
+NumInputs=2
+NumOutputs=1
+NumRules=9
+AndMethod='min'
+OrMethod='max'
+ImpMethod='min'
+AggMethod='max'
+DefuzzMethod='centroid'
+
+[Input1]
+Name='P1'
+Range=[0 255]
+NumMFs=3
+MF1='Dark':'gauss2mf',[50 0 10 50]
+MF2='Avg':'gauss2mf',[10 100 10 150]
+MF3='Light':'gauss2mf',[10 200 25 255]
+
+[Input2]
+Name='P2'
+Range=[0 255]
+NumMFs=3
+MF1='Dark':'gauss2mf',[50 0 10 50]
+MF2='Avg':'gauss2mf',[10 100 10 150]
+MF3='Light':'gauss2mf',[10 200 18 255]
+
+[Output1]
+Name='Decision'
+Range=[0 255]
+NumMFs=5
+MF1='Dark':'gauss2mf',[50 0 10 49]
+MF2='AmL':'gauss2mf',[18 150 18 175]
+MF3='Avg':'gauss2mf',[18 100 18 150]
+MF4='Light':'gauss2mf',[10 200 10 255]
+MF5='DmA':'gauss2mf',[10 75 10 100]
+
+[Rules]
+1 1, 1 (1) : 1
+1 2, 5 (1) : 1
+1 3, 3 (1) : 1
+2 1, 5 (1) : 1
+2 2, 3 (1) : 1
+2 3, 2 (1) : 1
+3 1, 3 (1) : 1
+3 2, 2 (1) : 1
+3 3, 4 (1) : 1
