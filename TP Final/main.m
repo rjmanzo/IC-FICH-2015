@@ -16,8 +16,9 @@ recuperada = medfilt2(ruidosa,[3 3]);
 procesar=ruidosa;
 [n,m]=size(procesar);
 a=readfis('FL-AMF');
+tic
+[xx yy]=find(procesar==255 | procesar==0); %xx=columnas yy=filas
 
-[xx yy]=find(procesar==255); %xx=columnas yy=filas
 for i=1:length(xx)
     if(xx(i)~=1 && xx(i)~=256 && yy(i)~=1 && yy(i)~=256)
         rect=[yy(i)-1 xx(i)-1 2 2];
@@ -41,53 +42,11 @@ for i=1:length(xx)
             DP2=evalfis([NS1 NS2],a);
             f=evalfis([double(DP1) double(DP2)],a);
             A=uint8(f);
-            recorte(2,2)=A;
-            hh=yy(i)-1;
-            kk=xx(i)-1;
-          
-           for l=hh:hh+2
-                for mm=kk:kk+2
-                   procesar(mm,l)=recorte(mm-kk+1,l-hh+1);
-               end
-           end
+            procesar(xx(i),yy(i))=A;
+ 
     end
 end
-
-[xx yy]=find(procesar==0); %xx=columnas yy=filas
-parfor i=1:length(xx)
-    if(xx(i)~=1 && xx(i)~=256 && yy(i)~=1 && yy(i)~=256)
-        rect=[yy(i)-1 xx(i)-1 2 2];
-        recorte = imcrop(procesar,rect); % rect [xmin ymin width height]
-        DP1 = median(recorte(:)');
-            %pixel - norte - sur
-            s1=[double(recorte(1,2)) double(recorte(3,2))];
-            %pixel - oeste - este
-            s2=[double(recorte(2,1)) double(recorte(2,3))];
-            %pixel - noroeste - sureste
-            s3=[double(recorte(1,1)) double(recorte(3,3))];
-            %pixel - suroeste - noreste
-            s4=[double(recorte(1,3)) double(recorte(3,1))];
-            %
-            ss1=evalfis(s1,a);
-            ss2=evalfis(s2,a);
-            ss3=evalfis(s3,a);
-            ss4=evalfis(s4,a);
-            NS1=evalfis([ss1 ss2],a);
-            NS2=evalfis([ss3 ss4],a);
-            DP2=evalfis([NS1 NS2],a);
-            f=evalfis([double(DP1) double(DP2)],a);
-            A=uint8(f);
-            recorte(2,2)=A;
-            hh=yy(i)-1;
-            kk=xx(i)-1;
-            for l=hh:hh+2
-                for mm=kk:kk+2
-                    procesar(mm,l)=recorte(mm-kk+1,l-hh+1);
-                end
-            end
-    end
-end
-
+toc
 
 % %FASE 2: Filtrado de bordes con mediana. Ventana de 3x3 descentradas.
 % %El filtro de mediana no arregla el ruido de sal y pimienta en los bordes,
