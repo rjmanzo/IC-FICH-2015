@@ -15,10 +15,9 @@ alpha = 1;
 beta = 1;
 
 %Parametros Busq. Coste Uniforme
-
 %Establezco el nodoRaiz dependiendo del archivo de entrada 
-nodoRaiz_N1 = 7;
-nodoRaiz_N2 = 5;
+nodoRaiz_N1 = 7; % 7cities
+nodoRaiz_N2 = 5; % 10cities
 
 %%7cities---- Tiempos y resultados para busqueda_costo_uniforme y colonia_hormigas------------------------
 
@@ -39,15 +38,15 @@ t2 = cputime;
 %Tiempos y resultados t2
 tiempoTotal_2=cputime - t2;
 display(strcat('7cities: tiempo total(sACO): ',num2str(tiempoTotal_2),' segundos'));
-
 %%FIN------------------------ 7cities---------------------------------------------------------------------
 
-%%7cities---- Tiempos y resultados para busqueda_costo_uniforme y colonia_hormigas------------------------
 
+
+%%10cities
 %Inicializo el temporarizador t3
 t3 = cputime;
 
-[mejorCaminoCU_N2,mejorCostoCU_N2]=busqueda_costo_uniforme(path_archivo_N1,nodoRaiz_N1);
+[mejorCaminoCU_N2,mejorCostoCU_N2]=busqueda_costo_uniforme(path_archivo_N2,nodoRaiz_N2);
 
 %Tiempos y resultados t3
 tiempoTotal_3=cputime - t3;
