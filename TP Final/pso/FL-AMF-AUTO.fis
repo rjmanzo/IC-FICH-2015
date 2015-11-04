@@ -1,0 +1,49 @@
+[System]
+Name='FL-AMF-AUTO'
+Type='mamdani'
+Version=2.0
+NumInputs=2
+NumOutputs=1
+NumRules=9
+AndMethod='min'
+OrMethod='max'
+ImpMethod='min'
+AggMethod='max'
+DefuzzMethod='centroid'
+
+[Input1]
+Name='P1'
+Range=[0 255]
+NumMFs=3
+MF1='Dark':'gauss2mf',[50 0 18 50]
+MF2='Avg':'gauss2mf',[18 100 18 150]
+MF3='Light':'gauss2mf',[18 200 18 255]
+
+[Input2]
+Name='P2'
+Range=[0 255]
+NumMFs=3
+MF1='Dark':'gauss2mf',[50 0 18 50]
+MF2='Avg':'gauss2mf',[18 100 18 150]
+MF3='Light':'gauss2mf',[18 200 18 255]
+
+[Output1]
+Name='Decision'
+Range=[0 255]
+NumMFs=5
+MF1='Dark':'gauss2mf',[2.71549449403037 223 15.7429222271677 242]
+MF2='AmL':'gauss2mf',[19.7942220420727 162 2.87974634203122 194]
+MF3='Avg':'gauss2mf',[14.3512687722861 25 15.0666978186895 64]
+MF4='Light':'gauss2mf',[8.78040546928458 232 14.6239050547643 241]
+MF5='DmA':'gauss2mf',[11.0778365503795 9 10.2600348646251 235]
+
+[Rules]
+1 1, 1 (1) : 1
+1 2, 5 (1) : 1
+1 3, 3 (1) : 1
+2 1, 5 (1) : 1
+2 2, 3 (1) : 1
+2 3, 2 (1) : 1
+3 1, 3 (1) : 1
+3 2, 2 (1) : 1
+3 3, 4 (1) : 1

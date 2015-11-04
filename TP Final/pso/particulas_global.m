@@ -9,13 +9,13 @@ posParticulas=inicializar_particulas(intervalo1,intervalo2,cantPart); %Inicializ
 %Inicializar: obtengo las posiciones de las particulas y calculo el mejor global
 mejorLocPos=posParticulas;                      %mejor posicion es la mejor posicion que tomo el emjambre
 mejorLocVal=aplicar_funcion(imagen,mejorLocPos); % mejorLocVal-->vector de psnr's
-[mejorGlobalVal,mejorGlobalIndex]=min(mejorLocVal); %Minimo global entre todas las particulas
-mejorGlobalPos=mejorLocPos(:,mejorGlobalIndex);
-velocPartic=zeros(size(posParticulas)); %Velocidades iniciales
+[mejorGlobalVal,mejorGlobalIndex]=max(mejorLocVal); %Maximo psnr global entre todas las particulas->pnsr->mas grande es mejor
+mejorGlobalPos=mejorLocPos{mejorGlobalIndex};
+velocPartic=zeros(cantPart,4); %Velocidades iniciales
 
 %Particulas: Inicio de algoritmo------------------------
 
-while cantIter<maxIter && TolCorte<mejorGlobalVal
+while cantIter<maxIter && TolCorte>mejorGlobalVal
  
     %Verifico peso inercial
     if(p_inercial<0)
@@ -23,10 +23,6 @@ while cantIter<maxIter && TolCorte<mejorGlobalVal
     else
         p_inercial=(maxIter-cantIter)/maxIter;
     end
-    
-    %Grafico la posicion parcial de las particulas
-    graficar_particulas(intervalo,posParticulas,aplicar_funcion(Nfunc,posParticulas));
-    pause(0.1);
     
     %actualizacion de velocidad: Rand de r1i y r2i
     r1=rand(size(posParticulas));
@@ -42,22 +38,22 @@ while cantIter<maxIter && TolCorte<mejorGlobalVal
     posParticulas=verificar_intervalo(posParticulas,intervalo);
     
     %Calculo las nuevas posiciones y valores de las particulas
-    funLocales=aplicar_funcion(Nfunc,posParticulas);
+    funLocales=aplicar_funcion(imagen,posParticulas);
     %Comparo valor de la posicion actual (posParticulas+1) con la vieja (posParticulas)
-    menores=funLocales<mejorLocVal;
-    %Reemplazo por los nuevos minimos tanto en los valores como en las posiciones
-    mejorLocVal(menores==1)=funLocales(menores==1);
-    mejorLocPos(:,menores==1)=posParticulas(:,menores==1);
+    mayores=funLocales>mejorLocVal; %todas las particulas con mayor pnsr a los mejores actuales 
+    %Reemplazo por los nuevos maximos tanto en los valores como en las posiciones
+    mejorLocVal(mayores==1)=funLocales(mayores==1); %escribo pnsr solo de las mejores particulas
+    mejorLocPos={posParticulas{mayores==1}}; % posiciones de los sistemas que tienen mejores psnr
     
-    %Calculo la mejor posicion y valor global entre todas las particulas (Min. Global)
-    [funGlobalVal,funGlobalPos]=min(mejorLocVal);
-    if funGlobalVal<mejorGlobalVal
+    %Calculo la mejor posicion y valor global entre todas las particulas (Max. Global)
+    [funGlobalVal,funGlobalPos]=max(mejorLocVal);%busco mayor
+    if funGlobalVal>mejorGlobalVal
         mejorGlobalVal=funGlobalVal;
-        mejorGlobalPos=mejorLocPos(:,funGlobalPos);
+        mejorGlobalPos=mejorLocPos{funGlobalPos};
     end
     
     %Muestro el resultado parcial
-    resultado_parcial(cantIter,mejorGlobalVal,mejorGlobalPos);
+    %resultado_parcial(cantIter,mejorGlobalVal,mejorGlobalPos);
     cantIter=cantIter+1;
 end
 %Particulas: Fin del algoritmo------------------------

@@ -2,21 +2,13 @@
 function[salida]=aplicar_funcion(imagen, pos)
 %for por la cantidad de elementos de pos
 for ff=1:length(pos)
-
-
 %crear los sistema(i) con las pos(i)
-%guardar los sistemas en memoria o en un archivo cada uno
-crear_sistema...--> debo seguir desde aqui
-%debo crear el sistema con los parametros pos(i) y evaluar ese sistema 
-
-
-
+[a] = crear_sistema('FL-AMF-AUTO',pos{ff}) ;
 %procesar la imagen con el sistema(i)
 procesar=imagen;
 [n,m]=size(procesar);
 tic
 [xx yy]=find(procesar==255 | procesar==0); %xx=columnas yy=filas
-
 for i=1:length(xx)
     if(xx(i)~=1 && xx(i)~=256 && yy(i)~=1 && yy(i)~=256)
         rect=[yy(i)-1 xx(i)-1 2 2];
@@ -44,8 +36,9 @@ for i=1:length(xx)
  
     end
 end
-
-salida(i)= psnr(imagen,procesar); 
+toc
+ff
+salida(ff)= psnr(imagen,procesar)
 end % en for por cada particula
 
 

@@ -1,4 +1,4 @@
-function [a] = crear_sistema(nombre,M)
+function [a] = crear_sistema(nombre,S) %posParticula
 %CREAR_SISTEMA Summary of this function goes here
 %   Detailed explanation goes here
 a = newfis(nombre);
@@ -32,19 +32,19 @@ a.output(1).name = 'Decision';
 a.output(1).range = [0 255];
 a.output(1).mf(1).name = 'Dark'
 a.output(1).mf(1).type = 'gauss2mf';
-a.output(1).mf(1).params = M(1,:); %[49 0 18 49];
+a.output(1).mf(1).params = S(1,:); %[49 0 18 49];
 a.output(1).mf(2).name = 'AmL';
 a.output(1).mf(2).type = 'gauss2mf';
-a.output(1).mf(2).params = M(2,:); %[18 151 18 199];
+a.output(1).mf(2).params = S(2,:); %[18 151 18 199];
 a.output(1).mf(3).name = 'Avg';
 a.output(1).mf(3).type = 'gauss2mf';
-a.output(1).mf(3).params = M(3,:); %[18 101 18 149];
+a.output(1).mf(3).params = S(3,:); %[18 101 18 149];
 a.output(1).mf(4).name = 'Light';
 a.output(1).mf(4).type = 'gauss2mf';
-a.output(1).mf(4).params = M(4,:); %[18 201 18 255];
+a.output(1).mf(4).params = S(4,:); %[18 201 18 255];
 a.output(1).mf(5).name = 'DmA';
 a.output(1).mf(5).type = 'gauss2mf';
-a.output(1).mf(5).params = M(5,:); %[18 51 18 99];
+a.output(1).mf(5).params = S(5,:); %[18 51 18 99];
 %Reglas--------------------------------------
 a.rule(1).antecedent = [1 1];
 a.rule(1).consequent = [1];
