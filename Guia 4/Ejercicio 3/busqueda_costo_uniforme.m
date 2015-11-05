@@ -6,6 +6,7 @@ datos = csvread(path_archivo);
 cantNodos = size(datos,1);
 
 % Inserto el nodo raiz en la matriz de conexiones
+% [  padre   -- nodosNorecorridos   --  nodos  --     distancias acumuladas]
 matrizConexiones(1,:) = [ 0 1 nodoRaiz 0 ];
 
 % Vector con los nodos no recorridos
@@ -14,13 +15,13 @@ nodosNoRecorridos = [1:cantNodos];
 % Elimino el nodoRaiz de los nodosNoRecorridos
 nodosNoRecorridos( nodosNoRecorridos == nodoRaiz ) = [];
 
-% Expando el nodo raiz
+% Expando el nodo raiz [         nodosNorecorridos   --  nodos  --     distancias acumuladas]
 hojas(1:length(nodosNoRecorridos),:) = [ ones(length(nodosNoRecorridos),1)  nodosNoRecorridos' datos(nodoRaiz,nodosNoRecorridos)'];
 
 % Reordeno la matriz de hojas en base a las distancias acumuladas
 hojas = sortrows( hojas , 3 );
 
-while hojas(1,2) ~= nodoRaiz
+while hojas(1,2) ~= nodoRaiz % cuando el proximo a expandir sea el el raiz donde inicie corto
     % Agrego el proximo nodo a expandir
     matrizConexiones = [ matrizConexiones; hojas(1,1) matrizConexiones(end,2)+1 hojas(1,2:3)   ];
     % Lo elimino de la matriz de hojas
@@ -32,24 +33,21 @@ while hojas(1,2) ~= nodoRaiz
         camino = [matrizConexiones(padre,3) camino];
         padre = matrizConexiones(padre,1);
     end
-    % Armo un vector con todos los nodos
-    nodosNoRecorridos = [1:cantNodos];
-    % Saco los nodos que ya recorri
-    nodosNoRecorridos = setdiff( nodosNoRecorridos , camino );
+    nodosNoRecorridos = [1:cantNodos];%todos los nodos
+    nodosNoRecorridos = setdiff( nodosNoRecorridos , camino );%elimino nodos que ya pase
     % Me fijo si el vector de nodos no recorridos quedo vacio
     if size(nodosNoRecorridos,2) == 0
         % Si quedo vacio llegue al nodo objetivo
         hojas = [ hojas; matrizConexiones(end,2) nodoRaiz matrizConexiones(end,4)+datos(matrizConexiones(end,3),nodoRaiz)];
     else
-        % Expando ese nodo
+        % Expando ese
+        % nodo------------------------------------------------------------------------------------acumulo_distancias_desde_nodo_expandido_a_origen
         hojas = [ hojas; repmat( matrizConexiones(end,2) , length(nodosNoRecorridos) , 1 ) nodosNoRecorridos' matrizConexiones(end,4)+datos(matrizConexiones(end,3),nodosNoRecorridos)'];
     end
-    % Ordeno las hojas para la proxima iteracion
-    hojas = sortrows( hojas , 3 );
-    % Obtengo el mejor costo
-    mejorCosto = hojas(1,3);
-    % Reconstruyo el mejor camino
-    mejorCamino = [hojas(1,2)];
+    
+    hojas = sortrows( hojas , 3 );%ordeno hojas segun columna 3 (distancia acumulada) de menor a mayor
+    mejorCosto = hojas(1,3);%costo mejor
+    mejorCamino = [hojas(1,2)]; %nodo que es el mejor camino (contruyo mejor camino)
     padre = hojas(1,1);
 end
 

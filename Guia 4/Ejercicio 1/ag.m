@@ -25,6 +25,11 @@ figure('Name','Evolucion a lo largo de las iteracion','NumberTitle','off')
 plot(1:n,mejorAptitud(1:n));
 ylabel('aptitudRequerida')
 xlabel('iteracion')
+if(length(Rango)==2) %muestro valor valor
+    f2(x(mejorPosicion))
+else
+    f2(x(mejorPosicion),x(mejorPosicion))
+end
 
 toc
 end

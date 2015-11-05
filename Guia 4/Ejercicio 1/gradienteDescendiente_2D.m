@@ -1,5 +1,5 @@
-function [n,x]= gradienteDescendiente_2D(f,Rango,iteracionesMaximas,a,b,tolerancia)
-
+function [n,X,Y]= gradienteDescendiente_2D(f,Rango,iteracionesMaximas,a,b,tolerancia)
+%Nota:podria terminar al encontrar un maximo
 tic
 syms x y;
 %derivadas
@@ -36,7 +36,5 @@ while (n<iteracionesMaximas && ( dfEval(1)>0+tolerancia || dfEval(1)<0-toleranci
 end
 
 toc
-%Atencion:
-%Como esta planteado el algoritmo podria terminar al encontrar un maximo
 end
 

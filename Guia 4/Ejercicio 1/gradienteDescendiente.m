@@ -34,7 +34,6 @@ function [n,x] = gradienteDescendiente(f,Rango,maximoIteraciones,a,b,tolerancia)
         grafica=scatter(x,double(subs(f,x)),600,'.');
         drawnow;
     end
-
-    toc
+toc
 end
 

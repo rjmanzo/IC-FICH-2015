@@ -1,6 +1,6 @@
-function poblacion= Reemplazo(poblacion,hijos,posMejor)
+function Poblacion= Reemplazo(Poblacion,hijos,mejorPosicion)
     %Elitismo
-    poblacion(1,:)=poblacion(posMejor,:); %El mejor no se elimina
-    poblacion(2:end,:)=hijos(2:end,:); % escribo el resto que son nuevos
+    Poblacion(1,:)=Poblacion(mejorPosicion,:); %El mejor no se elimina
+    Poblacion(2:end,:)=hijos(2:end,:); % escribo el resto que son nuevos
 end
 
