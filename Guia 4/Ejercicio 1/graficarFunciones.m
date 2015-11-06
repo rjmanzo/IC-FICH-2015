@@ -4,11 +4,13 @@ function graficarFunciones(f,f2,L,aptitudRequerida)
         subplot(2,1,1)
         x2=L(1):0.2:L(2);
         plot(x2,f(x2));
+        title('aptitud')
         hold on
         plot([L(1) L(2)],[aptitudRequerida aptitudRequerida],'r')
         subplot(2,1,2)
         x2=L(1):0.2:L(2);
         plot(x2,f2(x2));
+        title('funcion')
         drawnow;
     elseif (length(L)==4)
         figure('Name','funcion xy','NumberTitle','off')

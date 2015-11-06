@@ -19,6 +19,7 @@ function [n,x] = gradienteDescendiente(f,Rango,maximoIteraciones,a,b,tolerancia)
     paso=(Rango(2)-Rango(1))/100;
     x2=Rango(1):paso:Rango(2);
     plot(x2,double(subs(f,x2)));
+    title('gradiente')
     hold on
     grafica=scatter(x,subs(f,x),600,'.');
 

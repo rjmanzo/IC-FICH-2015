@@ -1,0 +1,71 @@
+LOS DOS ALGORITMOS ENCUENTRAN EL CAMINO OPTIMO
+7cities:
+
+Camino OPTIMO: [7 6 4 5 2 3 1 7]
+Distancia: 30.7188 km
+
+TEST 1:
+7cities: tiempo total(Busq.Costo Uniforme):0.43 segundos
+7cities: tiempo total(AS):2.43 segundos
+Camino: [7 6 4 5 2 3 1 7] (en los dos casos)
+Distancia: 30.7188 km (en los dos casos)
+N = 10; %Cantidad de hormigas
+b = 1; %Cantidad maxima de feromonas iniciales en un camino
+p = 0.1; %Porcentaje de feromonas que se eliminan por evaporacion
+Q=1;% Uniforme
+alpha = 1;
+beta = 1;
+
+TEST 2:
+7cities: tiempo total(Busq.Costo Uniforme):0.43 segundos
+7cities: tiempo total(AS):0.18 segundos
+Camino: [7 6 4 5 2 3 1 7] (en los dos casos)
+Distancia: 30.7188 km (en los dos casos)
+%Parametros hormiga
+N = 5; %Cantidad de hormigas
+b = 1; %Cantidad maxima de feromonas iniciales en un camino
+p = 0.5; %Porcentaje de feromonas que se eliminan por evaporacion
+Q=1;% Uniforme
+alpha = 1;
+beta = 1;
+
+------------------------------
+
+10cities:
+
+TEST 1
+Camino OPTIMO: [5 9 4 8 2 1 10 6 7 3 5]
+Distancia: 298.4305 km
+10cities: tiempo total(Busq.Costo Uniforme):157.41 segundos
+10cities: tiempo total(AS):6.22 segundos
+mejorCaminoCU_N2 =     [5     9     4     8     2     1    10     6     7     3     5]
+mejorCaminoHormiga_N2 =[5     9     4     8     2     1    10     6     7     3     5]
+N = 10; %Cantidad de hormigas
+b = 1; %Cantidad maxima de feromonas iniciales en un camino
+p = 0.1; %Porcentaje de feromonas que se eliminan por evaporacion
+Q=1;% Uniforme
+alpha = 1;
+beta = 1;
+
+
+TEST 2
+Camino OPTIMO: [5 9 4 8 2 1 10 6 7 3 5]
+Distancia: 298.4305 km
+10cities: tiempo total(Busq.Costo Uniforme):157.41 segundos
+10cities: tiempo total(AS):0.52 segundos
+mejorCaminoCU_N2 =     [5     9     4     8     2     1    10     6     7     3     5]
+mejorCaminoHormiga_N2 =[5     9     4     8     2     1    10     6     7     3     5]
+N = 5; %Cantidad de hormigas
+b = 1; %Cantidad maxima de feromonas iniciales en un camino
+p = 0.5; %Porcentaje de feromonas que se eliminan por evaporacion
+Q=1;% Uniforme
+alpha = 1;
+beta = 1;	
+
+
+
+Costo uniforme: expande nodos y calcula el costo de cada uno, siempre expande el nodo con menor costo desde el a la raiz, los que expande los
+va agregando al vector de hojas el cual ordena de menor a mayor segun costo, y saca el primero (que es el nodo que tiene menor costo a la raiz). Es completo y optimo, pero utiliza mucho tiempo y espacio cuando el arbol de busqueda crese. Por eso al pasar de 7cities a 10cities el tiempo aumenta tanto para encontrar el resultado.
+Hormigas converge mas rapido (encuentra el camino) dependiendo de como se lo configure, como se ve en TEST 1 y TEST 2, depende mucho de que velocidad de evaporacion se pone, lo cual hace las hormigas sigan mas rapido un mismo camino todas, por que evapora mucho y donde no pasan muchas hormigas el rastro se borra rapido.
+
+hormigas es el mejor algoritmo en los dos casos, encuentra el mejor camino y en menor tiempo

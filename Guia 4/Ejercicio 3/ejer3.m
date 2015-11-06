@@ -9,7 +9,7 @@ path_archivo_N2=strcat('../Datos/10cities.csv');
 %Parametros hormiga
 N = 5; %Cantidad de hormigas
 b = 1; %Cantidad maxima de feromonas iniciales en un camino
-p = 0.5; %Porcentaje de feromonas que se eliminan por evaporacion
+p = 0.3; %Porcentaje de feromonas que se eliminan por evaporacion
 Q=1;% Uniforme
 alpha = 1;
 beta = 1;
@@ -49,13 +49,13 @@ nodoRaiz_N2 = 5; % 10cities
 %%
 %10cities - BUSQUEDA COSTO UNIFORME
 %Inicializo el temporarizador t3
-t3 = cputime;
-
-[mejorCaminoCU_N2,mejorCostoCU_N2]=busqueda_costo_uniforme(path_archivo_N2,nodoRaiz_N2);
-
-%Tiempos y resultados t3
-tiempoTotal_3=cputime - t3;
-display(strcat('10cities: tiempo total(Busq.Costo Uniforme): ',num2str(tiempoTotal_3),' segundos'));
+% t3 = cputime;
+% 
+% [mejorCaminoCU_N2,mejorCostoCU_N2]=busqueda_costo_uniforme(path_archivo_N2,nodoRaiz_N2);
+% 
+% %Tiempos y resultados t3
+% tiempoTotal_3=cputime - t3;
+% display(strcat('10cities: tiempo total(Busq.Costo Uniforme): ',num2str(tiempoTotal_3),' segundos'));
 %%
 
 

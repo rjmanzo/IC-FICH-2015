@@ -36,9 +36,10 @@ function [mejorCamino,mejorCosto]=colonia_hormigas(path_archivo,nodo_i,N,b,p,alp
             %para cada conexion i,j se reduce la feromona
 			feromonas = (1-p)*feromonas; %eliminar por evaporacion			
 			[n,m]=size(caminos);
+            costoMin=min(costos);
             for i = 1 : n% depositar feromonas segun la importancia(bondad) de la conexion(camino)
 					for j = 1 : m-1
-						   feromonas( caminos(i,j) , caminos(i,j+1) ) = feromonas( caminos(i,j) , caminos(i,j+1) ) + Q/datos( caminos(i,j) , caminos(i,j+1) );
+						   feromonas( caminos(i,j) , caminos(i,j+1) ) = feromonas( caminos(i,j) , caminos(i,j+1) ) + Q/datos( caminos(i,j) , caminos(i,j+1) );%/costoMin;%/datos( caminos(i,j) , caminos(i,j+1) );
 					end
 			end
 	%         drawnow;

@@ -1,7 +1,7 @@
 %Particulas: Enjambre del mejor global
 function [] = particulas_global(imagen,intervalo1,intervalo2,Nfunc,maxIter,TolCorte,p_inercial,c1,c2)
 cantIter=1;
-cantPart=20;
+cantPart=2;
 
 %Inicializar: genero las particulas al azar en funcion del intervalo
 posParticulas=inicializar_particulas(intervalo1,intervalo2,cantPart); %Inicializar posiciones al azar
@@ -15,7 +15,7 @@ velocPartic=zeros(cantPart,4); %Velocidades iniciales
 
 %Particulas: Inicio de algoritmo------------------------
 
-while cantIter<maxIter && TolCorte>mejorGlobalVal
+while cantIter<=maxIter && TolCorte>mejorGlobalVal
  
     %Verifico peso inercial
     if(p_inercial<0)

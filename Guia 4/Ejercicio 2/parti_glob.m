@@ -1,5 +1,6 @@
 function [] = parti_glob(intervalo,maximoIteraciones,iteracion,mejorPosiLocal,mejorValorLocal,mejorPosiGlobal,mejorValorGlobal,posParticulas,velocidadDeParticula,c1,c2,cantParticulas,numeroFuncion)
-while iteracion<maximoIteraciones;
+
+while iteracion<=maximoIteraciones;
     inercia=(maximoIteraciones-iteracion)/maximoIteraciones;
     r1=rand(size(posParticulas));
     r2=rand(size(posParticulas));
