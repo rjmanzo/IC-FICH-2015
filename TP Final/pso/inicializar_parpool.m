@@ -1,3 +1,7 @@
+function [ ] = inicializar_parpool()
+
+distcomp.feature( 'LocalUseMpiexec', false )
+
 %1 - Primero inicializamos este listado de comandos. Son para iniciar el
 %conjunto de workers de paralelizacion
 %--------------------------------------------------------------------------------
@@ -13,25 +17,26 @@ mkdir(t);
 %Set job location
 c.JobStorageLocation=t;
 %Execute parpool cluster
-parpool(myCluster,2);
+parpool(myCluster);
 %--------------------------------------------------------------------------------
 
 %2 - Ejecutas este pequeño ejemplo. Deberia de andar. Si no llega a tirar
 %nada esta mal!
 %--------------------------------------------------------------------------------
-%Use created parallel pool 
-gcp();
-A = zeros(1,10000000);
-parfor i = 1:length(A)
-    A(i) = i;
-end
+% %Use created parallel pool
+% gcp();
+% A = zeros(1,10000000);
+% parfor i = 1:length(A)
+%     A(i) = i;
+% end
 %--------------------------------------------------------------------------------
-
+%
 % %3 - Cuando queremos parar el pool ejecutamos estas dos lineas
 % %--------------------------------------------------------------------------------
-% %Shutdowm parallel pool. 
+% %Shutdowm parallel pool.
 % poolobj = gcp('nocreate');
 % delete(poolobj);
 % %--------------------------------------------------------------------------------
-
+%
+end
 

@@ -8,7 +8,7 @@ posParticulas=inicializar_particulas(intervalo1,intervalo2,cantPart); %Inicializ
 %Inicializar: obtengo las posiciones de las particulas y calculo el mejor global
 mejorLocPos=posParticulas;                      %mejor posicion es la mejor posicion que tomo el emjambre
 tic
-mejorLocVal=aplicar_funcion(imgRuido,imgOrig,mejorLocPos); % mejorLocVal-->vector de psnr's
+mejorLocVal=aplicar_funcion_pool(imgRuido,imgOrig,mejorLocPos); % mejorLocVal-->vector de psnr's
 toc
 [mejorGlobalVal,mejorGlobalIndex]=max(mejorLocVal); %Maximo psnr global entre todas las particulas->pnsr->mas grande es mejor
 mejorGlobalPos=mejorLocPos(:,mejorGlobalIndex*4-3:mejorGlobalIndex*4);
@@ -18,12 +18,12 @@ velocPartic=zeros(5,cantPart*4); %Velocidades iniciales
 
 while cantIter<=maxIter && TolCorte>mejorGlobalVal
  
-    %Verifico peso inercial
-    if(p_inercial<0)
-        p_inercial = 1;
-    else
+%     %Verifico peso inercial
+%     if(p_inercial<0)
+%         p_inercial = 1;
+%     else
         p_inercial=(maxIter-cantIter)/maxIter;
-    end
+%     end
     
     %actualizacion de velocidad: Rand de r1i y r2i
     r1=rand(size(posParticulas));
@@ -42,7 +42,7 @@ while cantIter<=maxIter && TolCorte>mejorGlobalVal
     posParticulas=verificar_intervalo(posParticulas,intervalo1,intervalo2);
     
     %Calculo las nuevas posiciones y valores de las particulas
-    funLocales=aplicar_funcion(imgRuido,imgOrig,posParticulas); %% vector igual que mejorLocVal
+    funLocales=aplicar_funcion_pool(imgRuido,imgOrig,posParticulas); %% vector igual que mejorLocVal
     %Comparo valor de la posicion actual (posParticulas+1) con la vieja (posParticulas)
     mayores=funLocales>mejorLocVal; %todas las particulas con mayor pnsr a los mejores actuales 
     %Reemplazo por los nuevos maximos tanto en los valores como en las posiciones
