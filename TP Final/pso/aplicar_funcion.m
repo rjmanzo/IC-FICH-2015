@@ -1,16 +1,18 @@
-%Funciones: Seleccion el tipo de funcion a aplicar.
-function[salida]=aplicar_funcion(imagen, pos)
+function[salida]=aplicar_funcion(imgRuido,imgOrig, pos) %pos: particulas
+[~,m]=size(pos);
+contador=0;
 %for por la cantidad de elementos de pos
-for ff=1:length(pos)
+for ff=1:4:m
+contador=contador+1;
 %crear los sistema(i) con las pos(i)
-[a] = crear_sistema('FL-AMF-AUTO',pos{ff}) ;
-%procesar la imagen con el sistema(i)
-procesar=imagen;
+[a] = crear_sistema('FL-AMF-AUTO',pos(:,ff:ff+3))
+%procesar la imgRuido con el sistema(i)
+procesar=imgRuido;
 [n,m]=size(procesar);
 tic
 [xx yy]=find(procesar==255 | procesar==0); %xx=columnas yy=filas
 for i=1:length(xx)
-    if(xx(i)~=1 && xx(i)~=256 && yy(i)~=1 && yy(i)~=256)
+    if(xx(i)~=1 && xx(i)~=n && yy(i)~=1 && yy(i)~=m)
         rect=[yy(i)-1 xx(i)-1 2 2];
         recorte = imcrop(procesar,rect); % rect [xmin ymin width height]
         DP1 = median(recorte(:)');
@@ -37,8 +39,8 @@ for i=1:length(xx)
     end
 end
 toc
-ff
-salida(ff)= psnr(imagen,procesar)
+contador
+salida(contador)= psnr(imgOrig,procesar)
 end % en for por cada particula
 
 
