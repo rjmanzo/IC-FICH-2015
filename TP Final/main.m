@@ -1,9 +1,32 @@
-clear all
-close all
-clc
+% % clear all
+% close all
+% clc
 
-% parpool('local',2)
-% parpool
+%paralelooo.......................................
+
+% delete(gcp)
+%Disable local mpiexec
+% If you are using R2010a or newer, you may experience issues with the new local mpiexec implementation. In that case, try the following command to disable this feature:
+
+% distcomp.feature( 'LocalUseMpiexec', false )
+%
+% %Ini cluster
+% myCluster=parcluster('local');
+% %Delete previous Jobs
+% % delete(myCluster.Jobs)
+% %Set numbers of core workers
+% myCluster.NumWorkers=2;
+% %Tempory file directory
+% t=tempname();
+% mkdir(t);
+% %Set job location
+% c.JobStorageLocation=t;
+% %Execute parpool cluster
+% parpool(myCluster,2);
+
+%paralelooo.......................................
+
+gcp();
 
 path_imagen = 'Datos/cameraman.tif';
 %path_imagen = 'Datos/lena.jpg';
@@ -27,31 +50,31 @@ for i=1:length(xx)
         rect=[yy(i)-1 xx(i)-1 2 2];
         recorte = imcrop(procesar,rect); % rect [xmin ymin width height]
         DP1 = median(recorte(:)');
-            %pixel - norte - sur
-            s1=[double(recorte(1,2)) double(recorte(3,2))];
-            %pixel - oeste - este
-            s2=[double(recorte(2,1)) double(recorte(2,3))];
-            %pixel - noroeste - sureste
-            s3=[double(recorte(1,1)) double(recorte(3,3))];
-            %pixel - suroeste - noreste
-            s4=[double(recorte(1,3)) double(recorte(3,1))];
-            %
-            SS = [s1; s2; s3; s4];
-            ss = zeros(4,1);
-            parfor k=1:4
+        %pixel - norte - sur
+        s1=[double(recorte(1,2)) double(recorte(3,2))];
+        %pixel - oeste - este
+        s2=[double(recorte(2,1)) double(recorte(2,3))];
+        %pixel - noroeste - sureste
+        s3=[double(recorte(1,1)) double(recorte(3,3))];
+        %pixel - suroeste - noreste
+        s4=[double(recorte(1,3)) double(recorte(3,1))];
+        
+        SS = [s1; s2; s3; s4];
+        ss = zeros(4,1);
+        parfor k=1:4
             ss(k)=evalfis(SS(k,:),a);
-            end
-%                ss1=evalfis(s1,a);
-%             ss2=evalfis(s2,a);
-%             ss3=evalfis(s3,a);
-%             ss4=evalfis(s4,a);
-            NS1=evalfis([ss(1) ss(2)],a);
-            NS2=evalfis([ss(3) ss(4)],a);
-            DP2=evalfis([NS1 NS2],a);
-            f=evalfis([double(DP1) double(DP2)],a);
-            A=uint8(f);
-            procesar(xx(i),yy(i))=A;
- 
+        end
+        %             ss1=evalfis(s1,a);
+        %             ss2=evalfis(s2,a);
+        %             ss3=evalfis(s3,a);
+        %             ss4=evalfis(s4,a);
+        NS1=evalfis([ss(1) ss(2)],a);
+        NS2=evalfis([ss(3) ss(4)],a);
+        DP2=evalfis([NS1 NS2],a);
+        f=evalfis([double(DP1) double(DP2)],a);
+        A=uint8(f);
+        procesar(xx(i),yy(i))=A;
+        
     end
 end
 toc
@@ -60,13 +83,13 @@ toc
 % %El filtro de mediana no arregla el ruido de sal y pimienta en los bordes,
 % %de manera tal que tenemos q hacer un algoritmo que nos permita recorrer
 % %los bordes y en conjunto con sus vecinos mas proximos (i+1,j+1) calcular un promedio.
-% 
+%
 % %Me creo una copia para no pisar el algo original
 % procesar_2 = procesar;
-% 
+%
 % %Las esquinas son un caso especial. Son matrices de 3x3 pero descentradas
 % %de otra manera al recorrido general.
-% 
+%
 % %Esquinas-------------------------
 % %Esquina superior izquierda
 % rect=[1 1 2 2];
@@ -92,7 +115,7 @@ toc
 % if (recorte(3,3)==255 ||recorte(3,3)==0)
 %     procesar_2(n,m)=  median(recorte(:)');
 % end
-% 
+%
 % %Bordes-------------------------
 % %Recorro la primer Columna (Fijo j=1)
 % for i=1:n-1
@@ -102,16 +125,16 @@ toc
 %         procesar_2(i+1,1)=  median(recorte(:)');
 %     end
 % end
-% 
+%
 % %Recorro la ultima Columna (Fijo j=m)
 % for i=1:n-1
-%     rect=[m-2 i 2 2]; 
+%     rect=[m-2 i 2 2];
 %     recorte = imcrop(procesar,rect); % rect [xmin ymin width height]
 %     if (recorte(2,3)==255 ||recorte(2,3)==0) %En el rect el valor analizar es el de la i=2, j=1
 %         procesar_2(i+1,m)=  median(recorte(:)');
 %     end
 % end
-% 
+%
 % %Recorro la primer fila (Fijo i=1)
 % for j=1:m-1
 %     rect=[j 1 2 2];
@@ -120,7 +143,7 @@ toc
 %         procesar_2(1,j+1)=  median(recorte(:)');
 %     end
 % end
-% 
+%
 % %Recorro la ultima fila (Fijo i=n)
 % for j=1:m-1
 %     rect=[j n-2 2 2];
