@@ -1,5 +1,5 @@
 %Particulas: Enjambre del mejor global
-function [] = particulas_global(imgRuido,imgOrig,intervalo1,intervalo2,maxIter,TolCorte,p_inercial,c1,c2,cantPart)
+function [mejorGlobalVal,mejorGlobalPos,cantIter] = particulas_global(imgRuido,imgOrig,intervalo1,intervalo2,maxIter,TolCorte,c1,c2,cantPart)
 cantIter=1;
 
 %Inicializar: genero las particulas al azar en funcion del intervalo
@@ -18,19 +18,11 @@ velocPartic=zeros(5,cantPart*4); %Velocidades iniciales
 
 while cantIter<=maxIter && TolCorte>mejorGlobalVal
  
-%     %Verifico peso inercial
-%     if(p_inercial<0)
-%         p_inercial = 1;
-%     else
         p_inercial=(maxIter-cantIter)/maxIter;
-%     end
     
     %actualizacion de velocidad: Rand de r1i y r2i
     r1=rand(size(posParticulas));
     r2=rand(size(posParticulas));
-    AA=p_inercial.*velocPartic;
-    BB=c1*r1.*(mejorLocPos-posParticulas);
-    CC=c2*r2.*(repmat(mejorGlobalPos,1,cantPart)-posParticulas);
     %Calculo la velocidad de las particulas
     velocPartic=p_inercial.*velocPartic+c1*r1.*(mejorLocPos-posParticulas)+c2*r2.*(repmat(mejorGlobalPos,1,cantPart)-posParticulas);
     
@@ -47,14 +39,11 @@ while cantIter<=maxIter && TolCorte>mejorGlobalVal
     mayores=funLocales>mejorLocVal; %todas las particulas con mayor pnsr a los mejores actuales 
     %Reemplazo por los nuevos maximos tanto en los valores como en las posiciones
     mejorLocVal(mayores==1)=funLocales(mayores==1); %escribo pnsr solo de las mejores particulas
-   % mejorLocPos=posParticulas(mayores==1); % posiciones de los sistemas que tienen mejores psnr   
     index=find(mayores==1);
     for ii=1:length(index)
         mejorLocPos(:,index(ii)*4-3:index(ii)*4)=posParticulas(:,index(ii)*4-3:index(ii)*4);
     end
-   
-    
-    %mejorGlobalPos=mejorLocPos(:,mejorGlobalIndex*4-3:mejorGlobalIndex*4);
+ 
     
     %Calculo la mejor posicion y valor global entre todas las particulas (Max. Global)
     [funGlobalVal,funGlobalPos]=max(mejorLocVal);%busco mayor
@@ -62,11 +51,12 @@ while cantIter<=maxIter && TolCorte>mejorGlobalVal
         mejorGlobalVal=funGlobalVal;
         mejorGlobalPos=mejorLocPos(:,funGlobalPos*4-3:funGlobalPos*4);
     end
-    
-    %Muestro el resultado parcial
-    %resultado_parcial(cantIter,mejorGlobalVal,mejorGlobalPos);
+ 
+
     cantIter=cantIter+1;
+    mejorGlobalVal
 end
+
 %Particulas: Fin del algoritmo------------------------
 end
 

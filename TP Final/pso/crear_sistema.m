@@ -1,4 +1,4 @@
-function [a] = crear_sistema(nombre,S) %posParticula
+function [a] = crear_sistema(nombre,S,flag) %posParticula
 %CREAR_SISTEMA Summary of this function goes here
 %   Detailed explanation goes here
 a = newfis(nombre);
@@ -83,6 +83,8 @@ a.rule(9).consequent = [4];
 a.rule(9).weight = 1;
 a.rule(9).connection = 1;
 %escribo sistema-----
+if flag
 writefis(a,nombre);
+end
 end
 
