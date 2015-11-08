@@ -110,18 +110,3 @@ salida(contador)= psnr(imgOrig,procesar)
 end %PARTICULA
 
 end %FUNCION
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
