@@ -29,7 +29,7 @@ IDXS = find(procesar==255 | procesar==0);
 RECORTES = zeros(3,3,length(xx));
 idxs = zeros(length(xx),1);
 DP1 = zeros(length(xx),1);
-for ii = 1:length(xx)
+parfor ii = 1:length(xx)
     
     %===================================================
     % EXTRAIGO LOS PIXELES RUIDOSOS EVITANDO LOS BORDES
@@ -118,7 +118,9 @@ procesar(idxs) = uint8( evalfis([double(DP1) double(DP2)],a) );
 
 
 contador;
-salida(contador)= psnr(imgOrig,procesar);
+salida(contador)= psnr(imcrop(imgOrig,[2 2 n-1 m-1]),imcrop(procesar,[2 2 n-1 m-1]));
+% salida(contador)= psnr(imgOrig,procesar);
+
 end %PARTICULA
 
 end %FUNCION

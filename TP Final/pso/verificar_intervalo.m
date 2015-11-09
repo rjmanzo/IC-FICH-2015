@@ -5,13 +5,18 @@ function[particulas]=verificar_intervalo(particulas,intervalo1,intervalo2)
 [n,m]=size(particulas);
 i=1:2:m;
 B=particulas(:,i);
-B(find(B>intervalo2(2) | B<intervalo2(1)))=15; %valor default de sigma igual en los dos extremos de gauss2mf
+B(find(B<intervalo2(1)))=intervalo2(1); %valor default de sigma en el nivel bajo de gauss2mf
+particulas(:,i)=B;
+B(find(B>intervalo2(2)))=intervalo2(2); %valor default de sigma en nivel alto de gauss2mf
 particulas(:,i)=B;
 
 %verifico que las gaussiana esten dentro de rango x
+i=0;
 i=2:2:m;
 B=particulas(:,i);
-B(find(B>intervalo1(2) | B<intervalo1(1)))=128; %valor default de de ubicacion eje x de la gaussiana
+B(find(B<intervalo1(1)))=intervalo1(1); %valor default de de ubicacion eje x de la gaussiana
+particulas(:,i)=B;
+B(find(B>intervalo1(2)))=intervalo1(2); %valor default de de ubicacion eje x de la gaussiana
 particulas(:,i)=B;
 
 %verifico que valor sea x1<x2 en gaussianas, sino los invierto 

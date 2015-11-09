@@ -1,21 +1,21 @@
 clear all,close all,clc
 %====================================
 %Inicializo el parpool
-%inicializar_parpool();
+inicializar_parpool();
 %====================================
 
 
 %====================================
 % LECTURA DE LA IMAGEN ORIGINAL
 %====================================
-path_imagen = 'Datos/cameraman128x128.tif';
+path_imagen = 'Datos/lena150x150.jpg';
 imgOrig = imread(path_imagen);
 
 
 
 % LECTURA DE LA IMAGEN CON RUIDO
 %====================================
-path_imagen = 'Datos/cameramanRuido128x128_1por.tif';
+path_imagen = 'Datos/lenaRuido150x150_1por.jpg';
 imgRuido = imread(path_imagen);
 
 
@@ -30,18 +30,18 @@ recuperada = medfilt2(imgRuido,[3 3]);
 %====================================
 % PARAMETROS DE INICIALIZACION
 %====================================
-c1=0.3; %Aceleracion: Comp. cognitiva 
-c2=1-c1; %Aceleracion: Comp. Global
+c1=2; %Aceleracion: Comp. cognitiva 
+c2=2.5; %Aceleracion: Comp. Global
 %c2=0.7; %Aceleracion: Comp. Global
-maxIter=2000; %Max. de iteraciones 
-TolCorte=38; %toleracia psnr (db)
-cantPart=6;
+maxIter=200; %Max. de iteraciones 
+TolCorte=45; %toleracia psnr (db)
+cantPart=30;
 
 %====================================
 % DEFINICION DE INTERVALOS DE FUNCIONES
 %====================================
 intervalo1=[0 255];
-intervalo2=[1 50];
+intervalo2=[2 19];
 
 
 
@@ -68,12 +68,16 @@ display(strcat('Tiempo Total (gEP): ',num2str(tiempoTotal),' segundos'));
 %====================================
 %Termino el recorrido. Cierro el parpool
 %====================================
-%finalizar_parpool();
-
-
+finalizar_parpool();
 
 %====================================
 %guardo el sistema encontrado
 %====================================
 a = crear_sistema('FL-AMF-AUTO',mejorGlobalPos,1);
+
+[n,m]=size(imgOrig);
+mejorGlobalVal
+psnr(imcrop(imgOrig,[2 2 n-1 m-1]),imcrop(recuperada,[2 2 n-1 m-1]))
+% psnr(imgOrig,recuperada)
+cantIter
 

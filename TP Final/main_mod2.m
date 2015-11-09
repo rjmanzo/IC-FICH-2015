@@ -23,7 +23,7 @@ original = imread(path_imagen);
 %Imagen ruidosa (S&P)
 % ruidosa = imnoise(original,'salt & pepper',0.05);
 % imwrite(ruidosa,'Datos/cameramanRuido.tif' )
-path_imagen = 'Datos/cameramanRuido256x256_5por.tif';
+path_imagen = 'Datos/cameramanRuido256x256_1por.tif';
 ruidosa = imread(path_imagen);
 
 
@@ -114,7 +114,7 @@ tic
 %====================================
 % LEVANTO EL SISTEMA DIFUSO
 %====================================
-a = readfis('pso/FL-AMF-AUTO');
+a = readfis('pso/FL-AMF-AUTO(39)');
 
 %========================================
 % EVALUO LOS PARES DE PUNTOS ALMACENADOS
@@ -151,15 +151,15 @@ toc
 
 %Resultados--------------------------------------
 
-figure('Name','ORIGINAL','NumberTitle','off'), imshow(original);
-figure('Name','RUIDO','NumberTitle','off'), imshow(ruidosa);
-figure('Name','MEDIANA','NumberTitle','off'), imshow(recuperada)
-figure('Name','FUZZY','NumberTitle','off'), imshow(procesar);
+figure('Name','ORIGINAL','NumberTitle','off'), imshow(imcrop(original,[2 2 n-1 m-1]));
+figure('Name','RUIDO','NumberTitle','off'), imshow(imcrop(ruidosa,[2 2 n-1 m-1]));
+figure('Name','MEDIANA','NumberTitle','off'), imshow(imcrop(recuperada,[2 2 n-1 m-1]));
+figure('Name','FUZZY','NumberTitle','off'), imshow(imcrop(procesar,[2 2 n-1 m-1]));
 %figure('Name','FUZZY BORDES','NumberTitle','off'), imshow(procesar_2);
 
 %A mayor PSNR mejor es el resultado
-psrn1 = psnr(original,recuperada)
-psrn2 = psnr(original,procesar)
+psrn1 = psnr(imcrop(original,[2 2 n-1 m-1]),imcrop(recuperada,[2 2 n-1 m-1]))
+psnr2=psnr(imcrop(original,[2 2 n-1 m-1]),imcrop(procesar,[2 2 n-1 m-1]))
 %psrn3= psnr(original,procesar_2)
 
 
