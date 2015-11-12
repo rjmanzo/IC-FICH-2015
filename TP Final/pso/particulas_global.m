@@ -1,18 +1,18 @@
 %Particulas: Enjambre del mejor global
-function [mejorGlobalVal,mejorGlobalPos,cantIter] = particulas_global(imgRuido,imgOrig,intervalo1,intervalo2,maxIter,TolCorte,c1,c2,cantPart)
+function [mejorGlobalVal,mejorGlobalPos,cantIter] = particulas_global(imgRuido,imgOrig,intervalo1,intervalo2,maxIter,TolCorte,c1,c2,cantPart,cantGausseanas,flagWrite,flagSalida)
 cantIter=1;
 
 %Inicializar: genero las particulas al azar en funcion del intervalo
-posParticulas=inicializar_particulas(intervalo1,intervalo2,cantPart); %Inicializar posiciones al azar
+posParticulas=inicializar_particulas(intervalo1,intervalo2,cantPart,cantGausseanas); %Inicializar posiciones al azar
 
 %Inicializar: obtengo las posiciones de las particulas y calculo el mejor global
 mejorLocPos=posParticulas;                      %mejor posicion es la mejor posicion que tomo el emjambre
 tic
-mejorLocVal=aplicar_funcion_v2(imgRuido,imgOrig,mejorLocPos); % mejorLocVal-->vector de psnr's
+mejorLocVal=aplicar_funcion_v2(imgRuido,imgOrig,mejorLocPos,flagWrite,flagSalida); % mejorLocVal-->vector de psnr's
 toc
 [mejorGlobalVal,mejorGlobalIndex]=max(mejorLocVal); %Maximo psnr global entre todas las particulas->pnsr->mas grande es mejor
 mejorGlobalPos=mejorLocPos(:,mejorGlobalIndex*4-3:mejorGlobalIndex*4);
-velocPartic=zeros(5,cantPart*4); %Velocidades iniciales
+velocPartic=zeros(cantGausseanas,cantPart*4); %Velocidades iniciales
 
 %Particulas: Inicio de algoritmo------------------------
 
@@ -34,7 +34,7 @@ while cantIter<=maxIter && TolCorte>mejorGlobalVal
     posParticulas=verificar_intervalo(posParticulas,intervalo1,intervalo2);
     
     %Calculo las nuevas posiciones y valores de las particulas
-    funLocales=aplicar_funcion_v2(imgRuido,imgOrig,posParticulas); %% vector igual que mejorLocVal
+    funLocales=aplicar_funcion_v2(imgRuido,imgOrig,posParticulas,flagWrite,flagSalida); %% vector igual que mejorLocVal
     %Comparo valor de la posicion actual (posParticulas+1) con la vieja (posParticulas)
     mayores=funLocales>mejorLocVal; %todas las particulas con mayor pnsr a los mejores actuales 
     %Reemplazo por los nuevos maximos tanto en los valores como en las posiciones

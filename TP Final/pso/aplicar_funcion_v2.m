@@ -1,4 +1,4 @@
-function[salida]=aplicar_funcion_v2(imgRuido,imgOrig, pos) %pos: particulas
+function[salida]=aplicar_funcion_v2(imgRuido,imgOrig, pos,flagWrite,flagSalida) %pos: particulas
 %UNTITLED Summary of this function goes here
 %   version multicore de aplicar funcion
 
@@ -83,7 +83,7 @@ s4 = [squeeze(RECORTES(3,1,:)) squeeze(RECORTES(1,3,:))];
 %====================================
 for ff=1:4:mm
 contador=contador+1;
-[a] = crear_sistema('FL-AMF-AUTO',pos(:,ff:ff+3),0)
+[a] = crear_sistema('FL-AMF-AUTO',pos(:,ff:ff+3),flagWrite,flagSalida)
 %========================================
 % EVALUO LOS PARES DE PUNTOS ALMACENADOS
 %========================================

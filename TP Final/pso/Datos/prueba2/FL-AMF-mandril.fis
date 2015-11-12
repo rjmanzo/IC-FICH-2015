@@ -15,17 +15,17 @@ DefuzzMethod='centroid'
 Name='P1'
 Range=[0 255]
 NumMFs=3
-MF1='Dark':'gauss2mf',[17 46.1936683172976 17 81.2270025624884]
-MF2='Avg':'gauss2mf',[2 0.993410592463264 17 257]
-MF3='Light':'gauss2mf',[17 169.635002403266 17 257]
+MF1='Dark':'gauss2mf',[17 257 2 257]
+MF2='Avg':'gauss2mf',[17 109.623875382043 17 171.656590194475]
+MF3='Light':'gauss2mf',[2 151.692727115179 17 257]
 
 [Input2]
 Name='P2'
 Range=[0 255]
 NumMFs=3
-MF1='Dark':'gauss2mf',[17 46.1936683172976 17 81.2270025624884]
-MF2='Avg':'gauss2mf',[2 0.993410592463264 17 257]
-MF3='Light':'gauss2mf',[17 169.635002403266 17 257]
+MF1='Dark':'gauss2mf',[17 257 2 257]
+MF2='Avg':'gauss2mf',[17 109.623875382043 17 171.656590194475]
+MF3='Light':'gauss2mf',[2 151.692727115179 17 257]
 
 [Output1]
 Name='Decision'
