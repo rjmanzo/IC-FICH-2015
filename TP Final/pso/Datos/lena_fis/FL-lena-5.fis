@@ -1,5 +1,5 @@
 [System]
-Name='FL-AMF-AUTO'
+Name='FL-lena-5'
 Type='mamdani'
 Version=2.0
 NumInputs=2
@@ -15,17 +15,17 @@ DefuzzMethod='centroid'
 Name='P1'
 Range=[0 255]
 NumMFs=3
-MF1='Dark':'gauss2mf',[17 63.851369829977 17 125.320187751716]
-MF2='Avg':'gauss2mf',[17 91.0271730967767 16.0871585201005 257]
-MF3='Light':'gauss2mf',[10.6903001074146 121.919923697989 2 257]
+MF1='Dark':'gauss2mf',[2 0 14.2565549185305 84.3464415301871]
+MF2='Avg':'gauss2mf',[17 92.4142515209437 2 257]
+MF3='Light':'gauss2mf',[6.54905464597888 149.470236515783 17 257]
 
 [Input2]
 Name='P2'
 Range=[0 255]
 NumMFs=3
-MF1='Dark':'gauss2mf',[17 63.851369829977 17 125.320187751716]
-MF2='Avg':'gauss2mf',[17 91.0271730967767 16.0871585201005 257]
-MF3='Light':'gauss2mf',[10.6903001074146 121.919923697989 2 257]
+MF1='Dark':'gauss2mf',[2 0 14.2565549185305 84.3464415301871]
+MF2='Avg':'gauss2mf',[17 92.4142515209437 2 257]
+MF3='Light':'gauss2mf',[6.54905464597888 149.470236515783 17 257]
 
 [Output1]
 Name='Decision'

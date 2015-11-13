@@ -1,12 +1,12 @@
-path_imagen = 'Datos/lena.tif';
-original = imresize(imread(path_imagen),0.5);
-imwrite(original,'Datos/lena150x150.tif' )
+path_imagen = 'Datos/prueba2/lena_150x150.tif';
+original = imread(path_imagen);
+%imwrite(original,'Datos/prueba2/lena_150x150.tif' )
 %imshow(original)
 %histogram(original)
 % 
 % original = rgb2gray(imresize(imread(path_imagen),[100 100]));
 % imwrite(original,'Datos/bone100x100.tif' )
 % 
- ruidosa = imnoise(original,'salt & pepper',0.01);
+ ruidosa = imnoise(original,'salt & pepper',0.2);
 % 
- imwrite(ruidosa,'Datos/lenaRuido150x150_1por.tif' )
+ imwrite(ruidosa,'Datos/prueba2/lena_150x150_20por.tif' )
