@@ -10,13 +10,13 @@ clear all,close all,clc
     %====================================
     % LECTURA DE LA IMAGEN ORIGINAL
     %====================================
-    path_imagen = 'Datos/2.blonde_distintos_%_ruido/blonde.tif';
+    path_imagen = 'Datos/2.mandril_distintos_%_ruido/mandril.tif';
     imgOrig = imread(path_imagen);
     
     
     % LECTURA DE LA IMAGEN CON RUIDO
     %====================================
-    path_imagen = 'Datos/2.blonde_distintos_%_ruido/blonde_20por.tif';
+    path_imagen = 'Datos/2.mandril_distintos_%_ruido/mandril_50por.tif';
     imgRuido = imread(path_imagen);
     
     
@@ -33,7 +33,7 @@ clear all,close all,clc
     %====================================
     c1=2; %Aceleracion: Comp. cognitiva
     c2=3.5; %Aceleracion: Comp. Global
-    maxIter=200; %Max. de iteraciones
+    maxIter=60; %Max. de iteraciones
     TolCorte=50; %toleracia psnr (db)
     cantPart=30;
     cantGausseanas=3;
@@ -84,7 +84,7 @@ clear all,close all,clc
     %guardo el sistema encontrado
     %====================================
     
-    a = crear_sistema('Datos/2.blonde_distintos_%_ruido/blonde_20por.fis',mejorGlobalPos,1,flagSalida);
+    a = crear_sistema('Datos/2.mandril_distintos_%_ruido/mandril_50por.fis',mejorGlobalPos,1,flagSalida);
     %a = crear_sistema(strcat('Datos/blonde_fis/FL-blonde-',num2str(i)),mejorGlobalPos,1,flagSalida);
     
 %end

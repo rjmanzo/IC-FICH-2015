@@ -1,5 +1,5 @@
 % test.m
-% archivo creado para correr test sobre los 10 sistemas difusos obtenidos en corridas distintas del 
+% Creado para correr test sobre los 10 sistemas difusos obtenidos en corridas distintas del 
 % main_PSO con imagenes de 1% de ruido, de manera de poder obtener con ellos valores promedios y desvios, los sistemas 
 %fueren creados  en las siguientes carpetas
 % 1.blonde_fis
