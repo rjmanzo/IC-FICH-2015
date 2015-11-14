@@ -1,12 +1,24 @@
-clear all, close all, clc 
+% test.m
+% archivo creado para correr test sobre los 10 sistemas difusos obtenidos en corridas distintas del 
+% main_PSO con imagenes de 1% de ruido, de manera de poder obtener con ellos valores promedios y desvios, los sistemas 
+%fueren creados  en las siguientes carpetas
+% 1.blonde_fis
+% 1.cameraman_fis
+% 1.mandril_fis
+% 1.lena_fis
+%
+%COLOCAR en "nombre_img" el NOMBRE DE LA IMAGEN DE LA QUE SE QUIERE CORRER EL
+%TEST
 
-nombre_img='lena';
-carpeta_img='Datos/1.lena_fis/'
+clear all, close all , clc 
+
+nombre_img='cameraman';
+carpeta_img=strcat('Datos/1.',nombre_img,'_fis/');
 path_imagen = strcat(carpeta_img,nombre_img,'.tif');
 original = imread(path_imagen);
 path_imagen = strcat(carpeta_img,nombre_img,'_1por.tif');
 ruidosa = imread(path_imagen);
-carpeta_sistema='Datos/1.lena_fis/';
+carpeta_sistema=carpeta_img;
 
 recuperada = medfilt2(ruidosa,[3 3]);
 procesar=ruidosa;
@@ -110,14 +122,28 @@ DP2 = evalfis([NS1 NS2],a);
 procesar(idxs) = uint8( evalfis([double(DP1) double(DP2)],a) );
 
 
-%A mayor PSNR mejor es el resultado
+%A mayor PSNR y SSIM
 %Desestimo los bordes en el calculo psnr por que el algoritmo no recorre
 %los bordes
-x=2;
-y=m-3;
-psnr1(ii)= psnr(imcrop(original,[x x y y]),imcrop(recuperada,[x x y y]));
-psnr2(ii)=psnr(imcrop(original,[x x y y]),imcrop(procesar,[x x y y]));
-ganancia(ii)=psnr2(ii)-psnr1(ii);
+xx=2;
+yy=m-1;
+psnrMediana(ii)= psnr(imcrop(original,[xx xx yy yy]),imcrop(recuperada,[xx xx yy yy]));
+psnrMetodoPropuesto(ii)=psnr(imcrop(original,[xx xx yy yy]),imcrop(procesar,[xx xx yy yy]));
+gananciaMetodoPropuesto(ii)=psnrMetodoPropuesto(ii)-psnrMediana(ii);
+ssimMetodoPropuesto(ii)=ssim(imcrop(original,[xx xx yy yy]),imcrop(procesar,[xx xx yy yy]));
 end
-mean(psnr2)
-std(psnr2)
+%Datos estadisticos
+psnrMediana
+psnrMetodoPropuesto
+psnrPromedioMetodoPropuesto= mean(psnrMetodoPropuesto)
+psnrDesvioMEtodoPropuesto=std(psnrMetodoPropuesto)
+gananciaMetodoPropuesto
+gananciaPromedioMetodoPropuesto= mean(gananciaMetodoPropuesto)
+ssimMetodoPropuesto
+ssimPromedioMetodoPropuesto= mean(ssimMetodoPropuesto)
+ssimDesvioMEtodoPropuesto=std(ssimMetodoPropuesto)
+
+
+
+%save(strcat(carpeta_img,'info'),'psnrMetodoPropuesto','psnrPromedioMetodoPropuesto','-ascii');
+%save('info', psnrMetodoPropuesto,'-ascii');

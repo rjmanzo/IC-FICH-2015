@@ -1,0 +1,45 @@
+filtros obtenidos de mandril 1% de ruido
+
+psnrMediana =
+
+   20.7998   20.7998   20.7998   20.7998   20.7998   20.7998   20.7998   20.7998   20.7998   20.7998
+
+
+psnrMetodoPropuesto =
+
+   40.0084   38.2310   38.2255   38.2301   39.9988   38.2297   38.2332   40.0706   40.0190   40.0560
+
+
+psnrPromedioMetodoPropuesto =
+
+   39.1302
+
+
+psnrDesvioMEtodoPropuesto =
+
+    0.9493
+
+
+gananciaMetodoPropuesto =
+
+   19.2086   17.4313   17.4257   17.4303   19.1991   17.4299   17.4335   19.2708   19.2193   19.2563
+
+
+gananciaPromedioMetodoPropuesto =
+
+   18.3305
+
+
+ssimMetodoPropuesto =
+
+    0.9938    0.9915    0.9915    0.9915    0.9938    0.9915    0.9915    0.9933    0.9935    0.9935
+
+
+ssimPromedioMetodoPropuesto =
+
+    0.9925
+
+
+ssimDesvioMEtodoPropuesto =
+
+    0.0011

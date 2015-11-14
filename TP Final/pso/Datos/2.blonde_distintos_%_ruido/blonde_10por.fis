@@ -1,5 +1,5 @@
 [System]
-Name='FL-AMF-AUTO'
+Name='blonde_10por'
 Type='mamdani'
 Version=2.0
 NumInputs=2
@@ -15,17 +15,17 @@ DefuzzMethod='centroid'
 Name='P1'
 Range=[0 255]
 NumMFs=3
-MF1='Dark':'gauss2mf',[17 0 2.0665551759486 100.193334629311]
-MF2='Avg':'gauss2mf',[17 86.1260226902837 2 220.065215142756]
-MF3='Light':'gauss2mf',[2 153.951899432608 16.8481958914566 243.213159599704]
+MF1='Dark':'gauss2mf',[17 0 17 81.705020190694]
+MF2='Avg':'gauss2mf',[2 71.9656518022411 2 257]
+MF3='Light':'gauss2mf',[2 146.502628655995 17 235.37970743086]
 
 [Input2]
 Name='P2'
 Range=[0 255]
 NumMFs=3
-MF1='Dark':'gauss2mf',[17 0 2.0665551759486 100.193334629311]
-MF2='Avg':'gauss2mf',[17 86.1260226902837 2 220.065215142756]
-MF3='Light':'gauss2mf',[2 153.951899432608 16.8481958914566 243.213159599704]
+MF1='Dark':'gauss2mf',[17 0 17 81.705020190694]
+MF2='Avg':'gauss2mf',[2 71.9656518022411 2 257]
+MF3='Light':'gauss2mf',[2 146.502628655995 17 235.37970743086]
 
 [Output1]
 Name='Decision'

@@ -13,7 +13,7 @@ clear all, close all, clc
 % LECTURA DE LA IMAGEN SIN RUIDO
 %====================================
 %path_imagen = 'Datos/cameraman.tif';
-path_imagen = 'pso/Datos/prueba2/cameraman.tif';
+path_imagen = 'pso/Datos/1.lena_fis/lena.tif';
 original = imread(path_imagen);
 
 
@@ -24,7 +24,7 @@ original = imread(path_imagen);
 % ruidosa = imnoise(original,'salt & pepper',0.05);
 % imwrite(ruidosa,'Datos/cameramanRuido.tif' )
 %path_imagen = 'Datos/cameramanRuido256x256_1por.tif';
-path_imagen = 'pso/Datos/prueba2/cameraman_1por.tif';
+path_imagen = 'pso/Datos/1.lena_fis/lena_1por.tif';
 ruidosa = imread(path_imagen);
 
 
@@ -115,7 +115,7 @@ tic
 %====================================
 % LEVANTO EL SISTEMA DIFUSO
 %====================================
-a = readfis('FL-AMF-AUTO.fis');
+a = readfis('FL-lena-1.fis');
 
 %========================================
 % EVALUO LOS PARES DE PUNTOS ALMACENADOS

@@ -1,6 +1,6 @@
 clear all,close all,clc
-i=0;
-for i=1:10    
+%i=0;
+%for i=1:10    
     %====================================
     %Inicializo el parpool
     %inicializar_parpool();
@@ -10,14 +10,13 @@ for i=1:10
     %====================================
     % LECTURA DE LA IMAGEN ORIGINAL
     %====================================
-    path_imagen = 'Datos/prueba2/blonde_128x128.tif';
+    path_imagen = 'Datos/2.blonde_distintos_%_ruido/blonde.tif';
     imgOrig = imread(path_imagen);
-    
     
     
     % LECTURA DE LA IMAGEN CON RUIDO
     %====================================
-    path_imagen = 'Datos/prueba2/blonde_128x128_1por.tif';
+    path_imagen = 'Datos/2.blonde_distintos_%_ruido/blonde_20por.tif';
     imgRuido = imread(path_imagen);
     
     
@@ -67,7 +66,6 @@ for i=1:10
     %====================================
     % LLAMO A PSO
     %====================================
-    i
     [mejorGlobalVal,mejorGlobalPos,cantIter] =particulas_global(imgRuido,imgOrig,intervalo1,intervalo2,maxIter,TolCorte,c1,c2,cantPart,cantGausseanas,flagWrite,flagSalida)
     
     
@@ -81,17 +79,17 @@ for i=1:10
     %====================================
     %Termino el recorrido. Cierro el parpool
     %====================================
-    %finalizar_parpool();
-    
+    %finalizar_parpool()
     %====================================
     %guardo el sistema encontrado
     %====================================
     
-    a = crear_sistema(strcat('Datos/blonde_fis/FL-blonde-',num2str(i)),mejorGlobalPos,1,flagSalida);
+    a = crear_sistema('Datos/2.blonde_distintos_%_ruido/blonde_20por.fis',mejorGlobalPos,1,flagSalida);
+    %a = crear_sistema(strcat('Datos/blonde_fis/FL-blonde-',num2str(i)),mejorGlobalPos,1,flagSalida);
     
-end
+%end
 % [n,m]=size(imgOrig);
 % mejorGlobalVal
-% psnr(imcrop(imgOrig,[2 2 n-1 m-1]),imcrop(recuperada,[2 2 n-1 m-1]))
+%psnr(imcrop(imgOrig,[2 2 n-1 m-1]),imcrop(recuperada,[2 2 n-1 m-1]))
 % cantIter-1
 

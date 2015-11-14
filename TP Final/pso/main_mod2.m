@@ -1,24 +1,8 @@
-clear all, close all, clc
-
-% path_imagen = 'Datos/prueba1/fig1_mc.tif';
-% %path_imagen = 'Datos/lena.jpg';
-% original = imread(path_imagen);
-% reescalada = imresize(original,0.2,'Method','nearest');
-% imwrite(reescalada,'Datos/prueba1/fig1_0.2_hc.tif' )
-% %Imagen ruidosa (S&P)
-% ruidosa = imnoise(reescalada,'salt & pepper',0.01);
-% % ruidosa = imnoise(original,'salt & pepper',0.01);
-% % imwrite(ruidosa,'Datos/prueba1/fig1_mc_1por.tif' )
-% imwrite(ruidosa,'Datos/prueba1/fig1_0.2_hc_1por.tif' )
-% % path_imagen = 'Datos/cameramanRuido.tif';
-% % ruidosa = imread(path_imagen);
-
- 
+clear all, close all, clc 
 %====================================
 % LECTURA DE LA IMAGEN SIN RUIDO
 %====================================
-%path_imagen = 'Datos/cameraman.tif';
-path_imagen = 'Datos/prueba1/fig1_hc.tif';
+path_imagen = 'Datos/1.cameraman_fis/cameraman.tif';
 original = imread(path_imagen);
 
 
@@ -29,7 +13,7 @@ original = imread(path_imagen);
 % ruidosa = imnoise(original,'salt & pepper',0.05);
 % imwrite(ruidosa,'Datos/cameramanRuido.tif' )
 %path_imagen = 'Datos/cameramanRuido256x256_1por.tif';
-path_imagen = 'Datos/prueba1/fig1_hc_1por.tif';
+path_imagen = 'Datos/1.cameraman_fis/cameraman_1por.tif';
 ruidosa = imread(path_imagen);
 
 
@@ -120,7 +104,7 @@ tic
 %====================================
 % LEVANTO EL SISTEMA DIFUSO
 %====================================
-a = readfis('FL-AMF-AUTO.fis');
+a = readfis('Datos/1.cameraman_fis/FL-cameraman-2.fis');
 
 %========================================
 % EVALUO LOS PARES DE PUNTOS ALMACENADOS
@@ -156,14 +140,24 @@ toc
 
 
 %Resultados--------------------------------------
-
-figure('Name','ORIGINAL','NumberTitle','off'), imshow(imcrop(original,[2 2 n-1 m-1]));
-figure('Name','RUIDO','NumberTitle','off'), imshow(imcrop(ruidosa,[2 2 n-1 m-1]));
-figure('Name','MEDIANA','NumberTitle','off'), imshow(imcrop(recuperada,[2 2 n-1 m-1]));
-figure('Name','FUZZY','NumberTitle','off'), imshow(imcrop(procesar,[2 2 n-1 m-1]));
+xx= 2;
+yy=n-1;
+figure('Name','ORIGINAL','NumberTitle','off'), imshow(imcrop(original,[xx xx yy yy]));
+figure('Name','RUIDO','NumberTitle','off'), imshow(imcrop(ruidosa,[xx xx yy yy]));
+figure('Name','MEDIANA','NumberTitle','off'), imshow(imcrop(recuperada,[xx xx yy yy]));
+figure('Name','FUZZY','NumberTitle','off'), imshow(imcrop(procesar,[xx xx yy yy]));
 %figure('Name','FUZZY BORDES','NumberTitle','off'), imshow(procesar_2);
 
 %A mayor PSNR mejor es el resultado
-psrn1 = psnr(imcrop(original,[2 2 n-1 m-1]),imcrop(recuperada,[2 2 n-1 m-1]))
-psnr2=psnr(imcrop(original,[2 2 n-1 m-1]),imcrop(procesar,[2 2 n-1 m-1]))
-%psrn3= psnr(original,procesar_2)
+%Desestimo los bordes en el calculo psnr por que el algoritmo no recorre
+%los bordes
+psnrMediana= psnr(imcrop(original,[xx xx yy yy]),imcrop(recuperada,[xx xx yy yy]));
+psnrMetodoPropuesto=psnr(imcrop(original,[xx xx yy yy]),imcrop(procesar,[xx xx yy yy]));
+gananciaMetodoPropuesto=psnrMetodoPropuesto-psnrMediana;
+ssimMetodoPropuesto=ssim(imcrop(original,[xx xx yy yy]),imcrop(procesar,[xx xx yy yy]));
+
+psnrMetodoPropuesto
+psnrPromedioMetodoPropuesto= mean(psnrMetodoPropuesto)
+gananciaMetodoPropuesto
+ssimMetodoPropuesto
+ssimPromedioMetodoPropuesto= mean(ssimMetodoPropuesto)
