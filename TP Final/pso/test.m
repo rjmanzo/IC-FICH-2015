@@ -6,14 +6,17 @@
 % 1.cameraman_fis
 % 1.mandril_fis
 % 1.lena_fis
+% 3.fig1_lc_fis
+% 3.fig1_mc_fis
+% 3.fig1_hc_fis
 %
 %COLOCAR en "nombre_img" el NOMBRE DE LA IMAGEN DE LA QUE SE QUIERE CORRER EL
 %TEST
 
 clear all, close all , clc 
 
-nombre_img='cameraman';
-carpeta_img=strcat('Datos/1.',nombre_img,'_fis/');
+nombre_img='mandril';
+carpeta_img=strcat('Datos/2.',nombre_img,'_fis/');
 path_imagen = strcat(carpeta_img,nombre_img,'.tif');
 original = imread(path_imagen);
 path_imagen = strcat(carpeta_img,nombre_img,'_1por.tif');
@@ -93,6 +96,9 @@ for ii=1:cantSistemas
 %====================================
 
 path_sistema=strcat(carpeta_sistema,'FL-',nombre_img,'-',num2str(ii)),'.fis';
+
+%Levanto el sistema difuso de otra imagen
+% path_sistema=strcat('Datos/3.fig1_hc_fis/','FL-','fig1_hc','-',num2str(ii)),'.fis';
 a = readfis(path_sistema);
 
 %========================================
@@ -127,21 +133,27 @@ procesar(idxs) = uint8( evalfis([double(DP1) double(DP2)],a) );
 %los bordes
 xx=2;
 yy=m-1;
+psnrRuidosa(ii)= psnr(imcrop(original,[xx xx yy yy]),imcrop(ruidosa,[xx xx yy yy]));
 psnrMediana(ii)= psnr(imcrop(original,[xx xx yy yy]),imcrop(recuperada,[xx xx yy yy]));
 psnrMetodoPropuesto(ii)=psnr(imcrop(original,[xx xx yy yy]),imcrop(procesar,[xx xx yy yy]));
-gananciaMetodoPropuesto(ii)=psnrMetodoPropuesto(ii)-psnrMediana(ii);
+gananciaMetodoPropuesto(ii)=psnrMetodoPropuesto(ii)-psnrRuidosa(ii);
+ssimMediana(ii)=ssim(imcrop(original,[xx xx yy yy]),imcrop(recuperada,[xx xx yy yy]));
 ssimMetodoPropuesto(ii)=ssim(imcrop(original,[xx xx yy yy]),imcrop(procesar,[xx xx yy yy]));
 end
 %Datos estadisticos
-psnrMediana
-psnrMetodoPropuesto
+% psnrMediana
+% psnrMetodoPropuesto
+psnrPromedioRuidosa = mean(psnrRuidosa)
+psnrPromedioMediana =mean(psnrMediana)
 psnrPromedioMetodoPropuesto= mean(psnrMetodoPropuesto)
-psnrDesvioMEtodoPropuesto=std(psnrMetodoPropuesto)
-gananciaMetodoPropuesto
-gananciaPromedioMetodoPropuesto= mean(gananciaMetodoPropuesto)
-ssimMetodoPropuesto
-ssimPromedioMetodoPropuesto= mean(ssimMetodoPropuesto)
-ssimDesvioMEtodoPropuesto=std(ssimMetodoPropuesto)
+% psnrDesvioMEtodoPropuesto=std(psnrMetodoPropuesto)
+% gananciaMetodoPropuesto
+% gananciaPromedioMetodoPropuesto= mean(gananciaMetodoPropuesto)
+% ssimMediana
+% ssimMetodoPropuesto
+% ssimPromedioMediana= mean(ssimMediana)
+% ssimPromedioMetodoPropuesto= mean(ssimMetodoPropuesto)
+% ssimDesvioMEtodoPropuesto=std(ssimMetodoPropuesto)
 
 
 

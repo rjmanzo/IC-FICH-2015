@@ -2,7 +2,7 @@ clear all, close all, clc
 %====================================
 % LECTURA DE LA IMAGEN SIN RUIDO
 %====================================
-path_imagen = 'Datos/1.cameraman_fis/cameraman.tif';
+path_imagen = 'Datos/2.mandril_distintos_%_ruido/test/mandril.tif';
 original = imread(path_imagen);
 
 
@@ -10,13 +10,11 @@ original = imread(path_imagen);
 % LECTURA DE LA IMAGEN CON RUIDO
 %====================================
 %Imagen ruidosa (S&P)
-% ruidosa = imnoise(original,'salt & pepper',0.05);
-% imwrite(ruidosa,'Datos/cameramanRuido.tif' )
-%path_imagen = 'Datos/cameramanRuido256x256_1por.tif';
-path_imagen = 'Datos/1.cameraman_fis/cameraman_1por.tif';
+% ruidosa = imnoise(original,'salt & pepper',0.7);
+% imwrite(ruidosa,'Datos/2.mandril_distintos_%_ruido/test/mandril_70por.tif' )
+% path_imagen = 'Datos/cameramanRuido256x256_1por.tif';
+path_imagen = 'Datos/2.mandril_distintos_%_ruido/test/mandril_70por.tif';
 ruidosa = imread(path_imagen);
-
-
 
 %====================================
 % APLICO FILTRO DE MEDIANA
@@ -151,13 +149,16 @@ figure('Name','FUZZY','NumberTitle','off'), imshow(imcrop(procesar,[xx xx yy yy]
 %A mayor PSNR mejor es el resultado
 %Desestimo los bordes en el calculo psnr por que el algoritmo no recorre
 %los bordes
+psnrRuidosa(ii)= psnr(imcrop(original,[xx xx yy yy]),imcrop(ruidosa,[xx xx yy yy]));
 psnrMediana= psnr(imcrop(original,[xx xx yy yy]),imcrop(recuperada,[xx xx yy yy]));
 psnrMetodoPropuesto=psnr(imcrop(original,[xx xx yy yy]),imcrop(procesar,[xx xx yy yy]));
 gananciaMetodoPropuesto=psnrMetodoPropuesto-psnrMediana;
 ssimMetodoPropuesto=ssim(imcrop(original,[xx xx yy yy]),imcrop(procesar,[xx xx yy yy]));
 
-psnrMetodoPropuesto
+% psnrMetodoPropuesto
+psnrPromedioRuidosa= mean(psnrRuidosa)
+psnrPromedioMediana= mean(psnrMediana)
 psnrPromedioMetodoPropuesto= mean(psnrMetodoPropuesto)
-gananciaMetodoPropuesto
-ssimMetodoPropuesto
-ssimPromedioMetodoPropuesto= mean(ssimMetodoPropuesto)
+% gananciaMetodoPropuesto
+% ssimMetodoPropuesto7
+% ssimPromedioMetodoPropuesto= mean(ssimMetodoPropuesto)
