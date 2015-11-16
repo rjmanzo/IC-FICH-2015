@@ -1,4 +1,4 @@
-path_imagen = 'Datos/2.mandril_distintos_%_ruido/mandril.tif';
+path_imagen = 'Datos/2.cameraman_distintos_%_ruido/cameraman.tif';
 original = imread(path_imagen);
 %imwrite(original,'Datos/prueba2/lena_150x150.tif' )
 %imshow(original)
@@ -8,6 +8,6 @@ original = imread(path_imagen);
 % original = rgb2gray(imresize(imread(path_imagen),[100 100]));
 % imwrite(original,'Datos/bone100x100.tif' )
 % 
- ruidosa = imnoise(original,'salt & pepper',0.7);
+ ruidosa = imnoise(original,'salt & pepper',0.5);
 % 
-imwrite(ruidosa,'Datos/2.mandril_distintos_%_ruido/mandril_70por.tif' )
+imwrite(ruidosa,'Datos/2.cameraman_distintos_%_ruido/cameraman_50por.tif' )
