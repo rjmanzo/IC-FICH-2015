@@ -1,12 +1,13 @@
 clear all,close all,clc
-%i=0;
-%for i=1:10    
+
+% i=0;
+% for i=1:10    
     %====================================
     %Inicializo el parpool
-    %inicializar_parpool();
+    
     %====================================
     
-    
+    inicializar_parpool();
     %====================================
     % LECTURA DE LA IMAGEN ORIGINAL
     %====================================
@@ -16,7 +17,11 @@ clear all,close all,clc
     
     % LECTURA DE LA IMAGEN CON RUIDO
     %====================================
+<<<<<<< HEAD
     path_imagen = 'Datos/2.cameraman_distintos_%_ruido/cameraman_40por.tif';
+=======
+    path_imagen = 'Datos/2.mandril_distintos_%_ruido/mandril_70por.tif';
+>>>>>>> c1f55c4a56eaa6e1cbd884ab326bcce88c231efd
     imgRuido = imread(path_imagen);
     
     
@@ -79,15 +84,19 @@ clear all,close all,clc
     %====================================
     %Termino el recorrido. Cierro el parpool
     %====================================
-    %finalizar_parpool()
+    finalizar_parpool();
     %====================================
     %guardo el sistema encontrado
     %====================================
     
+<<<<<<< HEAD
     a = crear_sistema('Datos/2.cameraman_distintos_%_ruido/cameraman_40por.fis',mejorGlobalPos,1,flagSalida);
+=======
+    a = crear_sistema('Datos/2.mandril_distintos_%_ruido/FL-mandril_70por.fis',mejorGlobalPos,1,flagSalida);
+>>>>>>> c1f55c4a56eaa6e1cbd884ab326bcce88c231efd
     %a = crear_sistema(strcat('Datos/blonde_fis/FL-blonde-',num2str(i)),mejorGlobalPos,1,flagSalida);
     
-%end
+% end
 % [n,m]=size(imgOrig);
 % mejorGlobalVal
 %psnr(imcrop(imgOrig,[2 2 n-1 m-1]),imcrop(recuperada,[2 2 n-1 m-1]))

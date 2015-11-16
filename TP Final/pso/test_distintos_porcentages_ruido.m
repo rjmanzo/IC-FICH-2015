@@ -13,7 +13,7 @@ nombre_img='mandril';
 carpeta_img=strcat('Datos/2.',nombre_img,'_distintos_%_ruido/');
 path_imagen = strcat(carpeta_img,nombre_img,'.tif');
 original = imread(path_imagen);
-index=[1 2 5 10 20 30 40 50]; % indice para recorrorre los nombres de los archivos de imagenes y sistemas 1%,2%,5%,10%,20% de ruido
+index=[1 2 5 10 20 30 40 50 60 70]; % indice para recorrorre los nombres de los archivos de imagenes y sistemas 1%,2%,5%,10%,20% de ruido
 cantSistemas=length(index);
 for iii=1:cantSistemas
     
@@ -125,6 +125,7 @@ for iii=1:cantSistemas
     %los bordes
     xx=2;
     yy=m-1;
+    psnrRuido(iii)= psnr(imcrop(original,[xx xx yy yy]),imcrop(ruidosa,[xx xx yy yy]));
     psnrMediana(iii)= psnr(imcrop(original,[xx xx yy yy]),imcrop(recuperada,[xx xx yy yy]));
     psnrMetodoPropuesto(iii)=psnr(imcrop(original,[xx xx yy yy]),imcrop(procesar,[xx xx yy yy]));
     gananciaMetodoPropuesto(iii)=psnrMetodoPropuesto(iii)-psnrMediana(iii);
@@ -132,6 +133,7 @@ for iii=1:cantSistemas
     ssimMediana(iii)=ssim(imcrop(original,[xx xx yy yy]),imcrop(recuperada,[xx xx yy yy]));
 end
 %Datos estadisticos
+psnrRuido
 psnrMediana
 psnrMetodoPropuesto
 gananciaMetodoPropuesto
@@ -140,8 +142,8 @@ ssimMediana
 %i=1:1:5;
 %i=[1 2 5 10 20]
 figure('Name','Filtrado Mediana VS Filtro Propuesto','NumberTitle','off')
-plot (index,psnrMediana,'r--*',index,psnrMetodoPropuesto,'g-.o')
-legend('Filtro Mediana','Filtro Propuesto')
+plot (index,psnrMediana,'r--*',index,psnrMetodoPropuesto,'g-.o',index,psnrRuido,'b-.x')
+legend('Filtro Mediana','Filtro Propuesto','Ruido')
 xlim([min(index) max(index)])
 xlabel('% de Ruido Sal y Pimienta')
 title('Filtrado Mediana VS Metodo Propuesto')
