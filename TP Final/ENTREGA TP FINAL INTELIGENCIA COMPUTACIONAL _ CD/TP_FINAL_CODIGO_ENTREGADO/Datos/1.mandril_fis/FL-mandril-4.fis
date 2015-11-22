@@ -1,0 +1,49 @@
+[System]
+Name='FL-mandril-4'
+Type='mamdani'
+Version=2.0
+NumInputs=2
+NumOutputs=1
+NumRules=9
+AndMethod='min'
+OrMethod='max'
+ImpMethod='min'
+AggMethod='max'
+DefuzzMethod='centroid'
+
+[Input1]
+Name='P1'
+Range=[0 255]
+NumMFs=3
+MF1='Dark':'gauss2mf',[9.32868957492804 257 4.61194218807486 257]
+MF2='Avg':'gauss2mf',[2 0 17 257]
+MF3='Light':'gauss2mf',[9.37379534211538 160.074556116016 2 256.622930726644]
+
+[Input2]
+Name='P2'
+Range=[0 255]
+NumMFs=3
+MF1='Dark':'gauss2mf',[9.32868957492804 257 4.61194218807486 257]
+MF2='Avg':'gauss2mf',[2 0 17 257]
+MF3='Light':'gauss2mf',[9.37379534211538 160.074556116016 2 256.622930726644]
+
+[Output1]
+Name='Decision'
+Range=[0 255]
+NumMFs=5
+MF1='Dark':'gauss2mf',[49 0 18 49]
+MF2='AmL':'gauss2mf',[18 151 18 199]
+MF3='Avg':'gauss2mf',[18 101 18 149]
+MF4='Light':'gauss2mf',[18 201 18 255]
+MF5='DmA':'gauss2mf',[18 51 18 99]
+
+[Rules]
+1 1, 1 (1) : 1
+1 2, 5 (1) : 1
+1 3, 3 (1) : 1
+2 1, 5 (1) : 1
+2 2, 3 (1) : 1
+2 3, 2 (1) : 1
+3 1, 3 (1) : 1
+3 2, 2 (1) : 1
+3 3, 4 (1) : 1

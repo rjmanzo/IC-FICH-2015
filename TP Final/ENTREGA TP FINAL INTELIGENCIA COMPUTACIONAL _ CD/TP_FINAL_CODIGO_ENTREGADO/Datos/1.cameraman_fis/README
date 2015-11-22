@@ -1,0 +1,41 @@
+filtros obtenidos de cameraman 1% de ruido
+
+psnrMetodoPropuesto =
+
+   40.0887   39.9328   40.2668   38.1603   37.0842   40.0141   39.9912   39.9163   39.1243   40.2289
+
+
+psnrPromedioMetodoPropuesto =
+
+   39.4808
+
+
+psnrDesvioMEtodoPropuesto =
+
+    1.0594
+
+
+gananciaMetodoPropuesto =
+
+   13.3444   13.1885   13.5226   11.4161   10.3399   13.2698   13.2469   13.1720   12.3800   13.4846
+
+
+gananciaPromedioMetodoPropuesto =
+
+   12.7365
+
+
+ssimMetodoPropuesto =
+
+    0.9867    0.9850    0.9868    0.9788    0.9531    0.9862    0.9856    0.9849    0.9851    0.9860
+
+
+ssimPromedioMetodoPropuesto =
+
+    0.9818
+
+
+ssimDesvioMEtodoPropuesto =
+
+    0.0103
+

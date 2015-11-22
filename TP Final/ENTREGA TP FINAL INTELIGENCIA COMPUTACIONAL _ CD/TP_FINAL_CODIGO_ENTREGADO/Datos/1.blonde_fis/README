@@ -1,0 +1,40 @@
+filtros obtenidos de blonde 1% de ruido
+
+psnrMetodoPropuesto =
+
+   35.4104   35.6096   34.6475   35.3617   35.2508   35.4538   35.5643   35.0577   35.0849   35.7536
+
+
+psnrPromedioMetodoPropuesto =
+
+   35.3194
+
+
+psnrDesvioMEtodoPropuesto =
+
+    0.3233
+
+
+gananciaMetodoPropuesto =
+
+   10.6320   10.8313    9.8692   10.5834   10.4724   10.6754   10.7859   10.2793   10.3065   10.9753
+
+
+gananciaPromedioMetodoPropuesto =
+
+   10.5411
+
+
+ssimMetodoPropuesto =
+
+    0.9855    0.9876    0.9729    0.9850    0.9801    0.9856    0.9810    0.9793    0.9804    0.9883
+
+
+ssimPromedioMetodoPropuesto =
+
+    0.9826
+
+
+ssimDesvioMEtodoPropuesto =
+
+    0.0047

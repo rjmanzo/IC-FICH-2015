@@ -1,0 +1,33 @@
+Título: Restauración de Imágenes en escala de grises con degradación de sal y pimienta utilizando lógica borrosa y optimización por enjambre de partículas
+
+Title: grayscale Image Restoration with salt and pepper noise degradation using fuzzy logic and Particle Swarm optimization 
+
+Datos de los autores:
+About the Authors:
+
+- Cristian Vizzarri
+- Facultad de Ingenierias y Ciencias Hidricas - Universidad Nacional del Litoral - Argentina
+- Dirección: Saavedra 2048 - 1b, TEL: 0342.154781171, email: cristiaan3003@gmail.com
+
+- Renato Joseé Manzo
+- Facultad de Ingenierias y Ciencias Hidricas - Universidad Nacional del Litoral - Argentina
+- Dirección: Pasaje Paraguay 5233 , TEL: 0342.154450088 , email: manzorenato@gmail.com
+
+- Resumen:
+El filtrado de ruido es una tarea importante en el pre-procesamiento de imágenes digital. Tal es así su importancia que sin ello la extracción de características se transformaría en  inviable. Este artículo presenta un nuevo método de eliminación de ruido de sal y pimienta sobre imágenes en escala de grises, utilizando lógica borrosa y optimización mediante la técnica de enjambre de partículas. 
+El método propuesto es capaz de eliminar la componente de ruido optimizando los parámetros que definen las funciones de membresía del conjunto de entrada del sistema borroso. El rendimiento del método es probado en varias imágenes dañadas con distintas densidades de ruido y comparado con el filtro de mediana clásico. Los resultados experimentales muestran que el método propuesto presenta un rendimiento superior al filtrado de mediana en un rango de ruido que va desde el 1% al 60%, mientras que al mismo tiempo que se preserva eficazmente los detalles de la imagen.
+
+ 
+- Palabras clave:
+
+ Sal y pimienta, Procesamiento, Conjunto borroso, Optimización, PSO. 
+
+
+- Abstract:
+Noise filtering is important in the pre-digital image processing task. So it is so important that without it their feature extraction would become unviable. This paper presents a new method of removing salt and pepper noise on grayscale images using fuzzy logic and optimization by particle swarm technique.
+The proposed method is able to eliminate the noise component by optimizing the parameters that define the membership functions of the fuzzy set of input system. The performance of the method is tested on several damaged images with different densities of noise and compared to classical filter medium. Experimental results show that the proposed method has an efficiency greater than median filtering noise in a range ranging from 1% to 60%, while simultaneously it effectively preserves image detail.
+
+ 
+- Keywords:
+
+ Salt and pepper, processing, fuzzy set, Optimization, PSO.
