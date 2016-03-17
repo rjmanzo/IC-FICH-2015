@@ -41,22 +41,19 @@ clear all,close all,clc
     
     %inicializar_parpool();
    
-    
-    for i =1:26
+    for i=1:6 
     %====================================
     % LECTURA DE LA IMAGEN ORIGINAL
     %====================================
-    path_imagen = strcat('Datos/4.paper/128/img_',num2str(i),'_128x128.tif');
-    listImgOrig{i} = imread(path_imagen);
+    path_imagen = strcat('Datos/4.paper_jaiio/128/img_',num2str(i),'_128x128.tif');
+    listImgOrig{i}= imread(path_imagen);
     
     
     % LECTURA DE LA IMAGEN CON RUIDO
-    %====================================
-
-    path_imagen =strcat('Datos/4.paper/128/gray_noise/img_',num2str(i),'_128x128_5por.tif');
+    %====================================    
+    path_imagen =strcat('Datos/4.paper_jaiio/128/gray_noise/img_',num2str(i),'_128x128_5por.tif');
     listImgRuido{i} = imread(path_imagen);
     end
-    indice=randperm(26);
     
     %====================================
     % APLICO FILTRO DE MEDIANA
@@ -71,7 +68,7 @@ clear all,close all,clc
     %====================================
     c1=2; %Aceleracion: Comp. cognitiva
     c2=3.5; %Aceleracion: Comp. Global
-    maxIter=2000; %Max. de iteraciones
+    maxIter=1; %Max. de iteraciones
     TolCorte=50; %toleracia psnr (db)
     cantPart=30;
     cantGausseanas=3;
@@ -90,7 +87,7 @@ clear all,close all,clc
     %====================================
     % LLAMO A PSO
     %====================================
-    [mejorGlobalVal,mejorGlobalPos,cantIter] =particulas_global(indice,listImgRuido,listImgOrig,intervalo1,intervalo2,maxIter,TolCorte,c1,c2,cantPart,cantGausseanas,flagWrite,flagSalida)
+    [mejorGlobalVal,mejorGlobalPos,cantIter] =particulas_global(listImgRuido,listImgOrig,intervalo1,intervalo2,maxIter,TolCorte,c1,c2,cantPart,cantGausseanas,flagWrite,flagSalida)
     
    
     %====================================
@@ -101,7 +98,7 @@ clear all,close all,clc
     %guardo el sistema encontrado
     %====================================
 
-    a = crear_sistema('Datos/4.paper/sistema/sistema.fis',mejorGlobalPos,1,flagSalida);
+    a = crear_sistema('Datos/4.paper_jaiio/sistema/sistema.fis',mejorGlobalPos,1,flagSalida);
 
     %a = crear_sistema(strcat('Datos/blonde_fis/FL-blonde-',num2str(i)),mejorGlobalPos,1,flagSalida);
 
