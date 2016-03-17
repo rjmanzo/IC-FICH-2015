@@ -15,13 +15,19 @@
 
 clear all, close all , clc 
 
-nombre_img='fig1_lc';
-carpeta_img=strcat('Datos/3.',nombre_img,'_fis/');
-path_imagen = strcat(carpeta_img,nombre_img,'.tif');
-original = imread(path_imagen);
-path_imagen = strcat(carpeta_img,nombre_img,'_1por.tif');
-ruidosa = imread(path_imagen);
-carpeta_sistema=carpeta_img;
+% nombre_img='fig1_lc';
+% carpeta_img=strcat('Datos/3.',nombre_img,'_fis/');
+% path_imagen = strcat(carpeta_img,nombre_img,'.tif');
+% original = imread(path_imagen);
+% path_imagen = strcat(carpeta_img,nombre_img,'_1por.tif');
+% ruidosa = imread(path_imagen);
+% carpeta_sistema=carpeta_img;
+
+
+
+original = imread('Datos/4.paper/Original/gray/img_16.tif');
+ruidosa = imread('Datos/4.paper/Original/gray_noise/img_16_5por.tif');
+path_sistema='Datos/4.paper/sistema/sistema.fis';
 
 recuperada = medfilt2(ruidosa,[3 3]);
 procesar=ruidosa;
@@ -95,7 +101,7 @@ for ii=1:cantSistemas
 % LEVANTO EL SISTEMA DIFUSO
 %====================================
 
-path_sistema=strcat(carpeta_sistema,'FL-',nombre_img,'-',num2str(ii)),'.fis';
+%path_sistema=strcat(carpeta_sistema,'FL-',nombre_img,'-',num2str(ii)),'.fis';
 
 %Levanto el sistema difuso de otra imagen
 % path_sistema=strcat('Datos/3.fig1_hc_fis/','FL-','fig1_hc','-',num2str(ii)),'.fis';
