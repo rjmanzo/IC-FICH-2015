@@ -5,7 +5,6 @@ function[particulas]=inicializar_particulas(intervalo1,intervalo2,cantParticulas
     end
     particulas=cell2mat(particulas);
 end
-
 function[part]=particula(intervalo1,intervalo2,cantParticulas)%cantidad de conj salida por cada particula
    %8*rand+2--> numeros reales entre 2 y 10
    %n=round(255*rand) -> numero enteros entre 0 y 255

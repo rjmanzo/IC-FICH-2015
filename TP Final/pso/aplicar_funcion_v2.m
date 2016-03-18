@@ -1,12 +1,11 @@
-function[salida]=aplicar_funcion_v2(listImgRuido,listImgOrig, pos,flagWrite,flagSalida) %pos: particulas
+function[salida]=aplicar_funcion_v2(imgRuido,imgOrig, pos,flagWrite,flagSalida) %pos: particulas
 %UNTITLED Summary of this function goes here
 %   version multicore de aplicar funcion
+
 [~,mm]=size(pos);
-for l_i=1:length(listImgRuido)
-    l_i
 contador=0;
-%procesar la imgRuido(j)esima contra la particula(i)esima
-procesar=listImgRuido{l_i}; %tomo imagen(i)esima
+%procesar la imgRuido con el sistema(i)
+procesar=imgRuido;
 %====================================
 % EXTRAIGO DIMENSIONES DE LA IMAGEN
 %====================================
@@ -118,16 +117,12 @@ procesar(idxs) = uint8( evalfis([double(DP1) double(DP2)],a) );
 %toc;
 
 
-contador;% incrementa en 1 con cada particula
-%el psnr aqui esta img orig contra una sola img, esto lo tengo que cambiar
-%a que sea psnr promedio de listImgOrig contra todas las otras imag, y el
-%desvio de ese promedio
-psnr_i(l_i,contador)= psnr(imcrop(listImgOrig{l_i},[2 2 n-1 m-1]),imcrop(procesar,[2 2 n-1 m-1]));
-% salida(contador)= psnr(listImgOrig,procesar);
+contador;
+salida(contador)= psnr(imcrop(imgOrig,[2 2 n-1 m-1]),imcrop(procesar,[2 2 n-1 m-1]));
+% salida(contador)= psnr(imgOrig,procesar);
 
-end %PARTICULA - Fin paso todas las particulas a una imagen
-end% Lista de imagenes
-salida=mean(psnr_i); % promedio las psnr obtenidas por cada particula en cada imagen
+end %PARTICULA
+
 end %FUNCION
 
 
