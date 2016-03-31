@@ -41,7 +41,7 @@ clear all,close all,clc
     
     %inicializar_parpool();
    
-    for i=1:6 
+    for i=1:4
     %====================================
     % LECTURA DE LA IMAGEN ORIGINAL
     %====================================
@@ -51,7 +51,7 @@ clear all,close all,clc
     
     % LECTURA DE LA IMAGEN CON RUIDO
     %====================================    
-    path_imagen =strcat('Datos/4.paper_jaiio/128/gray_noise/img_',num2str(i),'_128x128_5por.tif');
+    path_imagen =strcat('Datos/4.paper_jaiio/128/gray_noise_40/img_',num2str(i),'_128x128_40por.tif');
     listImgRuido{i} = imread(path_imagen);
     end
     
@@ -67,8 +67,8 @@ clear all,close all,clc
     % PARAMETROS DE INICIALIZACION
     %====================================
     c1=2; %Aceleracion: Comp. cognitiva
-    c2=3.5; %Aceleracion: Comp. Global
-    maxIter=1; %Max. de iteraciones
+    c2=3.2; %Aceleracion: Comp. Global
+    maxIter=200; %Max. de iteraciones
     TolCorte=50; %toleracia psnr (db)
     cantPart=30;
     cantGausseanas=3;
@@ -87,9 +87,10 @@ clear all,close all,clc
     %====================================
     % LLAMO A PSO
     %====================================
+    tic
     [mejorGlobalVal,mejorGlobalPos,cantIter] =particulas_global(listImgRuido,listImgOrig,intervalo1,intervalo2,maxIter,TolCorte,c1,c2,cantPart,cantGausseanas,flagWrite,flagSalida)
-    
-   
+    toc
+   tiempo=tic-toc
     %====================================
     %Termino el recorrido. Cierro el parpool
     %====================================
@@ -98,7 +99,7 @@ clear all,close all,clc
     %guardo el sistema encontrado
     %====================================
 
-    a = crear_sistema('Datos/4.paper_jaiio/sistema/sistema.fis',mejorGlobalPos,1,flagSalida);
+    a = crear_sistema('Datos/4.paper_jaiio/sistema/sistema_40particulas_noise_40%.fis',mejorGlobalPos,1,flagSalida);
 
     %a = crear_sistema(strcat('Datos/blonde_fis/FL-blonde-',num2str(i)),mejorGlobalPos,1,flagSalida);
 

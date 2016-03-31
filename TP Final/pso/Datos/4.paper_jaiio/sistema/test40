@@ -1,0 +1,62 @@
+ = 
+
+            name: 'FL-AMF-AUTO'
+            type: 'mamdani'
+       andMethod: 'min'
+        orMethod: 'max'
+    defuzzMethod: 'centroid'
+       impMethod: 'min'
+       aggMethod: 'max'
+           input: [1x2 struct]
+          output: [1x1 struct]
+            rule: [1x9 struct]
+
+
+cantIter =
+
+   201
+
+
+mejorGlobalVal =
+
+   22.1258
+
+
+mejorGlobalVal =
+
+   22.1258
+
+
+mejorGlobalPos =
+
+   17.0000   36.3058   17.0000  140.9453
+   17.0000         0   17.0000         0
+   17.0000  121.3584    2.0000  257.0000
+
+
+cantIter =
+251
+
+Elapsed time is 9441.978913 seconds.
+
+tiempo =
+
+     1458535048476811
+
+
+a = 
+
+            name: 'Datos/4.paper_jaiio/sistema/sistema_40particulas_noise_40%.fis'
+            type: 'mamdani'
+       andMethod: 'min'
+        orMethod: 'max'
+    defuzzMethod: 'centroid'
+       impMethod: 'min'
+       aggMethod: 'max'
+           input: [1x2 struct]
+          output: [1x1 struct]
+            rule: []
+
+IdleTimeout has been reached.
+Parallel pool using the 'local' profile is shutting down.
+>> el estado de esta temática actualmente y sus avances

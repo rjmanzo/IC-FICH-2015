@@ -1,7 +1,7 @@
-porcentaje_ruido = 0.05;
+porcentaje_ruido = 0.5;
 
-for i =1:26
-    path_imagen = strcat('Datos/4.paper/Original/img_',num2str(i),'.tiff');
+for i =1:7
+    path_imagen = strcat('Datos/4.paper_jaiio/128/img_',num2str(i-1),'_128x128.tif');
     original = imread(path_imagen);
     [rows columns numberOfColorBands] = size(original);
     %%Guardo la original y la ruidosa en escala de grises
@@ -11,14 +11,14 @@ for i =1:26
         original_gray = original;
     end
     ruidosa = imnoise(original_gray,'salt & pepper',porcentaje_ruido);
-    imwrite(original_gray,strcat('Datos/4.paper/Original/gray/img_',num2str(i),'.tif'));
-    imwrite(ruidosa,strcat('Datos/4.paper/Original/gray_noise/img_',num2str(i),'_5por.tif'));
+    %imwrite(original_gray,strcat('Datos/4.paper_jaiio/128/gray/img_',num2str(i),'.tif'));
+    imwrite(ruidosa,strcat('Datos/4.paper_jaiio/128/gray_noise_50/img_',num2str(i-1),'_128x128_50por.tif'));
     
     %Guardo la imagen en 128 y su ruidosa
-    gray_resize = imresize(original_gray,[128 128]);
-    ruidosa_128 = imnoise(gray_resize,'salt & pepper',porcentaje_ruido);
-    imwrite(gray_resize,strcat('Datos/4.paper/128/img_',num2str(i),'_128x128.tif'));
-    imwrite(ruidosa_128,strcat('Datos/4.paper/128/gray_noise/img_',num2str(i),'_128x128_5por.tif'));
+    %gray_resize = imresize(original_gray,[128 128]);
+    %ruidosa_128 = imnoise(gray_resize,'salt & pepper',porcentaje_ruido);
+    %imwrite(gray_resize,strcat('Datos/4.paper/128/img_',num2str(i),'_128x128.tif'));
+    %imwrite(ruidosa_128,strcat('Datos/4.paper/128/gray_noise/img_',num2str(i),'_128x128_5por.tif'));
     
     %
 end

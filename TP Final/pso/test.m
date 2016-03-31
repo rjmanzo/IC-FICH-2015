@@ -25,9 +25,9 @@ clear all, close all , clc
 
 
 
-original = imread('Datos/4.paper/Original/gray/img_16.tif');
-ruidosa = imread('Datos/4.paper/Original/gray_noise/img_16_5por.tif');
-path_sistema='Datos/4.paper/sistema/sistema.fis';
+original = imread('Datos/4.paper_jaiio/128/img_1_128x128.tif');
+ruidosa = imread('Datos/4.paper_jaiio/128/gray_noise_40/img_1_128x128_40por.tif');
+path_sistema='Datos/4.paper_jaiio/sistema/sistema40.fis';
 
 recuperada = medfilt2(ruidosa,[3 3]);
 procesar=ruidosa;
